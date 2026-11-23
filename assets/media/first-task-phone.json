@@ -1,0 +1,12 @@
+{
+  "what": "The quickstart task, recorded at 390 by 844 from a real Botbench and a real Claude Code reply.",
+  "botbenchCommit": "d6f7b316bf24d81431ed132148ccefae283080b0",
+  "recordedAt": "2026-11-23T18:27:13.526Z",
+  "task": "Add a file hello.txt that says hello, then run ls to show that it is there.",
+  "model": "haiku",
+  "workingSeconds": 2,
+  "workingStretchPlayedFaster": "no: the whole recording plays at its real speed",
+  "frames": 213,
+  "branch": "botbench/your-mac/run-1/task-1",
+  "lastCommit": "Botbench task 1: Add a file hello.txt that says hello, then run ls to show…\n\n hello.txt | 1 +\n 1 file changed, 1 insertion(+)"
+}

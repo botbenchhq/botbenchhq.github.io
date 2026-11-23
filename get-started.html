@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build from source · Botbench</title>
+<meta name="description" content="Build Botbench from source on a Mac and make a first branch with Claude Code in a practice repository. About ten minutes.">
+<link rel="canonical" href="https://botbenchhq.github.io/get-started.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Botbench">
+<meta property="og:title" content="Build from source · Botbench">
+<meta property="og:description" content="Build Botbench from source on a Mac and make a first branch with Claude Code in a practice repository. About ten minutes.">
+<meta property="og:url" content="https://botbenchhq.github.io/get-started.html">
+<meta property="og:image" content="https://botbenchhq.github.io/assets/media/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Botbench: put your coding agents to work. Together.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script defer src="assets/site.js"></script>
+<noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<header class="site-header"><div class="wrap nav">
+<a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
+<button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open the menu"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg></button>
+<nav class="nav-links" id="site-nav" aria-label="Pages"><a href="index.html">Overview</a><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Verification</a><a href="explore.html">Explore</a><a href="docs.html">Docs</a><a class="phone-only" href="get-started.html" aria-current="page">Build from source</a></nav>
+<div class="nav-actions">
+<button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Use the dark theme"><svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M4.7 15.3l1.4-1.4M13.9 6.1l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.8A7 7 0 0 1 8.2 3.5a7 7 0 1 0 8.3 8.3z"/></svg></button>
+
+</div>
+</div></header>
+<main id="main">
+<section class="hero page-hero"><div class="wrap"><p class="eyebrow">First run</p><h1>Build from source, on a Mac.</h1><p class="lead">About ten minutes. It ends with a branch made by Claude Code in a practice repository, and costs one short Claude Code reply on your subscription. There is no installer and no hosted service.</p></div></section>
+
+<section><div class="wrap split even">
+<div class="prose">
+<p class="eyebrow">You need</p>
+<h2>Before you start</h2>
+<ul>
+<li>macOS. Agents are started only on macOS, because the confinement relies on its sandbox.</li>
+<li>Node 24 or later.</li>
+<li>git, set up so you can commit.</li>
+<li>Claude Code 2.1.322 or later, installed and signed in. Check with <code>claude --version</code> and <code>claude auth status</code>.</li>
+<li>Codex 0.171.0 or later, only if you want it to review or build.</li>
+</ul>
+</div>
+<div class="prose">
+<p class="eyebrow">Do not use it if</p>
+<h2>Limits worth knowing first</h2>
+<ul>
+<li>You are on Windows or Linux.</li>
+<li>You want a hosted service or a shared team server.</li>
+<li>You need a hard security boundary for code you do not trust.</li>
+<li>You need it stable. It changes often, and nothing is promised to stay the same.</li>
+</ul>
+</div>
+</div></section>
+
+<section><div class="wrap split reorder">
+<div><div class="section-head"><p class="eyebrow">The first branch</p><h2>Clone, build, start, hand over one task.</h2></div>
+<figure class="frame frame-phone"><video controls playsinline preload="none" width="780" height="1688" poster="assets/media/first-task-phone-poster.jpg" aria-label="A 23-second recording of steps 5 and 6 on a phone-size screen"><source src="assets/media/first-task-phone.mp4" type="video/mp4">Your browser cannot play this recording. The steps beside it say what it shows.</video><figcaption>Steps 5 and 6, recorded at phone size from a real Botbench and a real Claude Code reply, at its real speed. 23 seconds, no sound.</figcaption></figure></div>
+<div>
+<ol class="steps">
+<li><div><h3>Get it and build the screens</h3>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-build">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-build">git clone https://github.com/botbenchhq/botbench.git
+cd botbench
+npm ci
+npm ci --prefix web
+npm run build --prefix web</pre></div></div></li>
+<li><div><h3>Start it</h3><p>Leave this terminal open; Ctrl+C stops Botbench. It prints its address, <code>http://127.0.0.1:4780</code>, and on the first start a login token.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-start">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-start">npm start</pre></div></div></li>
+<li><div><h3>Sign in</h3><p>Open <code>http://127.0.0.1:4780</code> in a browser on the Mac, paste the token and choose Sign in. You arrive on Chat. Later, read the token with <code>cat ~/.botbench/login-token</code>.</p></div></li>
+<li><div><h3>Make a practice repository</h3><p>In a second terminal. Copy the path the last line prints.</p>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-try">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-try">mkdir ~/botbench-try &amp;&amp; cd ~/botbench-try
+git init
+echo "# Try" &gt; README.md
+git add README.md &amp;&amp; git commit -m "Start"
+pwd</pre></div></div></li>
+<li><div><h3>Start a task</h3><p>On Chat, press + under the message box, choose Repository, then Another folder…, and paste the path. When it reads "Usable git repository.", close the sheet. Write the task and choose Send:</p>
+<div class="code"><div class="code-head"><span>Message</span><button class="copy" type="button" data-copy="cmd-task">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-task" style="white-space:pre-wrap">Add a file hello.txt that says hello, then run ls to show that it is there.</pre></div></div></li>
+<li><div><h3>Review and accept</h3><p>Within a minute the transcript shows Claude Code writing the file and running <code>ls</code>. The task then reads Ready for review, with <code>hello.txt</code> under Changed files and its branch, such as <code>botbench/your-mac/run-1/task-1</code>. Choose Accept. Botbench keeps the branch and removes the task's copy. Your own branch is unchanged.</p></div></li>
+</ol>
+<p class="note">These steps follow the README's quickstart, which is the authority and has every detail, including how to clean up and how to use Botbench from your phone over a private network.</p>
+<div class="btn-row" style="margin-top:28px"><a class="btn btn-primary" href="https://github.com/botbenchhq/botbench#quickstart">The full quickstart <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a><a class="btn btn-quiet" href="https://github.com/botbenchhq/botbench#configure-a-repository">Set up checks for a repository <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></div>
+</div>
+</div></section>
+
+</main>
+<footer class="footer"><div class="wrap footer-grid">
+<div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
+<p>One workbench for your agents. One coordination layer for your team.</p>
+<p>Early, and macOS only. Apache License 2.0. This site sets no cookies and counts no visits.</p></div>
+<div class="footer-cols">
+<div><strong>Product</strong><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Verification</a><a href="explore.html">Explore</a></div>
+<div><strong>Use it</strong><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>
+<div><strong>Project</strong><a href="https://github.com/botbenchhq/botbench/issues">Issues</a><a href="https://github.com/botbenchhq/botbench/blob/main/SECURITY.md">Security</a><a href="https://github.com/botbenchhq/botbench/blob/main/LICENSE">Licence</a><a href="https://github.com/botbenchhq/design-system">Design system</a></div>
+</div>
+</div></footer>
+</body>
+</html>

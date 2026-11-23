@@ -1,0 +1,17 @@
+{
+  "name": "botbench-site",
+  "private": true,
+  "type": "module",
+  "description": "The Botbench website: static pages for GitHub Pages.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node tools/check-links.mjs",
+    "check:online": "node tools/check-links.mjs --online",
+    "check:browser": "node tools/check-browser.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.0",
+    "playwright": "1.65.1"
+  }
+}

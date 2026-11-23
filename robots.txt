@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://botbenchhq.github.io/sitemap.xml

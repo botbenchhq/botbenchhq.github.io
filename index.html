@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botbench: put your coding agents to work. Together.</title>
+<meta name="description" content="A local-first workbench for the coding agents you already use. Hand them tasks, keep your policies, and come back to branches, diffs, check results and review evidence.">
+<link rel="canonical" href="https://botbenchhq.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Botbench">
+<meta property="og:title" content="Botbench: put your coding agents to work. Together.">
+<meta property="og:description" content="A local-first workbench for the coding agents you already use. Hand them tasks, keep your policies, and come back to branches, diffs, check results and review evidence.">
+<meta property="og:url" content="https://botbenchhq.github.io/">
+<meta property="og:image" content="https://botbenchhq.github.io/assets/media/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Botbench: put your coding agents to work. Together.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/site.css">
+<script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script defer src="assets/site.js"></script>
+<noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the page</a>
+<header class="site-header"><div class="wrap nav">
+<a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
+<button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open the menu"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg></button>
+<nav class="nav-links" id="site-nav" aria-label="Pages"><a href="index.html" aria-current="page">Overview</a><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Verification</a><a href="explore.html">Explore</a><a href="docs.html">Docs</a><a class="phone-only" href="get-started.html">Build from source</a></nav>
+<div class="nav-actions">
+<button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Use the dark theme"><svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M4.7 15.3l1.4-1.4M13.9 6.1l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.8A7 7 0 0 1 8.2 3.5a7 7 0 1 0 8.3 8.3z"/></svg></button>
+<a class="btn btn-quiet" href="get-started.html">Build from source <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</div>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap">
+<p class="eyebrow">Open source · macOS · early</p>
+<h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
+<p class="lead">One workbench for your agents. One coordination layer for your team. Hand Claude Code and Codex tasks, let them work within your policies, and come back to git branches, diffs, check results and review evidence.</p>
+<div class="btn-row"><a class="btn btn-primary" href="get-started.html">Build from source <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn btn-quiet" href="#demo">Watch the 35-second demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+<ul class="facts"><li>Runs on your Mac</li><li>Your own sign-ins, no API keys</li><li>Never merges a pull request</li></ul>
+
+<div class="stages">
+<div class="tablist" role="tablist" aria-label="Four parts of a piece of work">
+<button class="tab" type="button" role="tab" id="tab-delegate" aria-controls="panel-delegate" aria-selected="true" tabindex="0"><span class="n">01</span>Delegate</button>
+<button class="tab" type="button" role="tab" id="tab-hand-over" aria-controls="panel-hand-over" aria-selected="false" tabindex="-1"><span class="n">02</span>Hand over</button>
+<button class="tab" type="button" role="tab" id="tab-coordinate" aria-controls="panel-coordinate" aria-selected="false" tabindex="-1"><span class="n">03</span>Coordinate</button>
+<button class="tab" type="button" role="tab" id="tab-verify" aria-controls="panel-verify" aria-selected="false" tabindex="-1"><span class="n">04</span>Verify</button>
+</div>
+<div class="tabpanel" role="tabpanel" id="panel-delegate" aria-labelledby="tab-delegate"><figure class="frame "><a class="zoom" href="assets/media/hero-workbench.png" title="Open the full-size image"><img src="assets/media/hero-workbench.png" width="1600" height="1080" alt="Botbench on a desktop and a phone. Desktop: a task's transcript, Claude Code's commands, Edited 4 files, ran 1 command, and its summary of the change to the cart API, its test, the checkout page and its test. Phone: Work, Needs you (2): two items Ready for review, one with Checks passed" loading="lazy" decoding="async"></a><figcaption><strong>Delegate.</strong> Hand a task to Claude Code or Codex. It works in its own copy of your repository, on its own branch. Here: Claude Code's work on the Mac, and what waits for you on the phone.</figcaption></figure></div>
+<div class="tabpanel" role="tabpanel" id="panel-hand-over" aria-labelledby="tab-hand-over" hidden><figure class="frame "><video controls playsinline preload="none" width="960" height="600" poster="assets/media/move-to-codex-poster.png" aria-label="A 9-second recording: Move to Codex is pressed on a task Claude Code is building"><source src="assets/media/move-to-codex.mp4" type="video/mp4">Your browser cannot play this recording. <a href="https://github.com/botbenchhq/botbench/blob/main/docs/media/move-to-codex.gif">See it on GitHub</a>.</video><figcaption><strong>Hand over.</strong> Move a task that is being built from Claude Code to Codex. The work so far is committed, and Codex carries on in the same copy and branch. A 9-second recording, no sound.</figcaption></figure></div>
+<div class="tabpanel" role="tabpanel" id="panel-coordinate" aria-labelledby="tab-coordinate" hidden><figure class="frame "><a class="zoom" href="assets/media/paired-question.png" title="Open the full-size image"><img src="assets/media/paired-question.png" width="1320" height="870" alt="maya's Work screen: under Needs you, a card titled theo asks a question about acme-shop-remote, with the Outside text badge, theo's question as plain text, the fingerprint of the workbench that signed it, and Answer it yourself, Give it to Claude Code and Dismiss; below it maya's run, Ready for review" loading="lazy" decoding="async"></a><figcaption><strong>Coordinate.</strong> A question from a paired workbench. Nothing is sent without its owner's Send, and nothing that arrives runs. Tested with two installations on one Mac, not yet across two Macs.</figcaption></figure></div>
+<div class="tabpanel" role="tabpanel" id="panel-verify" aria-labelledby="tab-verify" hidden><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" title="Open the full-size image"><img src="assets/media/ready-for-review-proof.png" width="1320" height="870" alt="A task's evidence: Checks passed, 1 of 1, npm test Passed; Codex's review, Verdict: looks right, and the four things it says it checked" loading="lazy" decoding="async"></a><figcaption><strong>Verify.</strong> The repository's own check passed, and Codex, another vendor's agent, reviewed Claude Code's change and said what it checked. Its review is a model's opinion, not a check.</figcaption></figure></div>
+<p class="source-note">Real screens from two Botbench installations on one Mac, named maya and theo, working on a small demo shop. Nothing on them was edited.</p>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<div class="section-head"><p class="eyebrow">Two ways to use it</p><h2>Work on your own. Work with a teammate.</h2><p>The workbench is useful without a team and does a good deal today. Coordination between teammates has its first steps, and the larger part is still to come. This site keeps the two apart.</p></div>
+<div class="duo">
+<article class="panel">
+<div class="panel-top"><p class="eyebrow">Your workbench</p><span class="tag tag-available">Available</span></div>
+<h3>Walk away. Come back to the branch.</h3>
+<p class="muted">Start a task, or a run of several, from a browser on the Mac or on your phone. You choose how much each run needs you.</p>
+<ul class="ticks">
+<li><strong>A separate copy and branch for each task</strong><span>Your files and your branch are not touched.</span></li>
+<li><strong>Approvals for what reaches outside</strong><span>Reading, searching and editing inside the task's copy never ask. A short list of dangerous actions always does.</span></li>
+<li><strong>Your checks, run and kept</strong><span>And a review by another vendor's agent, shown as an opinion.</span></li>
+</ul>
+<a class="more" href="workbench.html">How the workbench works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</article>
+<article class="panel sunken">
+<div class="panel-top"><p class="eyebrow">Your team's coordination</p><span class="tag tag-early">Early</span></div>
+<h3>Your agents. Their agents. One coordinated workflow.</h3>
+<p class="muted">Two developers, each with their own Mac, their own Botbench and their own agents, on one GitHub repository. Neither gives the other access to their machine.</p>
+<a class="more" href="coordination.html">What two workbenches can do today <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</article>
+</div>
+</div></section>
+
+<section id="demo"><div class="wrap">
+<div class="section-head"><p class="eyebrow">The product, recorded</p><h2>35 seconds, from a task to your decision.</h2><p>A real run on a small demo shop, recorded at 1440×900. The minute of work in the middle is shown five times faster.</p></div>
+<figure class="frame "><video controls playsinline preload="none" width="1440" height="900" poster="assets/media/botbench-demo-thumbnail.png" aria-label="The 35-second Botbench demo"><source src="assets/media/botbench-demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="https://github.com/botbenchhq/botbench/blob/main/docs/media/botbench-demo.mp4">Watch it on GitHub</a>.</video><figcaption>It ends on a task ready for review: four changed files, its branch botbench/maya/run-1/task-1, 1 of 1 check passed, Codex found nothing to fix, Accept and Reject. No sound.</figcaption></figure>
+</div></section>
+
+<section><div class="wrap">
+<div class="section-head"><p class="eyebrow">What changes</p><h2>From a terminal you watch to a branch you review.</h2></div>
+<div class="table-scroll"><table class="stack">
+<thead><tr><th scope="col">Without Botbench</th><th scope="col">With Botbench</th></tr></thead>
+<tbody>
+<tr><td data-label="Without">You keep a terminal open and answer each permission prompt as it comes.</td><td class="yes" data-label="With">The agent uses its tools inside the task's own copy without asking. An action that reaches outside the copy waits as a card you can answer from your phone.</td></tr>
+<tr><td data-label="Without">The agent edits your checkout, and you sort out what changed.</td><td class="yes" data-label="With">Each task works in its own copy on its own branch. Your files and your branch are not touched.</td></tr>
+<tr><td data-label="Without">"Done" is the agent's word.</td><td class="yes" data-label="With">Botbench runs your repository's checks and keeps their output. Another vendor's agent can review the change; its review is shown as a model's opinion, never as a check.</td></tr>
+<tr><td data-label="Without">Two developers find out they took the same issue when the second pull request opens.</td><td class="yes" data-label="With">You see the other workbenches' open pull requests and pushed branches, and Botbench says when one already covers your issue or changes the same files.</td></tr>
+</tbody></table></div>
+<a class="more" href="proof.html">What a check and a review can and cannot tell you <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</div></section>
+<section class="closing"><div class="wrap">
+<p class="eyebrow">Open source · macOS · early</p>
+<h2>Bring the agents you already use.</h2>
+<p>Botbench needs no subscription of its own. It runs each vendor's own program under your sign-in, on your Mac. About ten minutes from clone to a first branch.</p>
+<div class="btn-row"><a class="btn btn-primary" href="get-started.html">Build from source <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn btn-quiet" href="https://github.com/botbenchhq/botbench">Botbench on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></div>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid">
+<div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
+<p>One workbench for your agents. One coordination layer for your team.</p>
+<p>Early, and macOS only. Apache License 2.0. This site sets no cookies and counts no visits.</p></div>
+<div class="footer-cols">
+<div><strong>Product</strong><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Verification</a><a href="explore.html">Explore</a></div>
+<div><strong>Use it</strong><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>
+<div><strong>Project</strong><a href="https://github.com/botbenchhq/botbench/issues">Issues</a><a href="https://github.com/botbenchhq/botbench/blob/main/SECURITY.md">Security</a><a href="https://github.com/botbenchhq/botbench/blob/main/LICENSE">Licence</a><a href="https://github.com/botbenchhq/design-system">Design system</a></div>
+</div>
+</div></footer>
+</body>
+</html>

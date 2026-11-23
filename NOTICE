@@ -1,0 +1,12 @@
+Botbench website
+Copyright the Botbench authors. Licensed under the Apache License 2.0 (LICENSE).
+
+From botbenchhq/botbench (Apache License 2.0): the media in assets/media/ and
+assets/favicon.svg, listed with their commit and checksums in PROVENANCE.md, and
+the mark drawn in the header and footer.
+
+From botbenchhq/design-system, themes/botbench.css: the colour values at the top
+of assets/site.css.
+
+The first page layout came from a wireframe made for this site; its sitemap is
+kept. No file of the project that inspired it is copied here.
