@@ -88,7 +88,7 @@
 <div class="prose">
 <p class="eyebrow">Is it a sandbox?</p>
 <h2>Partly, and not a hard one.</h2>
-<p class="muted">Commands an agent runs are confined by the macOS sandbox: they cannot read your sign-ins, keys or Keychain, reach no network except hosts you allow for that repository, and can write only in the task's copy and a temporary folder.</p>
+<p class="muted">The macOS sandbox confines the commands an agent runs: they cannot read your sign-ins, keys or Keychain, reach no network except hosts you allow for that repository, and can write only in the task's copy and a temporary folder.</p>
 <p class="muted">It is not a virtual machine or a container. A separate copy separates changes; it is not a security boundary. Claude Code itself runs outside the sandbox with your rights, and your repository's setup and check commands can still read your home folder outside the protected places.</p>
 <p>Point Botbench only at repositories you trust.</p>
 <a class="more" href="https://github.com/botbenchhq/botbench/blob/main/docs/security/threat-model.md">The exact limits, in the threat model <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
@@ -102,9 +102,8 @@
 </div>
 </div></section>
 <section class="closing"><div class="wrap">
-<p class="eyebrow">Open source · macOS · early</p>
 <h2>Bring the agents you already use.</h2>
-<p>Botbench needs no subscription of its own. It runs each vendor's own program under your sign-in, on your Mac. About ten minutes from clone to a first branch.</p>
+<p>Botbench needs no subscription of its own, because it runs each vendor's own program under your sign-in, on your Mac. Getting from a clone to a first branch takes about ten minutes.</p>
 <div class="btn-row"><a class="btn btn-primary" href="get-started.html">Build from source <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn btn-quiet" href="https://github.com/botbenchhq/botbench">Botbench on GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></div>
 </div></section>
 </main>

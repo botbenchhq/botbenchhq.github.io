@@ -115,7 +115,7 @@ section + section { border-top: 1px solid var(--border); }
 .hero h1 { max-width: 12em; }
 .hero .lead { margin-top: 24px; }
 .hero .btn-row { margin-top: 32px; }
-.hero .facts { margin-top: 28px; font: 400 0.8rem/1.6 var(--mono); color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 0; list-style: none; }
+.hero .facts { margin-top: 28px; font: 400 0.8rem/1.6 var(--mono); color: var(--muted); max-width: 46em; }
 .section-head { max-width: 44em; margin-bottom: clamp(28px, 4vw, 48px); }
 .section-head h2 { margin-top: 12px; }
 .section-head p { margin-top: 16px; color: var(--muted); font-size: 1.1rem; }

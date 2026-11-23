@@ -42,9 +42,8 @@ const pageHero = (eyebrow, title, lead) => `<section class="hero page-hero"><div
 const SHOTS_NOTE = 'Real screens from two Botbench installations on one Mac, named maya and theo, working on a small demo shop. Nothing on them was edited.';
 
 const closing = `<section class="closing"><div class="wrap">
-<p class="eyebrow">Open source · macOS · early</p>
 <h2>Bring the agents you already use.</h2>
-<p>Botbench needs no subscription of its own. It runs each vendor's own program under your sign-in, on your Mac. About ten minutes from clone to a first branch.</p>
+<p>Botbench needs no subscription of its own, because it runs each vendor's own program under your sign-in, on your Mac. Getting from a clone to a first branch takes about ten minutes.</p>
 <div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Botbench on GitHub', REPO, 'quiet', icon.out)}</div>
 </div></section>`;
 
@@ -134,7 +133,7 @@ page({
 <h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
 <p class="lead">One workbench for your agents. One coordination layer for your team. Hand Claude Code and Codex tasks, let them work within your policies, and come back to git branches, diffs, check results and review evidence.</p>
 <div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Watch the 35-second demo', '#demo', 'quiet')}</div>
-<ul class="facts"><li>Runs on your Mac</li><li>Your own sign-ins, no API keys</li><li>Never merges a pull request</li></ul>
+<p class="facts">It runs on your Mac under your own sign-ins, with no API keys, and it never merges a pull request.</p>
 
 <div class="stages">
 <div class="tablist" role="tablist" aria-label="Four parts of a piece of work">
@@ -146,7 +145,7 @@ ${stages.map(([id, , media], i) => `<div class="tabpanel" role="tabpanel" id="pa
 </div></section>
 
 <section><div class="wrap">
-${head('Two ways to use it', 'Work on your own. Work with a teammate.', 'The workbench is useful without a team and does a good deal today. Coordination between teammates has its first steps, and the larger part is still to come. This site keeps the two apart.')}
+${head('Two ways to use it', 'Work on your own, or with a teammate.', 'The workbench is useful without a team and does a good deal today; coordination between teammates has only its first steps. This site keeps the two apart.')}
 <div class="duo">
 <article class="panel">
 <div class="panel-top"><p class="eyebrow">Your workbench</p>${tag('available')}</div>
@@ -156,6 +155,7 @@ ${head('Two ways to use it', 'Work on your own. Work with a teammate.', 'The wor
 <li><strong>A separate copy and branch for each task</strong><span>Your files and your branch are not touched.</span></li>
 <li><strong>Approvals for what reaches outside</strong><span>Reading, searching and editing inside the task's copy never ask. A short list of dangerous actions always does.</span></li>
 <li><strong>Your checks, run and kept</strong><span>And a review by another vendor's agent, shown as an opinion.</span></li>
+<li><strong>A record of every command</strong><span>What each agent ran and what you answered, kept on your Mac.</span></li>
 </ul>
 ${more('How the workbench works', 'workbench.html')}
 </article>
@@ -169,7 +169,7 @@ ${more('What two workbenches can do today', 'coordination.html')}
 </div></section>
 
 <section id="demo"><div class="wrap">
-${head('The product, recorded', '35 seconds, from a task to your decision.', 'A real run on a small demo shop, recorded at 1440×900. The minute of work in the middle is shown five times faster.')}
+${head('The product, recorded', 'A task to your decision, in 35 seconds.', 'A real run on a small demo shop, recorded at 1440×900. The minute of work in the middle is shown five times faster.')}
 ${clip('botbench-demo.mp4', 'botbench-demo-thumbnail.png', 1440, 900,
     'The 35-second Botbench demo',
     'It ends on a task ready for review: four changed files, its branch botbench/maya/run-1/task-1, 1 of 1 check passed, Codex found nothing to fix, Accept and Reject. No sound.',
@@ -177,13 +177,13 @@ ${clip('botbench-demo.mp4', 'botbench-demo-thumbnail.png', 1440, 900,
 </div></section>
 
 <section><div class="wrap">
-${head('What changes', 'From a terminal you watch to a branch you review.')}
+${head('What changes', 'You review a branch instead of watching a terminal.')}
 <div class="table-scroll"><table class="stack">
 <thead><tr><th scope="col">Without Botbench</th><th scope="col">With Botbench</th></tr></thead>
 <tbody>
 <tr><td data-label="Without">You keep a terminal open and answer each permission prompt as it comes.</td><td class="yes" data-label="With">The agent uses its tools inside the task's own copy without asking. An action that reaches outside the copy waits as a card you can answer from your phone.</td></tr>
 <tr><td data-label="Without">The agent edits your checkout, and you sort out what changed.</td><td class="yes" data-label="With">Each task works in its own copy on its own branch. Your files and your branch are not touched.</td></tr>
-<tr><td data-label="Without">"Done" is the agent's word.</td><td class="yes" data-label="With">Botbench runs your repository's checks and keeps their output. Another vendor's agent can review the change; its review is shown as a model's opinion, never as a check.</td></tr>
+<tr><td data-label="Without">"Done" is the agent's word.</td><td class="yes" data-label="With">Botbench runs your repository's checks and keeps their output. Another vendor's agent can review the change; Botbench shows its review as a model's opinion, never as a check.</td></tr>
 <tr><td data-label="Without">Two developers find out they took the same issue when the second pull request opens.</td><td class="yes" data-label="With">You see the other workbenches' open pull requests and pushed branches, and Botbench says when one already covers your issue or changes the same files.</td></tr>
 </tbody></table></div>
 ${more('What a check and a review can and cannot tell you', 'proof.html')}
@@ -247,7 +247,7 @@ ${head('Agents', 'The agents you already use, each for what it can do here.', 'B
 <div class="prose">
 <p class="eyebrow">Is it a sandbox?</p>
 <h2>Partly, and not a hard one.</h2>
-<p class="muted">Commands an agent runs are confined by the macOS sandbox: they cannot read your sign-ins, keys or Keychain, reach no network except hosts you allow for that repository, and can write only in the task's copy and a temporary folder.</p>
+<p class="muted">The macOS sandbox confines the commands an agent runs: they cannot read your sign-ins, keys or Keychain, reach no network except hosts you allow for that repository, and can write only in the task's copy and a temporary folder.</p>
 <p class="muted">It is not a virtual machine or a container. A separate copy separates changes; it is not a security boundary. Claude Code itself runs outside the sandbox with your rights, and your repository's setup and check commands can still read your home folder outside the protected places.</p>
 <p>Point Botbench only at repositories you trust.</p>
 ${more('The exact limits, in the threat model', src('docs/security/threat-model.md'), icon.out)}
@@ -317,9 +317,9 @@ page({
 ${shot('ready-for-review-proof.png', 1320, 870, 'A task\'s evidence: Checks passed, 1 of 1, npm test Passed in 1.4 s; Codex\'s review, by Codex, a model\'s opinion of the changes, not a check; Verdict: looks right, and the four things it says it checked', 'A task that is ready for review. The check and the review are separate, and labelled.')}
 <div class="prose">
 <p class="eyebrow">Two kinds of evidence</p>
-<h2>A check is a check. A review is an opinion.</h2>
+<h2>A check runs your commands; a review is a model's opinion.</h2>
 <p class="muted"><strong>Checks</strong> are your repository's own commands, run on the agent's work in a sandbox. Botbench keeps their output. A passing check proves only what the check covers, and the agent may have changed the code the checks run, so read the output, not only the result.</p>
-<p class="muted"><strong>A review</strong> is by another vendor's agent: Codex, Grok or Antigravity. It is asked to say what it checked, and the task shows when it did not. It is always shown as a model's opinion, never as a check.</p>
+<p class="muted"><strong>A review</strong> is by another vendor's agent: Codex, Grok or Antigravity. It is asked to say what it checked, and the task shows when it did not. Botbench always shows it as a model's opinion, never as a check.</p>
 </div>
 </div></section>
 
