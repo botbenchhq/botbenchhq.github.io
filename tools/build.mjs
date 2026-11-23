@@ -281,8 +281,8 @@ ${head('Today', 'Two workbenches on one repository.', 'Each developer runs their
 </ol>
 </div></section>
 
-<section><div class="wrap split media-first">
-${shot('paired-question.png', 1320, 870, 'maya\'s Work screen: under Needs you, a card titled theo asks a question about acme-shop-remote, with the Outside text badge, theo\'s question (Is the cart API still sending totalCents? My checkout change reads it, and I want to match what you are building.), the fingerprint of the workbench that signed it, and Answer it yourself, Give it to Claude Code and Dismiss', 'A question from theo\'s workbench, waiting for maya. Two installations on one Mac.')}
+<section><div class="wrap split even">
+${clip('paired-question.mp4', 'paired-question-poster.jpg', 1212, 1298, 'A 28-second recording of two workbenches pairing and exchanging a question and an answer', 'maya on the left, theo on the right: an invite, the fingerprints, both confirm, then theo\'s question and maya\'s answer. Two installations on one Mac, recorded at its real speed. 28 seconds, no sound.', 'Your browser cannot play this recording. The text beside it says what it shows.')}
 <div class="prose">
 <p class="eyebrow">Paired workbenches · ${tag('early')}</p>
 <h2>Every message is one its owner approved.</h2>

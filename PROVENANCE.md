@@ -27,3 +27,11 @@ Every file in the first table is from [botbenchhq/botbench](https://github.com/b
 | `assets/media/first-task-phone.mp4` | `e9bc52b040a9b30f4013176e217f89f5ba85b924f381fdf5d794923dfbb22235` |
 | `assets/media/first-task-phone-poster.jpg` | `f186d7bb7efadef1c6c27b9f2404b6d46f9b159b140cd2bfa5d636e2213834c4` |
 | `assets/media/first-task-phone.json` | `36d2939c6a5735d5bedbbebd145736bd52bd8de519926b7714688c99ff567a73` |
+
+`assets/media/paired-question.mp4` and its poster were recorded by `tools/capture/paired-question.ts` on the same day and commit: two Botbench processes on one Mac, each with its own data folder and its own copy of one repository under `/private/tmp`, named maya (left) and theo (right). Every message was typed and sent by its owner through the real screens; no agent took part. Nothing is edited or played faster. `paired-question.json` holds the question and the answer.
+
+| File | SHA-256 |
+|---|---|
+| `assets/media/paired-question.mp4` | `7a0d981b8b27e5220c104827c069b05eb77a741db660f71e3dfcd7818525bb67` |
+| `assets/media/paired-question-poster.jpg` | `c7c61dfae31b2c5b3c0448d8a594560453bd2a2e369f31dbee7469111802afba` |
+| `assets/media/paired-question.json` | `dbfbe3e72fd7ccafcc838ea254dcb4e951b2f71b9c8d6c5239d977b098da7bda` |

@@ -1,0 +1,10 @@
+{
+  "what": "Two Botbench installations on one Mac, maya (left) and theo (right), pair and exchange one question and one answer, each typed and sent by its owner.",
+  "botbenchCommit": "d6f7b316bf24d81431ed132148ccefae283080b0",
+  "recordedAt": "2026-11-23T18:36:19.776Z",
+  "question": "Is the cart API still sending totalCents? My checkout change reads it.",
+  "answer": "No. From this branch on it sends total, in dollars.",
+  "playedFaster": "no",
+  "modelReplies": 0,
+  "frames": 266
+}
