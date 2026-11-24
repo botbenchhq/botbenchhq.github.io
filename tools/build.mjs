@@ -12,8 +12,8 @@ const src = (path) => `${REPO}/blob/main/${path}`;
 const issue = (n) => `${REPO}/issues/${n}`;
 
 const icon = {
-  arrow: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>',
-  out: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>',
+  arrow: '',
+  out: '',
   sun: '<svg class="sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="3.4"/><path d="M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M4.7 15.3l1.4-1.4M13.9 6.1l1.4-1.4"/></svg>',
   moon: '<svg class="moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.8A7 7 0 0 1 8.2 3.5a7 7 0 1 0 8.3 8.3z"/></svg>',
   menu: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg>',
@@ -21,10 +21,9 @@ const icon = {
 };
 
 const NAV = [
-  ['index.html', 'Overview'],
   ['workbench.html', 'Workbench'],
   ['coordination.html', 'Coordination'],
-  ['proof.html', 'Verification'],
+  ['proof.html', 'Evidence'],
   ['explore.html', 'Explore'],
   ['docs.html', 'Docs'],
 ];
@@ -41,10 +40,11 @@ const pageHero = (eyebrow, title, lead) => `<section class="hero page-hero"><div
 
 const SHOTS_NOTE = 'Real screens from two Botbench installations on one Mac, named maya and theo, working on a small demo shop. Nothing on them was edited.';
 
-const closing = `<section class="closing"><div class="wrap">
-<h2>Bring the agents you already use.</h2>
-<p>Botbench needs no subscription of its own, because it runs each vendor's own program under your sign-in, on your Mac. Getting from a clone to a first branch takes about ten minutes.</p>
-<div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Botbench on GitHub', REPO, 'quiet', icon.out)}</div>
+const closing = `<section class="closing"><div class="wrap closing-grid">
+<div><p class="eyebrow">Start with one task</p><h2>Your next branch<br>starts here.</h2></div>
+<div class="closing-action"><p>Bring your Mac and the agents you already use. Build Botbench from source, then make your first branch in a practice repository.</p>
+<div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('View on GitHub', REPO, 'quiet')}</div>
+<p class="setup-note">macOS · Node 24+ · Claude Code or Codex<br>Early software. No installer or hosted service.</p></div>
 </div></section>`;
 
 function page({ file, title, description, body, base = '', rootLinks = false }) {
@@ -76,7 +76,7 @@ ${base}<title>${title}</title>
 <script defer src="assets/site.js"></script>
 <noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
 </head>
-<body>
+<body${file === 'index.html' ? ' class="home"' : ''}>
 <a class="skip" href="#main">Skip to the page</a>
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="index.html" aria-label="Botbench, home">${icon.mark}<span>Botbench</span></a>
@@ -94,7 +94,7 @@ ${file === 'get-started.html' ? '' : closing}
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home">${icon.mark}<span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Early, and macOS only. Apache License 2.0. This site sets no cookies and counts no visits.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><strong>Product</strong><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Verification</a><a href="explore.html">Explore</a></div>
 <div><strong>Use it</strong><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="${REPO}">GitHub</a></div>
@@ -109,84 +109,99 @@ ${file === 'get-started.html' ? '' : closing}
 
 /* ---------- Overview ---------- */
 const stages = [
-  ['delegate', 'Delegate', shot('hero-workbench.png', 1600, 1080,
-    'Botbench on a desktop and a phone. Desktop: a task\'s transcript, Claude Code\'s commands, Edited 4 files, ran 1 command, and its summary of the change to the cart API, its test, the checkout page and its test. Phone: Work, Needs you (2): two items Ready for review, one with Checks passed',
-    '<strong>Delegate.</strong> Hand a task to Claude Code or Codex. It works in its own copy of your repository, on its own branch. Here: Claude Code\'s work on the Mac, and what waits for you on the phone.')],
-  ['hand-over', 'Hand over', clip('move-to-codex.mp4', 'move-to-codex-poster.png', 960, 600,
-    'A 9-second recording: Move to Codex is pressed on a task Claude Code is building',
-    '<strong>Hand over.</strong> Move a task that is being built from Claude Code to Codex. The work so far is committed, and Codex carries on in the same copy and branch. A 9-second recording, no sound.',
-    `Your browser cannot play this recording. <a href="${src('docs/media/move-to-codex.gif')}">See it on GitHub</a>.`)],
-  ['coordinate', 'Coordinate', shot('paired-question.png', 1320, 870,
-    'maya\'s Work screen: under Needs you, a card titled theo asks a question about acme-shop-remote, with the Outside text badge, theo\'s question as plain text, the fingerprint of the workbench that signed it, and Answer it yourself, Give it to Claude Code and Dismiss; below it maya\'s run, Ready for review',
-    '<strong>Coordinate.</strong> A question from a paired workbench. Nothing is sent without its owner\'s Send, and nothing that arrives runs. Tested with two installations on one Mac, not yet across two Macs.')],
-  ['verify', 'Verify', shot('ready-for-review-proof.png', 1320, 870,
-    'A task\'s evidence: Checks passed, 1 of 1, npm test Passed; Codex\'s review, Verdict: looks right, and the four things it says it checked',
-    '<strong>Verify.</strong> The repository\'s own check passed, and Codex, another vendor\'s agent, reviewed Claude Code\'s change and said what it checked. Its review is a model\'s opinion, not a check.')],
+  {
+    id: 'delegate', label: 'Delegate', hint: 'Choose the work', state: 'available',
+    title: 'A task. Its own branch.',
+    text: 'Hand over a task, or let Claude Code plan a run. Choose Claude Code or Codex to build. Each task works in its own copy of the repository, away from your current branch.',
+    result: 'A separate place for the agent to work, with the permissions you chose.',
+    link: 'Explore the workbench', href: 'workbench.html',
+    media: shot('permissions-check.png', 1320, 870,
+      'Botbench Settings, Permissions: Check a command shows how git push origin main is handled in each run mode, with the Activity log below.',
+      'The real Permissions screen. Check how a command would be handled before an agent runs it.'),
+  },
+  {
+    id: 'hand-over', label: 'Hand over', hint: 'Switch builders', state: 'available',
+    title: 'Keep the work. Change the agent.',
+    text: 'Move a task that Claude Code is building to Codex. Botbench commits the work so far; Codex carries on in the same copy and branch.',
+    result: 'The same task and the same branch, continued by Codex.',
+    link: 'See how handover works', href: 'workbench.html',
+    media: clip('move-to-codex.mp4', 'move-to-codex-poster.png', 960, 600,
+      'A 9-second recording of Move to Codex on a task Claude Code is building.',
+      'A real handover from Claude Code to Codex. 9 seconds, no sound.',
+      `Your browser cannot play this recording. <a href="${src('docs/media/move-to-codex.gif')}">See the recording on GitHub</a>.`),
+  },
+  {
+    id: 'coordinate', label: 'Coordinate', hint: 'Bring in a teammate', state: 'early',
+    title: 'Your workbench can ask theirs.',
+    text: 'Pair two workbenches to exchange questions and answers. Every message is sent only when its owner approves. A message that arrives never starts work by itself.',
+    result: 'Shared context through questions and answers approved by their owners.',
+    link: 'See coordination today', href: 'coordination.html',
+    media: clip('paired-question.mp4', 'paired-question-poster.jpg', 1212, 1298,
+      'A 28-second recording of two workbenches pairing, then exchanging a question and an answer.',
+      'Two installations on one Mac, recorded at real speed. 28 seconds, no sound. Not yet tested across two Macs.',
+      'Your browser cannot play this recording. The coordination page describes the pairing and exchange.'),
+  },
+  {
+    id: 'verify', label: 'Verify', hint: 'Inspect the result', state: 'available',
+    title: 'Come back to work you can inspect.',
+    text: 'Read the branch, the diff and the output of your repository’s checks. Another agent can review the change; its review is a model’s opinion, shown separately from the checks.',
+    result: 'A branch with the change and the evidence. Botbench never merges a pull request.',
+    link: 'Read what the evidence means', href: 'proof.html',
+    media: shot('ready-for-review-proof.png', 1320, 870,
+      'A real task ready for review: npm test passed, followed by Codex’s review, its verdict and the things it checked.',
+      'Checks and review are shown separately. This is a recorded result from the demo shop.'),
+  },
 ];
 
 page({
   file: 'index.html',
   title: 'Botbench: put your coding agents to work. Together.',
-  description: 'A local-first workbench for the coding agents you already use. Hand them tasks, keep your policies, and come back to branches, diffs, check results and review evidence.',
-  body: `<section class="hero"><div class="wrap">
-<p class="eyebrow">Open source · macOS · early</p>
-<h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
-<p class="lead">One workbench for your agents. One coordination layer for your team. Hand Claude Code and Codex tasks, let them work within your policies, and come back to git branches, diffs, check results and review evidence.</p>
-<div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Watch the 35-second demo', '#demo', 'quiet')}</div>
-<p class="facts">It runs on your Mac under your own sign-ins, with no API keys, and it never merges a pull request.</p>
-
-<div class="stages">
-<div class="tablist" role="tablist" aria-label="Four parts of a piece of work">
-${stages.map(([id, label], i) => `<button class="tab" type="button" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span class="n">0${i + 1}</span>${label}</button>`).join('\n')}
+  description: 'One workbench for your coding agents. One coordination layer for your team. Hand tasks to Claude Code or Codex and come back to branches you can inspect.',
+  body: `<section class="hero home-hero"><div class="wrap">
+<div class="hero-heading">
+<div><p class="eyebrow hero-kicker">Open source <span>macOS only</span> <span>Early</span></p>
+<h1>Put your coding agents to work. <span class="peer">Together.</span></h1></div>
+<div class="hero-intro"><p class="hero-positioning">One workbench for your agents. <br>One coordination layer for your team.</p>
+<p class="lead">Hand tasks to Claude Code or Codex. Keep the work on separate branches. Pick it up on your Mac or phone when you’re ready to review.</p>
+<div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Watch the demo', '#demo', 'quiet')}</div>
+<a class="text-link" href="${REPO}">Explore the code on GitHub</a></div>
 </div>
-${stages.map(([id, , media], i) => `<div class="tabpanel" role="tabpanel" id="panel-${id}" aria-labelledby="tab-${id}"${i === 0 ? '' : ' hidden'}>${media}</div>`).join('\n')}
-<p class="source-note">${SHOTS_NOTE}</p>
-</div>
+<figure class="hero-product">
+<a class="zoom" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone"><img src="assets/media/hero-workbench.png" width="1600" height="1080" alt="Real Botbench screens: on the Mac, Claude Code’s work on a task; on the phone, two tasks ready for review." loading="eager" fetchpriority="high" decoding="async"></a>
+<figcaption><span><strong>Your Mac does the work.</strong> Your phone can bring you back to it.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens. View their source.</a></figcaption>
+</figure>
+<div class="agent-rail"><p>The agents you already use</p><div><strong>Claude Code</strong><span>Plan · Build</span></div><div><strong>Codex</strong><span>Build · Review</span></div><a href="workbench.html">See all agent capabilities</a></div>
 </div></section>
 
-<section><div class="wrap">
-${head('Two ways to use it', 'Work on your own, or with a teammate.', 'The workbench is useful without a team and does a good deal today; coordination between teammates has only its first steps. This site keeps the two apart.')}
-<div class="duo">
-<article class="panel">
-<div class="panel-top"><p class="eyebrow">Your workbench</p>${tag('available')}</div>
-<h3>Walk away. Come back to the branch.</h3>
-<p class="muted">Start a task, or a run of several, from a browser on the Mac or on your phone. You choose how much each run needs you.</p>
-<ul class="ticks">
-<li><strong>A separate copy and branch for each task</strong><span>Your files and your branch are not touched.</span></li>
-<li><strong>Approvals for what reaches outside</strong><span>Reading, searching and editing inside the task's copy never ask. A short list of dangerous actions always does.</span></li>
-<li><strong>Your checks, run and kept</strong><span>And a review by another vendor's agent, shown as an opinion.</span></li>
-<li><strong>A record of every command</strong><span>What each agent ran and what you answered, kept on your Mac.</span></li>
-</ul>
-${more('How the workbench works', 'workbench.html')}
-</article>
-<article class="panel sunken">
-<div class="panel-top"><p class="eyebrow">Your team's coordination</p>${tag('early')}</div>
-<h3>Your agents. Their agents. One coordinated workflow.</h3>
-<p class="muted">Two developers, each with their own Mac, their own Botbench and their own agents, on one GitHub repository. Neither gives the other access to their machine.</p>
-${more('What two workbenches can do today', 'coordination.html')}
-</article>
+<section class="workflow-section" id="workflow"><div class="wrap">
+<div class="section-title-row"><div><p class="eyebrow">Inside the workbench</p><h2>Walk away.<br>Come back to the branch.</h2></div><p>Choose a part of the workflow. <br>See what happens, and what you get back.</p></div>
+<div class="workflow" data-workflow>
+<div class="tablist workflow-tabs" role="tablist" aria-label="Explore the Botbench workflow">
+${stages.map((stage, i) => `<button class="tab workflow-tab" type="button" role="tab" id="tab-${stage.id}" aria-controls="panel-${stage.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span>${stage.label}</span><small>${stage.hint}</small></button>`).join('\n')}
 </div>
+${stages.map((stage, i) => `<div class="tabpanel workflow-panel" role="tabpanel" id="panel-${stage.id}" aria-labelledby="tab-${stage.id}" tabindex="0"${i === 0 ? '' : ' hidden'}><div class="workflow-copy">${tag(stage.state)}<h3>${stage.title}</h3><p>${stage.text}</p><div class="workflow-result"><span class="eyebrow">What comes back</span><p>${stage.result}</p></div>${more(stage.link, stage.href)}</div><div class="workflow-media">${stage.media}</div></div>`).join('\n')}
+</div>
+<p class="source-note">Screens and recordings from the real product. The example project is a small demo shop.</p>
 </div></section>
 
-<section id="demo"><div class="wrap">
-${head('The product, recorded', 'A task to your decision, in 35 seconds.', 'A real run on a small demo shop, recorded at 1440×900. The minute of work in the middle is shown five times faster.')}
+<section class="team-section"><div class="wrap">
+<div class="team-intro"><div><p class="eyebrow">The coordination layer ${tag('early')}</p><h2>One repository.<br>Two workbenches.</h2></div><p class="lead">Your agents. Their agents. A shared view of the work, with each developer in control of their own Mac.</p></div>
+<div class="team-layout">
+${shot('paired-question.png', 1320, 870,
+  'A question from theo’s paired workbench waiting on maya’s Work screen, with options to answer it, give it to Claude Code, or dismiss it.',
+  'A real question between maya and theo, two Botbench installations on one Mac. Nothing in an incoming message runs by itself.', 'team-screen')}
+<div class="team-points"><article><h3>See the work in motion.</h3><p>Shared GitHub visibility shows the other workbenches’ open pull requests and pushed branches.</p></article><article><h3>Spot the overlap.</h3><p>See when a teammate already covers an issue or changes the same files. Issue claims can be turned on for a repository.</p></article><article><h3>Keep the owners in the loop.</h3><p>Paired workbenches exchange questions and answers only after their owners approve sending them.</p></article>${more('Explore the coordination layer', 'coordination.html')}</div>
+</div>
+<p class="team-boundary">Pairing has been demonstrated with two installations on one Mac. Testing across two Macs and broader autonomous coordination across owners remain ahead.</p>
+</div></section>
+
+<section id="demo" class="demo-section"><div class="wrap">
+<div class="section-title-row"><div><p class="eyebrow">Watch the actual product</p><h2>From task to decision.</h2></div><p>A 35-second recording. <br>One real task, ready for review.</p></div>
 ${clip('botbench-demo.mp4', 'botbench-demo-thumbnail.png', 1440, 900,
-    'The 35-second Botbench demo',
-    'It ends on a task ready for review: four changed files, its branch botbench/maya/run-1/task-1, 1 of 1 check passed, Codex found nothing to fix, Accept and Reject. No sound.',
-    `Your browser cannot play this video. <a href="${src('docs/media/botbench-demo.mp4')}">Watch it on GitHub</a>.`)}
-</div></section>
-
-<section><div class="wrap">
-${head('What changes', 'You review a branch instead of watching a terminal.')}
-<div class="table-scroll"><table class="stack">
-<thead><tr><th scope="col">Without Botbench</th><th scope="col">With Botbench</th></tr></thead>
-<tbody>
-<tr><td data-label="Without">You keep a terminal open and answer each permission prompt as it comes.</td><td class="yes" data-label="With">The agent uses its tools inside the task's own copy without asking. An action that reaches outside the copy waits as a card you can answer from your phone.</td></tr>
-<tr><td data-label="Without">The agent edits your checkout, and you sort out what changed.</td><td class="yes" data-label="With">Each task works in its own copy on its own branch. Your files and your branch are not touched.</td></tr>
-<tr><td data-label="Without">"Done" is the agent's word.</td><td class="yes" data-label="With">Botbench runs your repository's checks and keeps their output. Another vendor's agent can review the change; Botbench shows its review as a model's opinion, never as a check.</td></tr>
-<tr><td data-label="Without">Two developers find out they took the same issue when the second pull request opens.</td><td class="yes" data-label="With">You see the other workbenches' open pull requests and pushed branches, and Botbench says when one already covers your issue or changes the same files.</td></tr>
-</tbody></table></div>
-${more('What a check and a review can and cannot tell you', 'proof.html')}
+  'A 35-second recording of a real Botbench task, ending with its branch, changes, check output, review and decision controls.',
+  'Recorded on a small demo shop at 1440 × 900. The minute of work in the middle is shown five times faster. No sound.',
+  `Your browser cannot play this recording. <a href="${src('docs/media/botbench-demo.mp4')}">Watch it on GitHub</a>.`, 'demo-frame')}
+<div class="demo-footnote"><p><strong>A branch, a diff, the evidence.</strong><br>The result is there to inspect when you return.</p><a class="text-link" href="proof.html">What checks and reviews can tell you</a></div>
 </div></section>`,
 });
 
@@ -270,7 +285,7 @@ page({
   body: `${pageHero('Your team\'s coordination', 'Your agents. Their agents. One coordinated workflow.', 'Add a teammate who hands work to their own agents, and the two of you become the messengers. Botbench does the first steps about that today. The larger part is still to come, and this page says which is which.')}
 
 <section><div class="wrap">
-${head('Today', 'Two workbenches on one repository.', 'Each developer runs their own Botbench on their own Mac, behind its own login token. There are no accounts and no shared server; two workbenches share nothing but what they push to GitHub.')}
+${head('Today', 'Two workbenches on one repository.', 'Each developer runs their own Botbench on their own Mac, behind its own login token. Botbench has no accounts or shared server. Workbenches see branches and pull requests on a shared GitHub repository; paired workbenches can also exchange questions and answers approved by their owners.')}
 <ol class="steps">
 <li><div><h3>Branches never clash ${tag('available')}</h3><p>Each workbench puts its name in its branches: <code>botbench/&lt;workbench&gt;/run-N/task-M</code>.</p></div></li>
 <li><div><h3>You see each other's work ${tag('available')}</h3><p>The Work screen shows, read only, the other workbenches' open pull requests and pushed branches on the same remote, read with your own <code>gh</code> and <code>git</code>.</p></div></li>
