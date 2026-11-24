@@ -468,16 +468,16 @@ npm ci --prefix web
 npm run build --prefix web</pre></div></div></li>
 <li><div><h3>Start it</h3><p>Leave this terminal open; Ctrl+C stops Botbench. It prints its address, <code>http://127.0.0.1:4780</code>, and on the first start a login token.</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-start">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-start">npm start</pre></div></div></li>
-<li><div><h3>Sign in</h3><p>Open <code>http://127.0.0.1:4780</code> in a browser on the Mac, paste the token and choose Sign in. You arrive on Chat. Later, read the token with <code>cat ~/.botbench/login-token</code>.</p></div></li>
+<li><div><h3>Sign in</h3><p>Open <code>http://127.0.0.1:4780</code> in a browser on the Mac, paste the token and choose Sign in. You arrive on Home. Later, read the token with <code>cat ~/.botbench/login-token</code>.</p></div></li>
 <li><div><h3>Make a practice repository</h3><p>In a second terminal. Copy the path the last line prints.</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-try">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-try">mkdir ~/botbench-try &amp;&amp; cd ~/botbench-try
 git init
 echo "# Try" &gt; README.md
 git add README.md &amp;&amp; git commit -m "Start"
 pwd</pre></div></div></li>
-<li><div><h3>Start a task</h3><p>On Chat, press + under the message box, choose Repository, then Another folder…, and paste the path. When it reads "Usable git repository.", close the sheet. Write the task and choose Send:</p>
+<li><div><h3>Start a task</h3><p>Open Chat, press Add context under the message box, choose Repository, then Another folder…, and paste the path. When it reads "Usable git repository.", close the sheet. Write the task and choose Send:</p>
 <div class="code"><div class="code-head"><span>Message</span><button class="copy" type="button" data-copy="cmd-task">Copy</button></div><pre tabindex="0" aria-label="Text to copy" id="cmd-task" style="white-space:pre-wrap">Add a file hello.txt that says hello, then run ls to show that it is there.</pre></div></div></li>
-<li><div><h3>Review and accept</h3><p>Within a minute the transcript shows Claude Code writing the file and running <code>ls</code>. The task then reads Ready for review, with <code>hello.txt</code> under Changed files and its branch, such as <code>botbench/your-mac/run-1/task-1</code>. Choose Accept. Botbench keeps the branch and removes the task's copy. Your own branch is unchanged.</p></div></li>
+<li><div><h3>Review and accept</h3><p>Within a minute the transcript shows Claude Code writing the file and running <code>ls</code>. The task then reads Ready for review, with <code>hello.txt</code> under "1 file changed" and its branch, such as <code>botbench/your-mac/run-1/task-1</code>. This repository has no checks, so the button reads Accept without verification; choose it. Botbench keeps the branch and removes the task's copy. Your own branch is unchanged.</p></div></li>
 </ol>
 <p class="note">These steps follow the README's quickstart, which is the authority and has every detail, including how to clean up and how to use Botbench from your phone over a private network.</p>
 <div class="btn-row" style="margin-top:28px">${btn('The full quickstart', `${REPO}#quickstart`, 'primary', icon.out)}${btn('Set up checks for a repository', `${REPO}#configure-a-repository`, 'quiet', icon.out)}</div>
