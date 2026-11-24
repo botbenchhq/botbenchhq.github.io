@@ -1,9 +1,11 @@
 # Where the media came from
 
-Every file in the first table is copied, unchanged, from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) by `tools/copy-media.mjs`, which also writes the table. Botbench makes them with `npm run media` (`e2e/media.shots.ts`): real screens and recordings of a Botbench installation named studio-mac, working on a small billing repository under `/private/tmp/studio`, and of a second one on the same Mac, office-mac, paired with it. No model runs while they are made: Claude Code's build and Codex's review are replayed from sessions recorded from the real tools, the repository's check really runs, and each owner's messages between the two workbenches are typed through the real screens. Sign-in happens before a recording starts. Each was looked at before it was copied: none shows a private path, user name, token or repository.
+Every file in the first table is copied, unchanged, from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) by `tools/copy-media.mjs`, which also writes the table. Botbench makes the product screens and recordings with `npm run media` (`e2e/media.shots.ts`): real screens and recordings of a Botbench installation named studio-mac, working on a small billing repository under `/private/tmp/studio`, and of a second one on the same Mac, office-mac, paired with it. No model runs while they are made: Claude Code's build and Codex's review are replayed from sessions recorded from the real tools, the repository's check really runs, and each owner's messages between the two workbenches are typed through the real screens. Sign-in happens before a recording starts. Each was looked at before it was copied: none shows a private path, user name, token or repository.
+
+`assets/media/social-preview.png` is marketing artwork exported from Botbench's versioned `docs/media/social-preview.svg`, which contains the canonical two-tone light lockup and the export command. The PNG is copied unchanged; its newer source commit is recorded in the table.
 
 <!-- media:start -->
-From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`:
+From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the social preview whose source commit is listed in its row:
 
 | File | Source in botbench | SHA-256 |
 |---|---|---|
@@ -17,7 +19,7 @@ From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`:
 | `assets/media/first-task-phone-poster.jpg` | `docs/media/first-task-phone-poster.jpg`, unchanged | `c58b7d27c19b6d64b3c69f259ec4173a71ac146d01f87c981167f9bdb69c1fd6` |
 | `assets/media/paired-question.mp4` | `docs/media/paired-question.mp4`, unchanged | `93f3ced8ad217dac7ceebe7431be7e58fd9b8b7967acb76c8e940838e9dfd56c` |
 | `assets/media/paired-question-poster.jpg` | `docs/media/paired-question-poster.jpg`, unchanged | `4ca087b17012600575923a494223db916729089ab6840fa90880dc8b2b769c55` |
-| `assets/media/social-preview.png` | `docs/media/social-preview.png`, unchanged | `7636d2f47762b741e6b3349e54aed446bf904052fa13eb1adb49be6d6d9103de` |
+| `assets/media/social-preview.png` | `docs/media/social-preview.png` at `15e08edace18af92102a33f4dd4182645e42349d`, unchanged | `d612024227ffe6db823875c83de2554e6a3bab187a0e96cf9ccd30bdcee0e939` |
 <!-- media:end -->
 
 ## From before the 0.3.0 redesign
