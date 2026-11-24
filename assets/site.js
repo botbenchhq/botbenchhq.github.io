@@ -9,6 +9,7 @@
     : matchMedia('(prefers-color-scheme: dark)').matches;
   const nameTheme = () => themeBtn?.setAttribute('aria-label', dark() ? 'Use the light theme' : 'Use the dark theme');
   nameTheme();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', nameTheme);
   themeBtn?.addEventListener('click', () => {
     const next = dark() ? 'light' : 'dark';
     root.dataset.theme = next;
@@ -26,6 +27,10 @@
   };
   if (menuBtn && nav) {
     menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+    matchMedia('(min-width: 941px)').addEventListener('change', (event) => {
+      if (event.matches) setMenu(false);
+    });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
     });
@@ -37,24 +42,36 @@
   // Tabs: arrow keys move, Home and End jump.
   document.querySelectorAll('[role="tablist"]').forEach((list) => {
     const tabs = [...list.querySelectorAll('[role="tab"]')];
-    const select = (tab, focus) => {
+    const select = (tab, focus, remember = false) => {
       tabs.forEach((t) => {
         const on = t === tab;
         t.setAttribute('aria-selected', String(on));
         t.tabIndex = on ? 0 : -1;
         const panel = document.getElementById(t.getAttribute('aria-controls'));
-        panel.hidden = !on;
-        if (!on) panel.querySelectorAll('video').forEach((v) => v.pause());
+        if (panel) {
+          panel.hidden = !on;
+          if (!on) panel.querySelectorAll('video').forEach((v) => v.pause());
+        }
       });
       if (focus) tab.focus();
+      // A selected stage is linkable. This changes the address without a jump.
+      if (remember) {
+        try { history.replaceState(null, '', `#${tab.id}`); } catch {}
+      }
     };
+    const fromAddress = () => {
+      const tab = tabs.find((t) => `#${t.id}` === location.hash || `#${t.getAttribute('aria-controls')}` === location.hash);
+      if (tab) select(tab, false);
+    };
+    fromAddress();
+    window.addEventListener('hashchange', fromAddress);
     tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('click', () => select(tab, false, true));
       tab.addEventListener('keydown', (e) => {
         const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
         if (to === undefined) return;
         e.preventDefault();
-        select(tabs[(to + tabs.length) % tabs.length], true);
+        select(tabs[(to + tabs.length) % tabs.length], true, true);
       });
     });
   });
