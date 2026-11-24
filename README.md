@@ -25,6 +25,14 @@ It opens every page at 390, 768, 1280 and 1440 wide in both themes, saves screen
 
 `BOTBENCH_DIR=../botbench node tools/check-links.mjs --online` also checks that every repository path the site links to exists in a checkout, and asks each outside address.
 
+## Product pictures and recordings
+
+They are made in the Botbench repository (`npm run media` there) and copied here unchanged:
+
+```sh
+BOTBENCH_DIR=../botbench node tools/copy-media.mjs   # copies into assets/media and updates PROVENANCE.md
+```
+
 ## Rules for what the pages say
 
 - Every claim comes from the Botbench README. Change the README first.
