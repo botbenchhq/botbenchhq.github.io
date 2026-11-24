@@ -3,20 +3,20 @@
 Every file in the first table is copied, unchanged, from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) by `tools/copy-media.mjs`, which also writes the table. Botbench makes them with `npm run media` (`e2e/media.shots.ts`): real screens and recordings of a Botbench installation named studio-mac, working on a small billing repository under `/private/tmp/studio`, and of a second one on the same Mac, office-mac, paired with it. No model runs while they are made: Claude Code's build and Codex's review are replayed from sessions recorded from the real tools, the repository's check really runs, and each owner's messages between the two workbenches are typed through the real screens. Sign-in happens before a recording starts. Each was looked at before it was copied: none shows a private path, user name, token or repository.
 
 <!-- media:start -->
-From botbench at commit `53098af13cf51544b54802ff5accd76d8db17536`:
+From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`:
 
 | File | Source in botbench | SHA-256 |
 |---|---|---|
-| `assets/media/hero-workbench.png` | `docs/images/hero-workbench.png`, unchanged | `a46959eaeb98fc292b4083d93750bef3e2f22cd416edec4d817b397cf9d0d5bb` |
-| `assets/media/ready-for-review-proof.png` | `docs/images/ready-for-review-proof.png`, unchanged | `d502e46202c01661d4266861cb9dfd390bebb3afaee4c39b7828e3be614ecf13` |
-| `assets/media/permissions-check.png` | `docs/images/permissions-check.png`, unchanged | `def66b9e7bbbd6b841233b5169f1857780676e429400cb66b142dc806f17a890` |
-| `assets/media/paired-question.png` | `docs/images/paired-question.png`, unchanged | `fc64bccc8de15a423cd6b3a47af2e06e20be383f31f8d250544534ef8aa73474` |
-| `assets/media/botbench-demo.mp4` | `docs/media/botbench-demo.mp4`, unchanged | `9af1c84e043dc8ef95c4b8cfb571ca87cb119ce46f4fec33341c77d7b73044d4` |
-| `assets/media/botbench-demo-thumbnail.png` | `docs/media/botbench-demo-thumbnail.png`, unchanged | `8184dcb02463ddc737aeb53237159e3097469c0db92f96222dfd509b53d82ce6` |
-| `assets/media/first-task-phone.mp4` | `docs/media/first-task-phone.mp4`, unchanged | `1616480c2a55a1df947e20a3bf04ce9937d4ab47520a462d263a6bcc0b9e6b73` |
-| `assets/media/first-task-phone-poster.jpg` | `docs/media/first-task-phone-poster.jpg`, unchanged | `475e12ba7784da880bb959ef29ea865e73b8707dcda27de5fb23c6c06e166f93` |
-| `assets/media/paired-question.mp4` | `docs/media/paired-question.mp4`, unchanged | `202826fae96af179a76b167cc31534026ecef9774ae11873747a5f93d2585d33` |
-| `assets/media/paired-question-poster.jpg` | `docs/media/paired-question-poster.jpg`, unchanged | `23e5a1aef05a9dd0e9ecf1e0cc8326b2b003f8b0aad80c47970f381d9de98599` |
+| `assets/media/hero-workbench.png` | `docs/images/hero-workbench.png`, unchanged | `d2e9534dd807d4b09c2f46412a97b314bb424eeb452d6623d4189aaaa8343196` |
+| `assets/media/ready-for-review-proof.png` | `docs/images/ready-for-review-proof.png`, unchanged | `cb67af2f4adf1e65f614d8d816fa5b4437c70caee5a43a71db4ff0b57421a3a6` |
+| `assets/media/permissions-check.png` | `docs/images/permissions-check.png`, unchanged | `101aded237fbdf1d546e41bcd19f6a7bc3326104ece7c6e8f63c8fe8582a0b0b` |
+| `assets/media/paired-question.png` | `docs/images/paired-question.png`, unchanged | `46d164a91c6f4cc88c661d97166ab042977bd122a11b640b711f43dda9200c05` |
+| `assets/media/botbench-demo.mp4` | `docs/media/botbench-demo.mp4`, unchanged | `f85d01b87da56578ce4519534425a1fd99fe2a7030382ab956db48153129a2bb` |
+| `assets/media/botbench-demo-thumbnail.png` | `docs/media/botbench-demo-thumbnail.png`, unchanged | `36c3421206b5a8e326d85dcf37e52f13ba765b3d077ef22335eedc15f6dcd0a7` |
+| `assets/media/first-task-phone.mp4` | `docs/media/first-task-phone.mp4`, unchanged | `7510607a54764c25b0db3fafda2d43efdd2e7c31d56ecbfad636800d223a9a25` |
+| `assets/media/first-task-phone-poster.jpg` | `docs/media/first-task-phone-poster.jpg`, unchanged | `c58b7d27c19b6d64b3c69f259ec4173a71ac146d01f87c981167f9bdb69c1fd6` |
+| `assets/media/paired-question.mp4` | `docs/media/paired-question.mp4`, unchanged | `93f3ced8ad217dac7ceebe7431be7e58fd9b8b7967acb76c8e940838e9dfd56c` |
+| `assets/media/paired-question-poster.jpg` | `docs/media/paired-question-poster.jpg`, unchanged | `4ca087b17012600575923a494223db916729089ab6840fa90880dc8b2b769c55` |
 | `assets/media/social-preview.png` | `docs/media/social-preview.png`, unchanged | `7636d2f47762b741e6b3349e54aed446bf904052fa13eb1adb49be6d6d9103de` |
 <!-- media:end -->
 
