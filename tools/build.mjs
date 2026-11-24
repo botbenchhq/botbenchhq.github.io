@@ -38,7 +38,7 @@ const clip = (file, poster, w, h, label, caption, fallback, cls = '') =>
 const head = (eyebrow, title, text) => `<div class="section-head"><p class="eyebrow">${eyebrow}</p><h2>${title}</h2>${text ? `<p>${text}</p>` : ''}</div>`;
 const pageHero = (eyebrow, title, lead) => `<section class="hero page-hero"><div class="wrap"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p class="lead">${lead}</p></div></section>`;
 
-const SHOTS_NOTE = 'Real screens from two Botbench installations on one Mac, named maya and theo, working on a small demo shop. Nothing on them was edited.';
+const SHOTS_NOTE = 'Real screens from a Botbench installation named studio-mac, working on a small billing repository, and a second one on the same Mac, office-mac, paired with it. The agents’ work is replayed from recorded Claude Code and Codex sessions; the check really ran. Nothing on them was edited.';
 
 const closing = `<section class="closing"><div class="wrap closing-grid">
 <div><p class="eyebrow">Start with one task</p><h2>Your next branch<br>starts here.</h2></div>
@@ -115,9 +115,9 @@ const stages = [
     text: 'Hand over a task, or let Claude Code plan a run. Choose Claude Code or Codex to build. Each task works in its own copy of the repository, away from your current branch.',
     result: 'A separate place for the agent to work, with the permissions you chose.',
     link: 'Explore the workbench', href: 'workbench.html',
-    media: shot('permissions-check.png', 1320, 870,
-      'Botbench Settings, Permissions: Check a command shows how git push origin main is handled in each run mode, with the Activity log below.',
-      'The real Permissions screen. Check how a command would be handled before an agent runs it.'),
+    media: shot('permissions-check.png', 2880, 1800,
+      'Botbench Settings, Permissions and autonomy: Check a command shows how git push origin main is handled in each run mode, with Activity below.',
+      'The real Permissions and autonomy screen. Check how a command would be handled before an agent runs it.'),
   },
   {
     id: 'hand-over', label: 'Hand over', hint: 'Switch builders', state: 'available',
@@ -127,7 +127,7 @@ const stages = [
     link: 'See how handover works', href: 'workbench.html',
     media: clip('move-to-codex.mp4', 'move-to-codex-poster.png', 960, 600,
       'A 9-second recording of Move to Codex on a task Claude Code is building.',
-      'A real handover from Claude Code to Codex. 9 seconds, no sound.',
+      'A real handover from Claude Code to Codex, recorded before the 0.3.0 redesign of the screens. 9 seconds, no sound.',
       `Your browser cannot play this recording. <a href="${src('docs/media/move-to-codex.gif')}">See the recording on GitHub</a>.`),
   },
   {
@@ -137,8 +137,8 @@ const stages = [
     result: 'Shared context through questions and answers approved by their owners.',
     link: 'See coordination today', href: 'coordination.html',
     media: clip('paired-question.mp4', 'paired-question-poster.jpg', 1212, 1298,
-      'A 28-second recording of two workbenches pairing, then exchanging a question and an answer.',
-      'Two installations on one Mac, recorded at real speed. 28 seconds, no sound. Not yet tested across two Macs.',
+      'A 21-second recording of two paired workbenches exchanging a question and an answer.',
+      'Two installations on one Mac, already paired, recorded at real speed. 21 seconds, no sound. Not yet tested across two Macs.',
       'Your browser cannot play this recording. The coordination page describes the pairing and exchange.'),
   },
   {
@@ -147,9 +147,9 @@ const stages = [
     text: 'Read the branch, the diff and the output of your repository’s checks. Another agent can review the change; its review is a model’s opinion, shown separately from the checks.',
     result: 'A branch with the change and the evidence. Botbench never merges a pull request.',
     link: 'Read what the evidence means', href: 'proof.html',
-    media: shot('ready-for-review-proof.png', 1320, 870,
-      'A real task ready for review: npm test passed, followed by Codex’s review, its verdict and the things it checked.',
-      'Checks and review are shown separately. This is a recorded result from the demo shop.'),
+    media: shot('ready-for-review-proof.png', 2880, 1800,
+      'A task ready for review: 1 of 1 check passed, followed by Codex’s review and the things it says it checked, the changed line, and Reject and Accept.',
+      'Checks and review are shown separately. The check really ran; the build and the review are replayed from recorded sessions.'),
   },
 ];
 
@@ -167,7 +167,7 @@ page({
 <a class="text-link" href="${REPO}">Explore the code on GitHub</a></div>
 </div>
 <figure class="hero-product">
-<a class="zoom" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone"><img src="assets/media/hero-workbench.png" width="1600" height="1080" alt="Real Botbench screens: on the Mac, Claude Code’s work on a task; on the phone, two tasks ready for review." loading="eager" fetchpriority="high" decoding="async"></a>
+<a class="zoom" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone"><img src="assets/media/hero-workbench.png" width="1600" height="860" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></a>
 <figcaption><span><strong>Your Mac does the work.</strong> Your phone can bring you back to it.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens. View their source.</a></figcaption>
 </figure>
 <div class="agent-rail"><p>The agents you already use</p><div><strong>Claude Code</strong><span>Plan · Build</span></div><div><strong>Codex</strong><span>Build · Review</span></div><a href="workbench.html">See all agent capabilities</a></div>
@@ -181,25 +181,25 @@ ${stages.map((stage, i) => `<button class="tab workflow-tab" type="button" role=
 </div>
 ${stages.map((stage, i) => `<div class="tabpanel workflow-panel" role="tabpanel" id="panel-${stage.id}" aria-labelledby="tab-${stage.id}" tabindex="0"${i === 0 ? '' : ' hidden'}><div class="workflow-copy">${tag(stage.state)}<h3>${stage.title}</h3><p>${stage.text}</p><div class="workflow-result"><span class="eyebrow">What comes back</span><p>${stage.result}</p></div>${more(stage.link, stage.href)}</div><div class="workflow-media">${stage.media}</div></div>`).join('\n')}
 </div>
-<p class="source-note">Screens and recordings from the real product. The example project is a small demo shop.</p>
+<p class="source-note">Screens and recordings from the real product. The example project is a small billing repository; the agents’ work on it is replayed from recorded sessions.</p>
 </div></section>
 
 <section class="team-section"><div class="wrap">
 <div class="team-intro"><div><p class="eyebrow">The coordination layer ${tag('early')}</p><h2>One repository.<br>Two workbenches.</h2></div><p class="lead">Your agents. Their agents. A shared view of the work, with each developer in control of their own Mac.</p></div>
 <div class="team-layout">
-${shot('paired-question.png', 1320, 870,
-  'A question from theo’s paired workbench waiting on maya’s Work screen, with options to answer it, give it to Claude Code, or dismiss it.',
-  'A real question between maya and theo, two Botbench installations on one Mac. Nothing in an incoming message runs by itself.', 'team-screen')}
+${shot('paired-question.png', 2880, 1800,
+  'A question from office-mac’s paired workbench waiting on studio-mac’s Home, with options to answer it, give it to Claude Code, or dismiss it.',
+  'A real question between studio-mac and office-mac, two Botbench installations on one Mac. Nothing in an incoming message runs by itself.', 'team-screen')}
 <div class="team-points"><article><h3>See the work in motion.</h3><p>Shared GitHub visibility shows the other workbenches’ open pull requests and pushed branches.</p></article><article><h3>Spot the overlap.</h3><p>See when a teammate already covers an issue or changes the same files. Issue claims can be turned on for a repository.</p></article><article><h3>Keep the owners in the loop.</h3><p>Paired workbenches exchange questions and answers only after their owners approve sending them.</p></article>${more('Explore the coordination layer', 'coordination.html')}</div>
 </div>
 <p class="team-boundary">Pairing has been demonstrated with two installations on one Mac. Testing across two Macs and broader autonomous coordination across owners remain ahead.</p>
 </div></section>
 
 <section id="demo" class="demo-section"><div class="wrap">
-<div class="section-title-row"><div><p class="eyebrow">Watch the actual product</p><h2>From task to decision.</h2></div><p>A 35-second recording. <br>One real task, ready for review.</p></div>
+<div class="section-title-row"><div><p class="eyebrow">Watch the actual product</p><h2>From task to decision.</h2></div><p>A 25-second recording. <br>One task, from its plan to your decision.</p></div>
 ${clip('botbench-demo.mp4', 'botbench-demo-thumbnail.png', 1440, 900,
-  'A 35-second recording of a real Botbench task, ending with its branch, changes, check output, review and decision controls.',
-  'Recorded on a small demo shop at 1440 × 900. The minute of work in the middle is shown five times faster. No sound.',
+  'A 25-second recording of a Botbench task: its plan is approved, Claude Code builds, the check and Codex’s review come back, and the task is accepted.',
+  'Recorded at 1440 × 900, at its real speed. The agents’ parts are replayed from recorded sessions; the check really ran. No sound.',
   `Your browser cannot play this recording. <a href="${src('docs/media/botbench-demo.mp4')}">Watch it on GitHub</a>.`, 'demo-frame')}
 <div class="demo-footnote"><p><strong>A branch, a diff, the evidence.</strong><br>The result is there to inspect when you return.</p><a class="text-link" href="proof.html">What checks and reviews can tell you</a></div>
 </div></section>`,
@@ -236,7 +236,7 @@ ${head('Modes', 'Choose how much each run needs you.', 'A mode is about your dec
 </div></section>
 
 <section><div class="wrap split media-first">
-${shot('permissions-check.png', 1320, 870, 'Settings, Permissions, Check a command: git push origin main in acme-shop asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push; below, the Activity log', 'Check what a command would get before any agent runs it. Here a push asks you, or is refused in a fully autonomous run.')}
+${shot('permissions-check.png', 2880, 1800, 'Settings, Permissions and autonomy, Check a command: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push; below, Activity', 'Check what a command would get before any agent runs it. Here a push asks you, or is refused in a fully autonomous run.')}
 <div class="prose">
 <p class="eyebrow">Control</p>
 <h2>Know the answer before the agent asks.</h2>
@@ -297,7 +297,7 @@ ${head('Today', 'Two workbenches on one repository.', 'Each developer runs their
 </div></section>
 
 <section><div class="wrap split even">
-${clip('paired-question.mp4', 'paired-question-poster.jpg', 1212, 1298, 'A 28-second recording of two workbenches pairing and exchanging a question and an answer', 'maya on the left, theo on the right: an invite, the fingerprints, both confirm, then theo\'s question and maya\'s answer. Two installations on one Mac, recorded at its real speed. 28 seconds, no sound.', 'Your browser cannot play this recording. The text beside it says what it shows.')}
+${clip('paired-question.mp4', 'paired-question-poster.jpg', 1212, 1298, 'A 21-second recording of two paired workbenches exchanging a question and an answer', 'office-mac on the left, studio-mac on the right, already paired: office-mac\'s question, studio-mac\'s answer, and the conversation it leaves. Two installations on one Mac, recorded at its real speed. 21 seconds, no sound.', 'Your browser cannot play this recording. The text beside it says what it shows.')}
 <div class="prose">
 <p class="eyebrow">Paired workbenches · ${tag('early')}</p>
 <h2>Every message is one its owner approved.</h2>
@@ -329,7 +329,7 @@ page({
   body: `${pageHero('Verification', 'Proof, not promises.', 'Every task ends in things you can inspect: a branch, its diff, the output of your own checks, and the transcript of what the agent did and what you answered.')}
 
 <section><div class="wrap split media-first">
-${shot('ready-for-review-proof.png', 1320, 870, 'A task\'s evidence: Checks passed, 1 of 1, npm test Passed in 1.4 s; Codex\'s review, by Codex, a model\'s opinion of the changes, not a check; Verdict: looks right, and the four things it says it checked', 'A task that is ready for review. The check and the review are separate, and labelled.')}
+${shot('ready-for-review-proof.png', 2880, 1800, 'A task\'s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed; Codex\'s review, a model\'s opinion, not a check: Codex found nothing to fix, and the two things it says it checked', 'A task that is ready for review. The check and the review are separate, and labelled.')}
 <div class="prose">
 <p class="eyebrow">Two kinds of evidence</p>
 <h2>A check runs your commands; a review is a model's opinion.</h2>
@@ -457,7 +457,7 @@ page({
 
 <section><div class="wrap split reorder">
 <div>${head('The first branch', 'Clone, build, start, hand over one task.')}
-${clip('first-task-phone.mp4', 'first-task-phone-poster.jpg', 780, 1688, 'A 23-second recording of steps 5 and 6 on a phone-size screen', 'Steps 5 and 6, recorded at phone size from a real Botbench and a real Claude Code reply, at its real speed. 23 seconds, no sound.', `Your browser cannot play this recording. The steps beside it say what it shows.`, 'frame-phone')}</div>
+${clip('first-task-phone.mp4', 'first-task-phone-poster.jpg', 780, 1688, 'A 24-second recording of starting one task and accepting it, on a phone-size screen', 'One task from start to Accept, recorded at phone size from a real Botbench at its real speed. Claude Code\'s reply is replayed from a recorded session, and the task is a bug fix, not the hello.txt of step 5. 24 seconds, no sound.', `Your browser cannot play this recording. The steps beside it say what it shows.`, 'frame-phone')}</div>
 <div>
 <ol class="steps">
 <li><div><h3>Get it and build the screens</h3>

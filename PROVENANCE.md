@@ -1,37 +1,32 @@
 # Where the media came from
 
-Every file in the first table is from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) at commit `d6f7b316bf24d81431ed132148ccefae283080b0`. They are real screens and recordings of two Botbench installations on one Mac, named maya and theo, working on a small demo shop. Each was looked at before it was copied: none shows a private path, user name, token or repository.
+Every file in the first table is copied, unchanged, from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) by `tools/copy-media.mjs`, which also writes the table. Botbench makes them with `npm run media` (`e2e/media.shots.ts`): real screens and recordings of a Botbench installation named studio-mac, working on a small billing repository under `/private/tmp/studio`, and of a second one on the same Mac, office-mac, paired with it. No model runs while they are made: Claude Code's build and Codex's review are replayed from sessions recorded from the real tools, the repository's check really runs, and each owner's messages between the two workbenches are typed through the real screens. Sign-in happens before a recording starts. Each was looked at before it was copied: none shows a private path, user name, token or repository.
+
+<!-- media:start -->
+From botbench at commit `53098af13cf51544b54802ff5accd76d8db17536`:
 
 | File | Source in botbench | SHA-256 |
 |---|---|---|
-| `assets/media/botbench-demo.mp4` | `docs/media/botbench-demo.mp4`, unchanged | `3370948a66b8bd052cb072719ea2195ad32582ce2efe51e89a7b10c8c885c244` |
-| `assets/media/botbench-demo-thumbnail.png` | `docs/media/botbench-demo-thumbnail.png`, unchanged | `4dda0d2bbc3d0814e43c02fdf05921788cee977bce585d432b240341f2a97119` |
+| `assets/media/hero-workbench.png` | `docs/images/hero-workbench.png`, unchanged | `a46959eaeb98fc292b4083d93750bef3e2f22cd416edec4d817b397cf9d0d5bb` |
+| `assets/media/ready-for-review-proof.png` | `docs/images/ready-for-review-proof.png`, unchanged | `d502e46202c01661d4266861cb9dfd390bebb3afaee4c39b7828e3be614ecf13` |
+| `assets/media/permissions-check.png` | `docs/images/permissions-check.png`, unchanged | `def66b9e7bbbd6b841233b5169f1857780676e429400cb66b142dc806f17a890` |
+| `assets/media/paired-question.png` | `docs/images/paired-question.png`, unchanged | `fc64bccc8de15a423cd6b3a47af2e06e20be383f31f8d250544534ef8aa73474` |
+| `assets/media/botbench-demo.mp4` | `docs/media/botbench-demo.mp4`, unchanged | `9af1c84e043dc8ef95c4b8cfb571ca87cb119ce46f4fec33341c77d7b73044d4` |
+| `assets/media/botbench-demo-thumbnail.png` | `docs/media/botbench-demo-thumbnail.png`, unchanged | `8184dcb02463ddc737aeb53237159e3097469c0db92f96222dfd509b53d82ce6` |
+| `assets/media/first-task-phone.mp4` | `docs/media/first-task-phone.mp4`, unchanged | `1616480c2a55a1df947e20a3bf04ce9937d4ab47520a462d263a6bcc0b9e6b73` |
+| `assets/media/first-task-phone-poster.jpg` | `docs/media/first-task-phone-poster.jpg`, unchanged | `475e12ba7784da880bb959ef29ea865e73b8707dcda27de5fb23c6c06e166f93` |
+| `assets/media/paired-question.mp4` | `docs/media/paired-question.mp4`, unchanged | `202826fae96af179a76b167cc31534026ecef9774ae11873747a5f93d2585d33` |
+| `assets/media/paired-question-poster.jpg` | `docs/media/paired-question-poster.jpg`, unchanged | `23e5a1aef05a9dd0e9ecf1e0cc8326b2b003f8b0aad80c47970f381d9de98599` |
 | `assets/media/social-preview.png` | `docs/media/social-preview.png`, unchanged | `7636d2f47762b741e6b3349e54aed446bf904052fa13eb1adb49be6d6d9103de` |
-| `assets/media/hero-workbench.png` | `docs/images/hero-workbench.png`, unchanged | `82481a13b5b0bf767e9c4b2df9860e071f3643adf455ce24669ff99f3ff5187f` |
-| `assets/media/ready-for-review-proof.png` | `docs/images/ready-for-review-proof.png`, unchanged | `21744c04080877a5b3b45851fe2ffbdb6fb594c4045cf054dce19dc1eec25682` |
-| `assets/media/permissions-check.png` | `docs/images/permissions-check.png`, unchanged | `212db054fd87dc173d6e0573a96c7b0ee46431b7fb471ab8609bb5aaa77167c3` |
-| `assets/media/paired-question.png` | `docs/images/paired-question.png`, unchanged | `a7b38e11665983e443856ceddc2175d0d670a2648095737bf7131b794d671de5` |
-| `assets/media/move-to-codex.mp4` | made from `docs/media/move-to-codex.gif` (see below) | `462265e5e93cab800ffea2c887d3c6acd78959f9548e9a90f6bacf4acb96f84c` |
-| `assets/media/move-to-codex-poster.png` | made from `docs/media/move-to-codex.gif` (see below) | `7cd754b678bf43125d32bb5abad2fd5f4648554d742a5b932256b2a54c6addc0` |
+<!-- media:end -->
 
-`move-to-codex.mp4` is the same recording as the GIF, changed only in format so that it has a pause button and does not play by itself: `ffmpeg -i move-to-codex.gif -movflags +faststart -pix_fmt yuv420p -crf 26 move-to-codex.mp4`. Its poster is the recording's last frame.
+## From before the 0.3.0 redesign
+
+`assets/media/move-to-codex.mp4` and `assets/media/move-to-codex-poster.png` still show the screens as they were before Botbench 0.3.0. They were made from `docs/media/move-to-codex.gif` at commit `d6f7b316bf24d81431ed132148ccefae283080b0`, a real handover on a small demo shop, changed only in format: `ffmpeg -i move-to-codex.gif -movflags +faststart -pix_fmt yuv420p -crf 26 move-to-codex.mp4`. The poster is the recording's last frame. A handover needs a live turn of both agents, which `npm run media` does not make.
+
+| File | SHA-256 |
+|---|---|
+| `assets/media/move-to-codex.mp4` | `462265e5e93cab800ffea2c887d3c6acd78959f9548e9a90f6bacf4acb96f84c` |
+| `assets/media/move-to-codex-poster.png` | `7cd754b678bf43125d32bb5abad2fd5f4648554d742a5b932256b2a54c6addc0` |
 
 `assets/favicon.svg` is `assets/svg/botbench-app-icon-two-tone-dark.svg` from the same commit, unchanged.
-
-## Recorded for this site
-
-`assets/media/first-task-phone.mp4` and its poster were recorded by `tools/capture/first-task.ts` on 23 November 2026, from Botbench at commit `d6f7b316bf24d81431ed132148ccefae283080b0` with its own data folder, a practice repository at `/private/tmp/botbench-try`, the workbench name `your-mac`, and one real Claude Code reply (Haiku). The frames are screenshots of the real screens, shown for as long as each was on screen; nothing on them was edited and nothing is played faster. Sign-in happens before the recording starts, so the login token is not on it. `first-task-phone.json` holds the task, the branch and the commit the run made.
-
-| File | SHA-256 |
-|---|---|
-| `assets/media/first-task-phone.mp4` | `e9bc52b040a9b30f4013176e217f89f5ba85b924f381fdf5d794923dfbb22235` |
-| `assets/media/first-task-phone-poster.jpg` | `f186d7bb7efadef1c6c27b9f2404b6d46f9b159b140cd2bfa5d636e2213834c4` |
-| `assets/media/first-task-phone.json` | `36d2939c6a5735d5bedbbebd145736bd52bd8de519926b7714688c99ff567a73` |
-
-`assets/media/paired-question.mp4` and its poster were recorded by `tools/capture/paired-question.ts` on the same day and commit: two Botbench processes on one Mac, each with its own data folder and its own copy of one repository under `/private/tmp`, named maya (left) and theo (right). Every message was typed and sent by its owner through the real screens; no agent took part. Nothing is edited or played faster. `paired-question.json` holds the question and the answer.
-
-| File | SHA-256 |
-|---|---|
-| `assets/media/paired-question.mp4` | `7a0d981b8b27e5220c104827c069b05eb77a741db660f71e3dfcd7818525bb67` |
-| `assets/media/paired-question-poster.jpg` | `c7c61dfae31b2c5b3c0448d8a594560453bd2a2e369f31dbee7469111802afba` |
-| `assets/media/paired-question.json` | `dbfbe3e72fd7ccafcc838ea254dcb4e951b2f71b9c8d6c5239d977b098da7bda` |
