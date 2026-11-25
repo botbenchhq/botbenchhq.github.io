@@ -54,6 +54,9 @@ const COPY = {
   thisTask: 'This task',
   facts: [['Mode', 'Manual'], ['Agent', 'Claude Code'], ['Reviewer', 'Codex, its default model'], ['Repository', 'billing-api']],
   label: "Illustration · words from Botbench's screens",
+  // Not a product string: the card's one annotation, drawn outside the screen's surfaces in the
+  // peer colour with a leader to the line it explains.
+  note: 'Another workbench is changing the same file. You find out before either is merged.',
 };
 
 // Fragments to find in the product's source. A templated line is checked by its fixed parts.
@@ -86,10 +89,10 @@ if (botbench && existsSync(join(botbench, 'web/src'))) {
 // ---------------------------------------------------------------- the colours
 // Graphite + Glacier, from design-system themes/botbench.css (light :root, dark [data-theme="dark"]).
 const THEMES = {
-  light: { surface: '#F5F6F7', raised: '#FFFFFF', fill: '#ECEEF1', text: '#1A2028', muted: '#545E6B', border: '#DFE2E7', borderStrong: '#76808E', accent: '#215BB8', onAccent: '#FFFFFF', success: '#146A4A', successSubtle: '#E1F3EA', danger: '#B43E46', info: '#215BB8', infoSubtle: '#E6EEFB', approval: '#97600E', approvalSubtle: '#FBF0DC' },
-  dark: { surface: '#111316', raised: '#20242B', fill: '#2C3139', text: '#F2F3F5', muted: '#ADB4BE', border: '#2A2F37', borderStrong: '#727D8B', accent: '#7CB7FF', onAccent: '#0B1522', success: '#6ED5A4', successSubtle: '#12281F', danger: '#FF898A', info: '#7CB7FF', infoSubtle: '#16263A', approval: '#F2B95D', approvalSubtle: '#2E2513' },
+  light: { surface: '#F5F6F7', raised: '#FFFFFF', fill: '#ECEEF1', text: '#1A2028', muted: '#545E6B', border: '#DFE2E7', borderStrong: '#76808E', accent: '#215BB8', onAccent: '#FFFFFF', success: '#146A4A', successSubtle: '#E1F3EA', danger: '#B43E46', info: '#215BB8', infoSubtle: '#E6EEFB', approval: '#97600E', approvalSubtle: '#FBF0DC', peer: '#0C7187' },
+  dark: { surface: '#111316', raised: '#20242B', fill: '#2C3139', text: '#F2F3F5', muted: '#ADB4BE', border: '#2A2F37', borderStrong: '#727D8B', accent: '#7CB7FF', onAccent: '#0B1522', success: '#6ED5A4', successSubtle: '#12281F', danger: '#FF898A', info: '#7CB7FF', infoSubtle: '#16263A', approval: '#F2B95D', approvalSubtle: '#2E2513', peer: '#60D4D4' },
 };
-const TOKEN = { surface: 'surface', raised: 'surface-raised', fill: 'fill', text: 'on-surface', muted: 'muted', border: 'border', borderStrong: 'border-strong', accent: 'accent', onAccent: 'on-accent', success: 'success', successSubtle: 'success-subtle', danger: 'danger', info: 'info', infoSubtle: 'info-subtle', approval: 'approval', approvalSubtle: 'approval-subtle' };
+const TOKEN = { surface: 'surface', raised: 'surface-raised', fill: 'fill', text: 'on-surface', muted: 'muted', border: 'border', borderStrong: 'border-strong', accent: 'accent', onAccent: 'on-accent', success: 'success', successSubtle: 'success-subtle', danger: 'danger', info: 'info', infoSubtle: 'info-subtle', approval: 'approval', approvalSubtle: 'approval-subtle', peer: 'peer' };
 
 const ds = sibling('DS_DIR', ['ds', 'design-system']);
 if (ds && existsSync(join(ds, 'themes/botbench.css'))) {
@@ -271,7 +274,33 @@ function build(mode, layout) {
   y += layout === 'wide' ? 34 : 40;
   const ol = wrap(COPY.overlap, S.small, LW - 8);
   stage.push(g(rise(7.0), ol.map((s, i) => text(s, { size: S.small, x: L, y: y + i * S.small * 1.4, fill: C.muted })).join('')));
+  const overlapTop = y;
   y += (ol.length - 1) * S.small * 1.4;
+
+  // The annotation: not part of the screen. A 1.5 px leader in the peer colour leaves a dot
+  // 6 px from the line it explains and draws to a short note, which then fades in and stays.
+  const draw = (t, axis) => `class="${tl.keyframes((p) => `0%,${p(t)}{opacity:0;transform:scale${axis}(0)}${p(t + 0.05)}{opacity:1;transform:scale${axis}(0)}${p(t + 0.35)},100%{opacity:1;transform:scale${axis}(1)}`, { timing: ease, base: `transform-box:fill-box;transform-origin:${axis === 'X' ? 'left center' : 'center top'};` })}"`;
+  const NOTE = layout === 'wide' ? 21 : 25;
+  const noteLines = (width) => wrap(COPY.note, NOTE, width, 'bold');
+  let noteBottom;
+  if (layout === 'wide') {
+    const NX = 812, ly = overlapTop - S.small * 0.36;
+    const from = L + measure(ol[0], S.small) + 6;
+    const lines = noteLines(W - P - NX);
+    stage.push(g(tl.on(7.25, { fade: 0.1 }).attrs, `<circle cx="${f1(from + 2.5)}" cy="${f1(ly)}" r="2.5" fill="${C.peer}"/>`));
+    stage.push(`<path ${draw(7.25, 'X')} d="M${f1(from + 2.5)} ${f1(ly)}H${NX - 10}" stroke="${C.peer}" stroke-width="1.5"/>`);
+    stage.push(g(rise(7.5, 6), lines.map((l, i) => text(l, { font: 'bold', size: NOTE, x: NX, y: ly + NOTE * 0.36 + i * NOTE * 1.32, fill: C.peer })).join('')));
+    noteBottom = ly + NOTE * 0.36 + (lines.length - 1) * NOTE * 1.32;
+  } else {
+    const top = y + 16, lines = noteLines(LW - 22);
+    const first = top + 14 + NOTE * 0.8;
+    const last = first + (lines.length - 1) * NOTE * 1.32;
+    stage.push(g(tl.on(7.25, { fade: 0.1 }).attrs, `<circle cx="${L + 4}" cy="${f1(top)}" r="2.5" fill="${C.peer}"/>`));
+    stage.push(`<path ${draw(7.25, 'Y')} d="M${L + 4} ${f1(top)}V${f1(last + 6)}" stroke="${C.peer}" stroke-width="1.5"/>`);
+    stage.push(g(rise(7.5, 6), lines.map((l, i) => text(l, { font: 'bold', size: NOTE, x: L + 20, y: first + i * NOTE * 1.32, fill: C.peer })).join('')));
+    noteBottom = last;
+    y = last;
+  }
 
   // Right column (wide) or below (compact): the task's facts until the decision, then the decision.
   const decision = [];
@@ -285,7 +314,7 @@ function build(mode, layout) {
       facts.push(text(v, { size: S.panelBody, x: X + RW, y: fy, fill: C.text, anchor: 'end' }));
       facts.push(line(X, fy + 20.5, X + RW, fy + 20.5, C.border));
     });
-    stage.push(g(tl.until(8.2, { fade: 0.2 }).attrs, facts.join('')));
+    stage.push(g(tl.until(9.1, { fade: 0.2 }).attrs, facts.join('')));
     const top = 100, ix = X + 24, iw = RW - 48;
     let dy = top + 52;
     decision.push(text(COPY.decision, { font: 'bold', size: S.panelTitle, x: ix, y: dy, fill: C.text }));
@@ -308,8 +337,8 @@ function build(mode, layout) {
     decision.push(text(COPY.accept, { font: 'bold', size: S.panelBody, x: ix + rw + 12 + aw / 2, y: dy + bh / 2 + 6.5, fill: C.onAccent, anchor: 'middle' }));
     dy += bh + 26;
     const panel = rect(X + 0.5, top + 0.5, RW - 1, dy - top - 1, 14, C.raised, C.border) + decision.join('');
-    stage.push(g(rise(8.45, 10), panel));
-    H = Math.ceil(Math.max(y, dy) + 40);
+    stage.push(g(rise(9.35, 10), panel));
+    H = Math.ceil(Math.max(y, dy, noteBottom) + 40);
   } else {
     y += 28;
     const top = y, ix = L + pad;
@@ -322,11 +351,11 @@ function build(mode, layout) {
     decision.push(rect(ix + rw + 14, dy, aw, bh, 9, C.accent));
     decision.push(text(COPY.accept, { font: 'bold', size: S.panelBody, x: ix + rw + 14 + aw / 2, y: dy + bh / 2 + 8, fill: C.onAccent, anchor: 'middle' }));
     dy += bh + 24;
-    stage.push(g(rise(8.4, 10), rect(L + 0.5, top + 0.5, LW - 1, dy - top - 1, 14, C.raised, C.border) + decision.join('')));
+    stage.push(g(rise(9.35, 10), rect(L + 0.5, top + 0.5, LW - 1, dy - top - 1, 14, C.raised, C.border) + decision.join('')));
     H = Math.ceil(dy + P);
   }
 
-  const title = "Illustration in Botbench's own words: a task, Make add in calc.py return the sum, is handed to Claude Code, which works in a separate copy on the branch botbench/studio-mac/run-7/task-7. 1 of 1 check passed. Codex's review is shown as a model's opinion, not a check. Under the changed file, calc.py, Botbench warns: office-mac's open pull request #12 also changes calc.py, so the two may conflict when both are merged. Your decision: Reject or Accept.";
+  const title = "Illustration in Botbench's own words: a task, Make add in calc.py return the sum, is handed to Claude Code, which works in a separate copy on the branch botbench/studio-mac/run-7/task-7. 1 of 1 check passed. Codex's review is shown as a model's opinion, not a check. Under the changed file, calc.py, Botbench warns: office-mac's open pull request #12 also changes calc.py, so the two may conflict when both are merged. Your decision: Reject or Accept. An annotation beside the warning, not part of the screen, says: Another workbench is changing the same file. You find out before either is merged.";
   const body = rect(0, 0, W, H, 0, C.surface) + `<g class="${tl.dip({ seconds: 0.4 })}">${header.join('')}${stage.join('')}</g>`;
   return { svg: card({ title, css: tl.css(), defs: out.join('') + glyphs.defs(), body, width: W, height: H, radius: 16 }), T };
 }
