@@ -10,3 +10,23 @@ of assets/site.css.
 
 The first page layout came from a wireframe made for this site; its sitemap is
 kept. No file of the project that inspired it is copied here.
+
+README product card (tools/cards/, assets/cards/):
+
+- tools/cards/lib/ holds five files of the ChanMeng SVG product-card kit
+  (text.cjs, timeline.cjs, shell.cjs, check-card.mjs, capture-frames.mjs), copied
+  unchanged from ChanMeng666/chanmeng-svg-animation-studio at commit
+  539208618e6ca68963474f77921f62e39713bb0e, skills/chanmeng-svg-product-card/kit/,
+  by its own scripts/init-kit.mjs. MIT License, Copyright (c) 2026 Chan Meng:
+  tools/cards/licenses/CHANMENG-LICENSE.
+- The text in assets/cards/*.svg is glyph outlines of Inter (Regular, SemiBold)
+  and JetBrains Mono (Regular), read at build time from the @fontsource/inter and
+  @fontsource/jetbrains-mono packages (5.2.5). Both are under the SIL Open Font
+  License 1.1: Copyright 2016 The Inter Project Authors, and Copyright 2020 The
+  JetBrains Mono Project Authors. Licence texts in tools/cards/licenses/. No font
+  file is shipped in the cards.
+- tools/cards/assets/botbench-lockup-two-tone-{light,dark}.svg are copied unchanged
+  from botbenchhq/botbench (Apache License 2.0); see PROVENANCE.md.
+- The check, minus and circle-check icons are lucide's path data (ISC License,
+  Copyright (c) Lucide Contributors), as Botbench's own screens draw them.
+- The colours are from botbenchhq/design-system, themes/botbench.css (Graphite + Glacier).

@@ -33,6 +33,17 @@ They are made in the Botbench repository (`npm run media` there) and copied here
 BOTBENCH_DIR=../botbench node tools/copy-media.mjs   # copies into assets/media and updates PROVENANCE.md
 ```
 
+## README product card
+
+`assets/cards/` holds the animated card the Botbench README shows, an illustration in the product's own words (see `PROVENANCE.md`). It is built from `tools/cards/build.mjs` with the ChanMeng product-card kit in `tools/cards/lib/`:
+
+```sh
+npm install
+BOTBENCH_DIR=../botbench DS_DIR=../design-system npm run build:cards   # checks the words and colours against those checkouts when they are there
+npm run check:cards                                                     # rebuilt the same, the kit's static gate, and an <img> in Chromium, WebKit and Firefox
+npm run check:cards -- --frames=shots/cards                             # also the kit's timed captures and a contact sheet per card
+```
+
 ## Rules for what the pages say
 
 - Every claim comes from the Botbench README. Change the README first.
