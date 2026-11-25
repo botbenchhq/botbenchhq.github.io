@@ -32,3 +32,18 @@ From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the s
 | `assets/media/move-to-codex-poster.png` | `7cd754b678bf43125d32bb5abad2fd5f4648554d742a5b932256b2a54c6addc0` |
 
 `assets/favicon.svg` is `assets/svg/botbench-app-icon-two-tone-dark.svg` from the same commit, unchanged.
+
+## Crops of the hero picture
+
+The homepage hero shows two crops of `assets/media/hero-workbench.png`, each cut out of it with no other change (no scaling, no edit of the pixels), so the desktop screen can be shown at its own size and the phone screen on its own on a phone:
+
+| File | Cut from `assets/media/hero-workbench.png` | SHA-256 |
+|---|---|---|
+| `assets/media/hero-desktop-crop.png` | 2380 × 1500 at x 68, y 110: the desktop window (`ffmpeg -i hero-workbench.png -vf crop=2380:1500:68:110`) | `e1c424d0f277ad16b9bfde3e70846411069e9247ae04b2348d0c63daddf1e9db` |
+| `assets/media/hero-phone-crop.png` | 680 × 1452 at x 2448, y 134: the phone (`-vf crop=680:1452:2448:134`) | `05ad15bf158e616bba83eb80b87c11a69bbf624d344ded5fb394b4a12fcb4559` |
+
+## The coordination scene (an illustration, not a screen)
+
+"Before the second pull request" on the home and Coordination pages is drawn, not recorded, and is labelled as an illustration where it is shown. It is built with the Stageshow kit (`third_party/stageshow/`, MIT, revision `299140fafd08df55a9c234e610c3f64af3f45531`). The words inside its windows are Botbench's own, copied from botbenchhq/botbench at commit `f1ab6448e13e3d03e610c4b00bd5e498a749f698`: the claim and its withdrawal from `src/engine/claims.ts` (`holderWords` and the withdrawn detail, times in the format of `claimTimeWords` in `src/engine/claim-branch.ts`), the run's status line from `e2e/northstar.e2e.ts`, the overlap line from `web/src/app/peers.ts` (`overlapLines`), Check together from `web/src/app/check-together.ts` and `web/src/components/check-together.tsx`, and the decision line from `web/src/screens2/review/decision-panel.tsx`. The names studio-mac and office-mac, the repository billing-api, and the issue and task titles are the example of the real screenshots. The colours are the Botbench theme of botbenchhq/design-system (`themes/botbench.css`, Graphite + Glacier, at `9457a46630f10c55a33682d80ee872e001a9a2a8`). Each step is shipped behaviour listed in the README's "What works today"; the acceptance test (`e2e/northstar.e2e.ts`) covers the claim and the withdrawal.
+
+`assets/media/scene-coordination-final.png` is the scene's last frame, rendered from the scene itself (Playwright, Chromium, 1280 wide, device scale 2, reduced motion), shown only when JavaScript is off. SHA-256 `d544b2b47bf4ce61ca0f9d18732b3a4177f22ab161943c83c1a193e0af4f8e13`.

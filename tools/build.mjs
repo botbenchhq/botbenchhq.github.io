@@ -38,6 +38,19 @@ const clip = (file, poster, w, h, label, caption, fallback, cls = '') =>
 const head = (eyebrow, title, text) => `<div class="section-head"><p class="eyebrow">${eyebrow}</p><h2>${title}</h2>${text ? `<p>${text}</p>` : ''}</div>`;
 const pageHero = (eyebrow, title, lead) => `<section class="hero page-hero"><div class="wrap"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p class="lead">${lead}</p></div></section>`;
 
+// The coordination scene: an authored illustration (scene/coordination.tsx), bundled
+// into assets/scene-coordination.{js,css} by tools/build-scene.mjs. Without
+// JavaScript the page shows its last frame as an image and its last caption.
+const SCENE_ASSETS = '<link rel="stylesheet" href="assets/kit/stageshow.css">\n<link rel="stylesheet" href="assets/scene-coordination.css">\n<script defer src="assets/scene-coordination.js"></script>\n';
+const SCENE_FINAL_ALT = 'Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its pull request #12. office-mac’s task for issue #43 is accepted, after checking it together with pull request #12: Passed together.';
+const scene = (id) => `<figure class="scene" id="${id}">
+<div class="scene-mount" data-scene-mount="coordination">
+<img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="${SCENE_FINAL_ALT}" loading="lazy" decoding="async">
+<p class="scene-fallback-caption">You found out before either was merged. Both branches are still there to decide on.</p>
+</div>
+<figcaption class="scene-label">Illustration. The words are Botbench’s own, and each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="${REPO}#what-works-today">What works today</a></figcaption>
+</figure>`;
+
 const SHOTS_NOTE = 'Real screens from a Botbench installation named studio-mac, working on a small billing repository, and a second one on the same Mac, office-mac, paired with it. The agents’ work is replayed from recorded Claude Code and Codex sessions; the check really ran. Nothing on them was edited.';
 
 const closing = `<section class="closing"><div class="wrap closing-grid">
@@ -47,7 +60,7 @@ const closing = `<section class="closing"><div class="wrap closing-grid">
 <p class="setup-note">macOS · Node 24+ · Claude Code or Codex<br>Early software. No installer or hosted service.</p></div>
 </div></section>`;
 
-function page({ file, title, description, body, base = '', rootLinks = false }) {
+function page({ file, title, description, body, base = '', rootLinks = false, headExtra = '' }) {
   const nav = NAV.map(([href, label]) => `<a href="${href}"${href === file ? ' aria-current="page"' : ''}>${label}</a>`).join('');
   const url = SITE + (file === 'index.html' ? '' : file);
   const html = `<!doctype html>
@@ -74,7 +87,7 @@ ${base}<title>${title}</title>
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
-<noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+${headExtra}<noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
 </head>
 <body${file === 'index.html' ? ' class="home"' : ''}>
 <a class="skip" href="#main">Skip to the page</a>
@@ -157,6 +170,7 @@ page({
   file: 'index.html',
   title: 'Botbench: put your coding agents to work. Together.',
   description: 'One workbench for your coding agents. One coordination layer for your team. Hand tasks to Claude Code or Codex and come back to branches you can inspect.',
+  headExtra: SCENE_ASSETS,
   body: `<section class="hero home-hero"><div class="wrap">
 <div class="hero-heading">
 <div><p class="eyebrow hero-kicker">Open source <span>macOS only</span> <span>Early</span></p>
@@ -167,7 +181,10 @@ page({
 <a class="text-link" href="${REPO}">Explore the code on GitHub</a></div>
 </div>
 <figure class="hero-product">
-<a class="zoom" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone"><img src="assets/media/hero-workbench.png" width="1600" height="860" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></a>
+<a class="zoom hero-shots" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone">
+<picture class="hero-desktop"><source media="(max-width: 1023px)" srcset="assets/media/hero-phone-crop.png" width="680" height="1452"><img src="assets/media/hero-desktop-crop.png" width="2380" height="1500" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></picture>
+<img class="hero-phone" src="assets/media/hero-phone-crop.png" width="680" height="1452" alt="" loading="eager" decoding="async">
+</a>
 <figcaption><span><strong>Your Mac does the work.</strong> Your phone can bring you back to it.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens. View their source.</a></figcaption>
 </figure>
 <div class="agent-rail"><p>The agents you already use</p><div><strong>Claude Code</strong><span>Plan · Build</span></div><div><strong>Codex</strong><span>Build · Review</span></div><a href="workbench.html">See all agent capabilities</a></div>
@@ -186,10 +203,8 @@ ${stages.map((stage, i) => `<div class="tabpanel workflow-panel" role="tabpanel"
 
 <section class="team-section"><div class="wrap">
 <div class="team-intro"><div><p class="eyebrow">The coordination layer ${tag('early')}</p><h2>One repository.<br>Two workbenches.</h2></div><p class="lead">Your agents. Their agents. A shared view of the work, with each developer in control of their own Mac.</p></div>
-<div class="team-layout">
-${shot('paired-question.png', 2880, 1800,
-  'A question from office-mac’s paired workbench waiting on studio-mac’s Home, with options to answer it, give it to Claude Code, or dismiss it.',
-  'A real question between studio-mac and office-mac, two Botbench installations on one Mac. Nothing in an incoming message runs by itself.', 'team-screen')}
+${scene('before-the-second-pull-request')}
+<div class="team-layout team-layout-after-scene">
 <div class="team-points"><article><h3>See the work in motion.</h3><p>Shared GitHub visibility shows the other workbenches’ open pull requests and pushed branches.</p></article><article><h3>Spot the overlap.</h3><p>See when a teammate already covers an issue or changes the same files. Issue claims can be turned on for a repository.</p></article><article><h3>Keep the owners in the loop.</h3><p>Paired workbenches exchange questions and answers only after their owners approve sending them.</p></article>${more('Explore the coordination layer', 'coordination.html')}</div>
 </div>
 <p class="team-boundary">Pairing has been demonstrated with two installations on one Mac. Testing across two Macs and broader autonomous coordination across owners remain ahead.</p>
@@ -282,7 +297,13 @@ page({
   file: 'coordination.html',
   title: 'Coordination · Botbench',
   description: 'What two separately owned Botbench workbenches can do together today, what is early, and what is planned.',
+  headExtra: SCENE_ASSETS,
   body: `${pageHero('Your team\'s coordination', 'Your agents. Their agents. One coordinated workflow.', 'Add a teammate who hands work to their own agents, and the two of you become the messengers. Botbench does the first steps about that today. The larger part is still to come, and this page says which is which.')}
+
+<section class="scene-section"><div class="wrap">
+${head('Before the second pull request', 'Find out before either change is merged.', 'Two developers, each handing work to their own agents in one repository. Here is what each workbench sees when they reach for the same issue, and then the same file.')}
+${scene('before-the-second-pull-request')}
+</div></section>
 
 <section><div class="wrap">
 ${head('Today', 'Two workbenches on one repository.', 'Each developer runs their own Botbench on their own Mac, behind its own login token. Botbench has no accounts or shared server. Workbenches see branches and pull requests on a shared GitHub repository; paired workbenches can also exchange questions and answers approved by their owners.')}
