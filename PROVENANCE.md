@@ -32,3 +32,18 @@ From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the s
 | `assets/media/move-to-codex-poster.png` | `7cd754b678bf43125d32bb5abad2fd5f4648554d742a5b932256b2a54c6addc0` |
 
 `assets/favicon.svg` is `assets/svg/botbench-app-icon-two-tone-dark.svg` from the same commit, unchanged.
+
+## README product card (an illustration, not a recording)
+
+`assets/cards/botbench-card-{light,dark}.svg`, their motionless `botbench-card-still-{light,dark}.svg`, and the phone compositions `botbench-card-compact-{light,dark}.svg` and `botbench-card-compact-still-{light,dark}.svg` are **authored illustrations**, labelled on the card itself: "Illustration · words from Botbench's screens". They are made by `tools/cards/build.mjs` (`npm run build:cards`) and checked by `tools/cards/check.mjs` (`npm run check:cards`). They show one task of the run in `docs/images/ready-for-review-proof.png`: Make add in calc.py return the sum, built by Claude Code on `botbench/studio-mac/run-7/task-7`, 1 of 1 check passed, Codex's review as "A model's opinion, not a check.", then the overlap line on the Review tab under the changed file with one annotation beside it, then Your decision.
+
+- **Words.** Every string is Botbench's own, from botbench at `f1ab6448e13e3d03e610c4b00bd5e498a749f698`. The builder lists the file each comes from and, when a Botbench checkout is beside this one (`BOTBENCH_DIR`), stops if one no longer says it. The overlap line is the product's sentence (`web/src/app/peers.ts`, `overlapLines`) filled with office-mac and pull request #12: office-mac is the second workbench of the media recordings, and pull request #12 is the example the product brief uses, not a recorded pull request. No recording shows this overlap line yet.
+- **Placement and order.** As the product shows it: the overlap line is muted text on the Review tab under the changed files (`web/src/screens2/task/task-screen.tsx`), shown once the task is Ready for review. The card brings the decision panel in after the overlap line so the warning is read first; in the product both appear when the task becomes Ready for review.
+- **The one annotation.** "Another workbench is changing the same file. You find out before either is merged." is not a product string and not part of the screen: it is drawn outside the screen's surfaces, in the theme's peer colour, joined by a fine leader to the overlap line it explains. It is in the resting frame, the stills and the alt text.
+- **Look.** The Botbench theme of the design system (Graphite + Glacier), checked against `themes/botbench.css` at design-system `aff82d06bbf9f32009db29114c351c7b94065234` when a checkout is beside this one (`DS_DIR`). The lockup is the real file, unchanged except that its one `<text>` ("Botbench", which asks for the platform's system font) is outlined in Inter SemiBold.
+- **Kit.** ChanMeng SVG product-card kit, MIT, at `539208618e6ca68963474f77921f62e39713bb0e`; the five files in `tools/cards/lib/` are unchanged copies.
+
+| File | Source | SHA-256 |
+|---|---|---|
+| `tools/cards/assets/botbench-lockup-two-tone-light.svg` | botbench `assets/svg/botbench-lockup-two-tone-light.svg` at `f1ab6448e13e3d03e610c4b00bd5e498a749f698`, unchanged | `413ee8684c133d0090e978aa61cb60bd8954dfe554c9db4a5e0d11183b439896` |
+| `tools/cards/assets/botbench-lockup-two-tone-dark.svg` | botbench `assets/svg/botbench-lockup-two-tone-dark.svg` at `f1ab6448e13e3d03e610c4b00bd5e498a749f698`, unchanged | `39fb799a4f483fb2cad1b86090836d7af518dcaaa1ee25603a5985f488229761` |
