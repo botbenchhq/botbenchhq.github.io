@@ -26,7 +26,15 @@ studio-mac first).
 | 4 | 10.6 s | 11.5 s | the cursor presses Check together with pull request #12; Checking together for 1.2 s; Passed together: Merged cleanly, and every check passed on the merge |
 | 5 | 15.1 s | 16.0 s | the cursor presses Accept; Ready for review rolls to Accepted; the scene rests on the payoff (16.5 s / 17.4 s), and Pause becomes Play |
 
-Captured: widths 1280 (wide, scaled 1.15 by `fill`) and 390 (compact, 358);
+After the orchestrator's review: the compact design now starts below a 960px
+column (768 and every tablet get it, centred at 480px wide, not the wide scene
+at 0.7 scale); both windows have the same bar (the workbench's name, no traffic
+lights: Botbench is a web page, and the real screenshots have none); and
+office-mac's opening screen shows the composer's delivery choice (its own words,
+`web/src/components/composer-sheet.tsx`) with the composer directly under it,
+so there is no void between the issue and the composer.
+
+Captured: widths 1280 (wide, scaled 1.15 by `fill`), 768 (compact, 480 wide) and 390 (compact, 358);
 the reduced-motion still at 1280; every beat at `--slow 10`; ffmpeg contact
 sheets of the host at 500 ms (1280 dark, 390 light); the page screenshots at
 358, 390, 768, 1280 and 1440 in both themes from `tools/check-browser.mjs`.
@@ -42,8 +50,8 @@ Film lines on the way (each fixed, then re-filmed):
   studio-mac as a short whole window over the remote, office-mac a bled hero
   wider than it shows tall; compact shows 346 × 346 of its window.
 - `framing: corner bleed gutter`: the remote card straddles office-mac's left
-  edge as its satellite; studio-mac and the remote bleed off the left (their
-  traffic lights are cropped, never words).
+  edge as its satellite; studio-mac and the remote bleed off the left (only
+  window edge and padding are cropped, never words).
 - `kit override` on `.ss-check__fill`: a false positive from bundling the
   kit's CSS into the scene's file; the kit's styles now ship in
   `assets/kit/stageshow.css` so the check can tell them apart.

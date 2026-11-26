@@ -253,7 +253,12 @@ function Remote({ s, layout }: { s: S; layout: Layout }) {
   )
 }
 
-function Compose({ s, on }: { s: S; on: boolean }) {
+// The delivery choice in the composer (web/src/components/composer-sheet.tsx)
+const DELIVERY_HINT = 'It cannot be changed once the run starts.'
+const KEEP = ['Keep the branch', 'The work stays on its branch on this Mac. Nothing is sent anywhere.']
+const OPEN_PR = ['Open a pull request', "Botbench pushes the task's branch with your own git and gh, and opens a pull request. It never merges, never pushes by force, and never pushes to your main branch."]
+
+function Compose({ s, on, layout }: { s: S; on: boolean; layout: Layout }) {
   return (
     <div className="bb-screen bb-compose" data-on={on || undefined}>
       <div className="bb-crumbs"><span className="bb-strong">New chat or task</span></div>
@@ -262,10 +267,23 @@ function Compose({ s, on }: { s: S; on: boolean }) {
         <div className="bb-meta">#{ISSUE} of github.com/billing/billing-api</div>
         <div className="bb-filler bb-filler-tight">
           <Bar w={300} h={6} tone={2} />
-          <Bar w={260} h={6} tone={2} />
-          <Bar w={180} h={6} tone={2} />
+          <Bar w={220} h={6} tone={2} />
         </div>
       </div>
+      {layout === 'wide' && (
+        <div className="bb-card bb-delivery">
+          <p className="bb-muted">{DELIVERY_HINT}</p>
+          {[KEEP, OPEN_PR].map(([name, description], i) => (
+            <div key={name} className="bb-option" data-picked={i === 1 || undefined}>
+              <span className="bb-radio" aria-hidden />
+              <div>
+                <div className="bb-strong">{name}</div>
+                <div className="bb-muted">{description}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="bb-composer">
         <div className="bb-filler bb-filler-tight">
           <Bar w={220} h={6} tone={2} />
@@ -386,7 +404,7 @@ function TaskScreen({ s, on, layout }: { s: S; on: boolean; layout: Layout }) {
 function OfficeMac({ s, layout }: { s: S; layout: Layout }) {
   return (
     <div className="bb-pane bb-office">
-      <Compose s={s} on={s.screen === 'compose'} />
+      <Compose s={s} on={s.screen === 'compose'} layout={layout} />
       <RunScreen s={s} on={s.screen === 'run'} layout={layout} />
       <TaskScreen s={s} on={s.screen === 'task'} layout={layout} />
     </div>
@@ -518,7 +536,7 @@ function CoordinationScene() {
           key={take}
           width={1040}
           height={568}
-          compact={{ below: 640, width: 358, height: 482 }}
+          compact={{ below: 960, width: 358, height: 482 }}
           initial={initial}
           poster={poster}
           script={script}

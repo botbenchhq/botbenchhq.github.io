@@ -48,7 +48,7 @@ const scene = (id) => `<figure class="scene" id="${id}">
 <img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="${SCENE_FINAL_ALT}" loading="lazy" decoding="async">
 <p class="scene-fallback-caption">You found out before either was merged. Both branches are still there to decide on.</p>
 </div>
-<figcaption class="scene-label">Illustration. The words are Botbench’s own, and each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="${REPO}#what-works-today">What works today</a></figcaption>
+<figcaption class="scene-label">Illustration. Botbench’s lines are in its own words; the repository, issue titles and the remote’s panel are examples. Each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="${REPO}#what-works-today">What works today</a></figcaption>
 </figure>`;
 
 const SHOTS_NOTE = 'Real screens from a Botbench installation named studio-mac, working on a small billing repository, and a second one on the same Mac, office-mac, paired with it. The agents’ work is replayed from recorded Claude Code and Codex sessions; the check really ran. Nothing on them was edited.';

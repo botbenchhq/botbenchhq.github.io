@@ -73,7 +73,9 @@
 .bb-stage .ss-stage[data-layout="wide"] .bb-win-studio .bb-pane { padding-left: 96px; }
 .bb-stage .ss-stage[data-layout="wide"] .bb-win-office .bb-screen { padding-right: 60px; padding-left: 64px; }
 .bb-stage .ss-stage[data-layout="wide"] .bb-win-office .bb-foot { padding-right: 60px; padding-left: 64px; bottom: 56px; }
-.bb-stage .bb-win .ss-window__title { margin-right: 0; padding-right: 36px; }
+.bb-stage .bb-win .ss-window__title { margin-right: 0; }
+/* Botbench is a web page on the owner's Mac; both workbenches get the same bar: its name, no traffic lights */
+.bb-stage .bb-win .ss-window__lights { display: none; }
 .bb-stage .bb-win .ss-window__bar { background: var(--bb-pane); border-bottom: 1px solid var(--bb-border); }
 .bb-stage .bb-win .ss-window__title { font-size: 12px; font-weight: 600; color: var(--bb-text); }
 .bb-stage .bb-win .ss-window__body { position: relative; background: var(--bb-surface); }
@@ -334,13 +336,21 @@
 
 /* The composer docks at the foot of the window under the issue it starts from */
 .bb-stage .bb-compose { display: flex; flex-direction: column; }
-.bb-stage .bb-compose .bb-composer { margin-top: auto; margin-bottom: 56px; }
+.bb-stage .bb-compose .bb-composer { margin-top: 12px; }
 .bb-stage .bb-issue-card { padding: 14px 16px; }
 .bb-stage .bb-issue-title { margin-top: 0; font-size: 16px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-compose .bb-composer { margin-bottom: 52px; }
+
 .bb-stage .ss-stage[data-layout="compact"] .bb-issue-title { font-size: 14px; }
 .bb-stage .bb-studio-sub { display: grid; }
 .bb-stage .bb-studio-sub > * { grid-area: 1 / 1; }
-@media (max-width: 640px) { .bb-scene .bb-caption { min-height: 4.5em; } }
-@media (min-width: 641px) { .bb-scene .bb-caption { min-height: 3em; } }
+@media (max-width: 1007px) { .bb-scene .bb-caption { min-height: 4.5em; } }
+@media (min-width: 1008px) { .bb-scene .bb-caption { min-height: 3em; } }
 .bb-stage .ss-button[data-pressed] { transform: scale(0.96); }
+
+/* The delivery choice, as the composer's sheet shows it */
+.bb-stage .bb-delivery { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; padding: 12px 14px; font-size: 12px; }
+.bb-stage .bb-option { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: 8px; }
+.bb-stage .bb-option[data-picked] { background: var(--bb-info-subtle); box-shadow: inset 0 0 0 1px var(--bb-accent); }
+.bb-stage .bb-option .bb-strong { font-size: 12.5px; }
+.bb-stage .bb-radio { flex: none; width: 14px; height: 14px; margin-top: 2px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ss-ink-4); }
+.bb-stage .bb-option[data-picked] .bb-radio { box-shadow: inset 0 0 0 4px var(--bb-accent); }

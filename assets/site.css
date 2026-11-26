@@ -433,6 +433,9 @@ h2.group { font-size: 1.3rem; letter-spacing: -0.015em; padding-top: 18px; }
 .scene-fallback-caption { margin-top: 16px; font-size: 1rem; line-height: 1.5; }
 .scene-label { margin-top: 12px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 52em; }
 .scene-section { padding-top: 0; }
+/* Below a 960px column the scene switches to its compact design (scene/coordination.tsx);
+   it keeps a phone column's width, centred, rather than stretching across a tablet */
+@media (max-width: 1007px) { .scene { max-width: 480px; margin-left: auto; margin-right: auto; } }
 .team-layout-after-scene { display: block; }
 .team-layout-after-scene .team-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .team-layout-after-scene .team-points article, .team-layout-after-scene .team-points article:first-child { padding: 20px 0 0; border-top: 1px solid var(--border); }
