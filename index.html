@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
+<link rel="stylesheet" href="assets/kit/stageshow.css">
+<link rel="stylesheet" href="assets/scene-coordination.css">
+<script defer src="assets/scene-coordination.js"></script>
 <noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
 </head>
 <body class="home">
@@ -46,7 +49,10 @@
 <a class="text-link" href="https://github.com/botbenchhq/botbench">Explore the code on GitHub</a></div>
 </div>
 <figure class="hero-product">
-<a class="zoom" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone"><img src="assets/media/hero-workbench.png" width="1600" height="860" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></a>
+<a class="zoom hero-shots" href="assets/media/hero-workbench.png" aria-label="Open the full-size image of Botbench on a Mac and phone">
+<picture class="hero-desktop"><source media="(max-width: 1023px)" srcset="assets/media/hero-phone-crop.png" width="680" height="1452"><img src="assets/media/hero-desktop-crop.png" width="2380" height="1500" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></picture>
+<img class="hero-phone" src="assets/media/hero-phone-crop.png" width="680" height="1452" alt="" loading="eager" decoding="async">
+</a>
 <figcaption><span><strong>Your Mac does the work.</strong> Your phone can bring you back to it.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens. View their source.</a></figcaption>
 </figure>
 <div class="agent-rail"><p>The agents you already use</p><div><strong>Claude Code</strong><span>Plan · Build</span></div><div><strong>Codex</strong><span>Build · Review</span></div><a href="workbench.html">See all agent capabilities</a></div>
@@ -71,8 +77,14 @@
 
 <section class="team-section"><div class="wrap">
 <div class="team-intro"><div><p class="eyebrow">The coordination layer <span class="tag tag-early">Early</span></p><h2>One repository.<br>Two workbenches.</h2></div><p class="lead">Your agents. Their agents. A shared view of the work, with each developer in control of their own Mac.</p></div>
-<div class="team-layout">
-<figure class="frame team-screen"><a class="zoom" href="assets/media/paired-question.png" title="Open the full-size image"><img src="assets/media/paired-question.png" width="2880" height="1800" alt="A question from office-mac’s paired workbench waiting on studio-mac’s Home, with options to answer it, give it to Claude Code, or dismiss it." loading="lazy" decoding="async"></a><figcaption>A real question between studio-mac and office-mac, two Botbench installations on one Mac. Nothing in an incoming message runs by itself.</figcaption></figure>
+<figure class="scene" id="before-the-second-pull-request">
+<div class="scene-mount" data-scene-mount="coordination">
+<img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its pull request #12. office-mac’s task for issue #43 is accepted, after checking it together with pull request #12: Passed together." loading="lazy" decoding="async">
+<p class="scene-fallback-caption">You found out before either was merged. Both branches are still there to decide on.</p>
+</div>
+<figcaption class="scene-label">Illustration. Botbench’s lines are in its own words; the repository, issue titles and the remote’s panel are examples. Each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="https://github.com/botbenchhq/botbench#what-works-today">What works today</a></figcaption>
+</figure>
+<div class="team-layout team-layout-after-scene">
 <div class="team-points"><article><h3>See the work in motion.</h3><p>Shared GitHub visibility shows the other workbenches’ open pull requests and pushed branches.</p></article><article><h3>Spot the overlap.</h3><p>See when a teammate already covers an issue or changes the same files. Issue claims can be turned on for a repository.</p></article><article><h3>Keep the owners in the loop.</h3><p>Paired workbenches exchange questions and answers only after their owners approve sending them.</p></article><a class="more" href="coordination.html">Explore the coordination layer </a></div>
 </div>
 <p class="team-boundary">Pairing has been demonstrated with two installations on one Mac. Testing across two Macs and broader autonomous coordination across owners remain ahead.</p>

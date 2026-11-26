@@ -25,6 +25,24 @@ It opens every page at 390, 768, 1280 and 1440 wide in both themes, saves screen
 
 `BOTBENCH_DIR=../botbench node tools/check-links.mjs --online` also checks that every repository path the site links to exists in a checkout, and asks each outside address.
 
+## The coordination scene
+
+An authored illustration, "Before the second pull request", on the home and Coordination pages. Its source is `scene/coordination.tsx` and `scene/coordination.css`, built with the Stageshow kit in `third_party/stageshow/` (MIT, pinned revision in that folder's README). The bundled files under `assets/` are committed, so the pages need no build to be served:
+
+```sh
+npm ci
+node tools/build-scene.mjs    # writes assets/scene-coordination.{js,css} and assets/kit/stageshow.css
+node tools/build.mjs
+```
+
+Every word inside its windows is Botbench's own, copied from the code the scene's source names; the captions under it are the site's. Film it with Stageshow's own tools, against a local server of this folder:
+
+```sh
+node third_party/stageshow/scripts/film.mjs "http://127.0.0.1:8765/coordination.html" --select ".bb-stage" --width 1280 --every 1000 --count 20 --gate --out shots/scene.png
+```
+
+`scene/REHEARSAL.md` records the last rehearsal.
+
 ## Product pictures and recordings
 
 They are made in the Botbench repository (`npm run media` there) and copied here unchanged:
@@ -48,6 +66,6 @@ npm run check:cards -- --frames=shots/cards                             # also t
 
 - Every claim comes from the Botbench README. Change the README first.
 - Each capability is Available, Early or Planned, and Planned means not built.
-- Only real screens and recordings, listed in `PROVENANCE.md` with the commit they came from. Nothing is drawn to look like the product.
+- Real screens and recordings are the evidence, listed in `PROVENANCE.md` with the commit they came from. An authored illustration is allowed only for shipped behaviour, uses the product's own words, is labelled as an illustration where it is shown, and sits beside real media.
 - Wording follows `docs/product/voice.md` in the Botbench repository.
 - No cookies and no tracking.

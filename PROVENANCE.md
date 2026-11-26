@@ -33,6 +33,21 @@ From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the s
 
 `assets/favicon.svg` is `assets/svg/botbench-app-icon-two-tone-dark.svg` from the same commit, unchanged.
 
+## Crops of the hero picture
+
+The homepage hero shows two crops of `assets/media/hero-workbench.png`, each cut out of it with no other change (no scaling, no edit of the pixels), so the desktop screen can be shown at its own size and the phone screen on its own on a phone:
+
+| File | Cut from `assets/media/hero-workbench.png` | SHA-256 |
+|---|---|---|
+| `assets/media/hero-desktop-crop.png` | 2380 × 1500 at x 68, y 110: the desktop window (`ffmpeg -i hero-workbench.png -vf crop=2380:1500:68:110`) | `e1c424d0f277ad16b9bfde3e70846411069e9247ae04b2348d0c63daddf1e9db` |
+| `assets/media/hero-phone-crop.png` | 680 × 1452 at x 2448, y 134: the phone (`-vf crop=680:1452:2448:134`) | `05ad15bf158e616bba83eb80b87c11a69bbf624d344ded5fb394b4a12fcb4559` |
+
+## The coordination scene (an illustration, not a screen)
+
+"Before the second pull request" on the home and Coordination pages is drawn, not recorded, and is labelled as an illustration where it is shown. It is built with the Stageshow kit (`third_party/stageshow/`, MIT, revision `299140fafd08df55a9c234e610c3f64af3f45531`). The words inside its windows are Botbench's own, copied from botbenchhq/botbench at commit `f1ab6448e13e3d03e610c4b00bd5e498a749f698`: the claim and its withdrawal from `src/engine/claims.ts` (`holderWords` and the withdrawn detail, times in the format of `claimTimeWords` in `src/engine/claim-branch.ts`), the run's status line from `e2e/northstar.e2e.ts`, the overlap line from `web/src/app/peers.ts` (`overlapLines`), Check together from `web/src/app/check-together.ts` and `web/src/components/check-together.tsx`, and the decision line from `web/src/screens2/review/decision-panel.tsx`. The names studio-mac and office-mac, the repository billing-api, and the issue and task titles are the example of the real screenshots. The colours are the Botbench theme of botbenchhq/design-system (`themes/botbench.css`, Graphite + Glacier, at `9457a46630f10c55a33682d80ee872e001a9a2a8`). Each step is shipped behaviour listed in the README's "What works today"; the acceptance test (`e2e/northstar.e2e.ts`) covers the claim and the withdrawal.
+
+`assets/media/scene-coordination-final.png` is the scene's last frame, rendered from the scene itself (Playwright, Chromium, 1280 wide, device scale 2, reduced motion), shown only when JavaScript is off. SHA-256 `d81a1933705eb40dd94ab1b0f62199681892d6860d35f32270aea2129a5c29bb`.
+
 ## README product card (an illustration, not a recording)
 
 `assets/cards/botbench-card-{light,dark}.svg`, their motionless `botbench-card-still-{light,dark}.svg`, and the phone compositions `botbench-card-compact-{light,dark}.svg` and `botbench-card-compact-still-{light,dark}.svg` are **authored illustrations**, labelled on the card itself: "Illustration · words from Botbench's screens". They are made by `tools/cards/build.mjs` (`npm run build:cards`) and checked by `tools/cards/check.mjs` (`npm run check:cards`). They show one task of the run in `docs/images/ready-for-review-proof.png`: Make add in calc.py return the sum, built by Claude Code on `botbench/studio-mac/run-7/task-7`, 1 of 1 check passed, Codex's review as "A model's opinion, not a check.", then the overlap line on the Review tab under the changed file with one annotation beside it, then Your decision.

@@ -1,5 +1,6 @@
-// Opens every page in a real browser: screenshots at four widths in both themes,
-// an accessibility scan, and a keyboard pass. Needs `npm install` first.
+// Opens every page in a real browser: screenshots at five widths in both themes,
+// an accessibility scan, a keyboard pass, and the coordination scene's playback,
+// controls and reduced-motion frame. Needs `npm install` first.
 import { chromium } from 'playwright';
 import { readFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -25,7 +26,7 @@ const pages = readdirSync(ROOT).filter((f) => f.endsWith('.html') && f !== '404.
 const problems = [];
 const browser = await chromium.launch();
 
-for (const theme of ['dark', 'light']) for (const width of [390, 768, 1280, 1440]) {
+for (const theme of ['dark', 'light']) for (const width of [358, 390, 768, 1280, 1440]) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme });
   const p = await ctx.newPage();
   p.on('pageerror', (e) => problems.push(`${theme} ${width}: script error ${e.message}`));
@@ -98,8 +99,75 @@ const expect = (ok, what) => { if (!ok) problems.push(`keyboard: ${what}`); };
   await ctx.close();
 }
 
+// The coordination scene: present where it is placed, starts only once in view,
+// Pause and Replay work from the keyboard, and reduced motion shows the last frame still.
+const mark = (p) => p.evaluate(() => document.querySelector('.bb-stage .ss-stage')?.getAttribute('data-mark') ?? '');
+for (const file of ['index.html', 'coordination.html']) {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const p = await ctx.newPage();
+  await p.goto(base + file);
+  expect(await p.locator('[data-scene-mount="coordination"] .bb-stage .ss-stage').count() === 1, `${file}: the coordination scene is on the page`);
+  expect(await p.locator('.scene-label a[href$="#what-works-today"]').count() === 1, `${file}: the scene carries its illustration label and link`);
+  if (file === 'index.html') {
+    await p.waitForTimeout(1500);
+    expect(!/^beat-[1-5]$/.test(await mark(p)), `${file}: the scene waits until it is in view`);
+  }
+  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.waitForFunction(() => /^beat-[1-5]$/.test(document.querySelector('.bb-stage .ss-stage')?.getAttribute('data-mark') ?? ''), null, { timeout: 8000 }).catch(() => {});
+  expect(/^beat-[1-5]$/.test(await mark(p)), `${file}: the scene plays once in view`);
+  const toggle = p.locator('[data-scene-toggle]');
+  expect((await toggle.textContent()).trim() === 'Pause', `${file}: the scene's control reads Pause while it plays`);
+  const box = await toggle.boundingBox();
+  expect(box && box.height >= 44 && box.width >= 44, `${file}: the scene's controls are at least 44px`);
+  await toggle.focus();
+  await p.keyboard.press('Enter');
+  expect((await toggle.textContent()).trim() === 'Play' && await p.locator('.bb-scene[data-paused]').count() === 1, `${file}: Enter on Pause pauses the scene`);
+  const held = await mark(p);
+  await p.waitForTimeout(2500);
+  expect(await mark(p) === held, `${file}: a paused scene stays on its beat`);
+  await p.keyboard.press('Space');
+  expect((await toggle.textContent()).trim() === 'Pause', `${file}: Space on Play plays it again`);
+  await p.locator('[data-scene-replay]').focus();
+  await p.keyboard.press('Enter');
+  await p.waitForTimeout(300);
+  expect(/^1 of 5/.test((await p.textContent('.bb-caption')).trim()), `${file}: Replay starts the scene from its first step`);
+  await ctx.close();
+}
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' });
+  const p = await ctx.newPage();
+  await p.goto(base + 'coordination.html');
+  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.waitForTimeout(1500);
+  expect(await p.locator('.bb-scene[data-reduced] .bb-stage .ss-stage[data-still]').count() === 1, 'reduced motion: the scene shows its still frame');
+  expect(await p.locator('.bb-stage [data-target="accept"]').count() === 1 && (await p.textContent('.bb-caption')).includes('before either was merged'), 'reduced motion: the still is the last step, with its caption');
+  expect(await p.locator('[data-scene-toggle]').count() === 0, 'reduced motion: no playback controls');
+  const running = await p.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running' && a.effect?.target?.closest?.('.bb-stage')).length);
+  expect(running === 0, `reduced motion: nothing in the scene animates (${running} running)`);
+  expect(!/^beat-/.test(await mark(p)), 'reduced motion: the scene\'s script does not run');
+  await ctx.close();
+}
+for (const file of ['index.html', 'coordination.html']) {
+  const ctx = await browser.newContext({ viewport: { width: 358, height: 800 } });
+  const p = await ctx.newPage();
+  await p.goto(base + file);
+  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.waitForTimeout(800);
+  expect(await p.locator('.bb-stage .ss-stage[data-layout="compact"]').count() === 1, `${file} at 358: the scene uses its compact design`);
+  expect(await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 0, `${file} at 358: no sideways scroll with the scene`);
+  await p.locator('.scene').screenshot({ path: join(OUT, `scene-${file.replace('.html', '')}-358.png`) });
+  await ctx.close();
+}
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, javaScriptEnabled: false });
+  const p = await ctx.newPage();
+  await p.goto(base + 'coordination.html');
+  expect(await p.locator('.scene-fallback').isVisible() && await p.locator('.scene-fallback-caption').isVisible(), 'without JavaScript: the scene\'s last frame and caption show');
+  await ctx.close();
+}
+
 await browser.close();
 server.close();
-console.log(`${pages.length} pages at 4 widths in 2 themes. Screenshots are in shots/.`);
+console.log(`${pages.length} pages at 5 widths in 2 themes. Screenshots are in shots/.`);
 if (problems.length) { console.error(problems.join('\n')); process.exit(1); }
-console.log('No sideways scroll, no failed requests, no accessibility findings, keyboard pass complete.');
+console.log('No sideways scroll, no failed requests, no accessibility findings, keyboard pass and scene checks complete.');

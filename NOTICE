@@ -11,6 +11,18 @@ of assets/site.css.
 The first page layout came from a wireframe made for this site; its sitemap is
 kept. No file of the project that inspired it is copied here.
 
+From Stageshow by Benji Taylor (https://github.com/benjitaylor/skills, folder
+stageshow, revision 299140fafd08df55a9c234e610c3f64af3f45531), MIT License: the
+kit in third_party/stageshow/kit and the filming scripts in
+third_party/stageshow/scripts, with Stageshow's LICENSE and NOTICE.md beside
+them. The coordination scene is built with that kit, and assets/kit/stageshow.css
+and assets/scene-coordination.js contain it in bundled form. Local changes are
+listed in third_party/stageshow/README.md.
+
+Bundled into assets/scene-coordination.js at build time: React and React DOM
+18.3.1 (MIT License, Copyright Meta Platforms, Inc. and affiliates) and their
+scheduler (MIT). Their licence comments are kept at the end of the file.
+
 README product card (tools/cards/, assets/cards/):
 
 - tools/cards/lib/ holds five files of the ChanMeng SVG product-card kit

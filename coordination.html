@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
+<link rel="stylesheet" href="assets/kit/stageshow.css">
+<link rel="stylesheet" href="assets/scene-coordination.css">
+<script defer src="assets/scene-coordination.js"></script>
 <noscript><style>.tabpanel[hidden]{display:block!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
 </head>
 <body>
@@ -37,6 +40,17 @@
 </div></header>
 <main id="main">
 <section class="hero page-hero"><div class="wrap"><p class="eyebrow">Your team's coordination</p><h1>Your agents. Their agents. One coordinated workflow.</h1><p class="lead">Add a teammate who hands work to their own agents, and the two of you become the messengers. Botbench does the first steps about that today. The larger part is still to come, and this page says which is which.</p></div></section>
+
+<section class="scene-section"><div class="wrap">
+<div class="section-head"><p class="eyebrow">Before the second pull request</p><h2>Find out before either change is merged.</h2><p>Two developers, each handing work to their own agents in one repository. Here is what each workbench sees when they reach for the same issue, and then the same file.</p></div>
+<figure class="scene" id="before-the-second-pull-request">
+<div class="scene-mount" data-scene-mount="coordination">
+<img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its pull request #12. office-mac’s task for issue #43 is accepted, after checking it together with pull request #12: Passed together." loading="lazy" decoding="async">
+<p class="scene-fallback-caption">You found out before either was merged. Both branches are still there to decide on.</p>
+</div>
+<figcaption class="scene-label">Illustration. Botbench’s lines are in its own words; the repository, issue titles and the remote’s panel are examples. Each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="https://github.com/botbenchhq/botbench#what-works-today">What works today</a></figcaption>
+</figure>
+</div></section>
 
 <section><div class="wrap">
 <div class="section-head"><p class="eyebrow">Today</p><h2>Two workbenches on one repository.</h2><p>Each developer runs their own Botbench on their own Mac, behind its own login token. Botbench has no accounts or shared server. Workbenches see branches and pull requests on a shared GitHub repository; paired workbenches can also exchange questions and answers approved by their owners.</p></div>
