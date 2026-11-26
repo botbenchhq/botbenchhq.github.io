@@ -43,7 +43,7 @@ await build({
 mkdirSync(join(ROOT, 'assets/kit'), { recursive: true });
 await build({
   ...common,
-  stdin: { contents: kitCss.map((p) => `@import "./${relative(KIT, p)}";`).join('\n'), resolveDir: KIT, loader: 'css' },
+  stdin: { contents: [...kitCss].sort().map((p) => `@import "./${relative(KIT, p)}";`).join('\n'), resolveDir: KIT, loader: 'css' },
   outfile: join(ROOT, 'assets/kit/stageshow.css'),
 });
 for (const f of ['scene-coordination.js', 'scene-coordination.css', 'kit/stageshow.css']) {

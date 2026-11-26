@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="212" height="36" viewBox="0 0 212 36" role="img" aria-label="Botbench" fill="none">
+  <g transform="translate(-6 -6) scale(2)">
+    <path d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z" fill="#1C1C1E"/>
+    <path d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z" fill="#03748F"/>
+  </g>
+  <text x="46" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="600" letter-spacing="-0.7" fill="#1C1C1E">Botbench</text>
+</svg>
