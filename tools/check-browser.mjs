@@ -99,6 +99,30 @@ const expect = (ok, what) => { if (!ok) problems.push(`keyboard: ${what}`); };
   await ctx.close();
 }
 
+// What each page says and how: the closing band only where it is the page's next step,
+// one name for the Evidence page, no capitals set by CSS, and the get-started steps
+// ending at the branch.
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const p = await ctx.newPage();
+  for (const file of [...pages, '404.html']) {
+    await p.goto(base + file);
+    const closing = await p.locator('.closing').count();
+    const wants = ['index.html', 'workbench.html', 'coordination.html', 'proof.html'].includes(file);
+    expect(closing === (wants ? 1 : 0), `${file}: the closing band is ${wants ? 'there' : 'not there'}`);
+    const caps = await p.evaluate(() => [...document.querySelectorAll('body *')].filter((el) => getComputedStyle(el).textTransform === 'uppercase' && el.textContent.trim() && !el.closest('.bb-stage')).map((el) => el.textContent.trim().slice(0, 30)));
+    expect(caps.length === 0, `${file}: no text is set in capitals by CSS (${caps.join(', ')})`);
+    expect(await p.locator('.eyebrow').count() === 0, `${file}: no eyebrow label above a heading`);
+    expect(!/Verification/.test(await p.evaluate(() => document.title + document.body.innerText)), `${file}: the Evidence page is never called Verification`);
+    expect(!/Claude Code or Codex/.test(await p.evaluate(() => document.body.innerText)), `${file}: Claude Code is never offered as an alternative to Codex`);
+  }
+  await p.goto(base + 'proof.html');
+  expect((await p.title()).startsWith('Evidence'), 'proof.html: its title is Evidence');
+  await p.goto(base + 'get-started.html');
+  expect((await p.locator('.steps > li h3').last().textContent()).trim() === 'See the branch', 'get-started.html: the last step is See the branch');
+  await ctx.close();
+}
+
 // The coordination scene: present where it is placed, starts only once in view,
 // Pause and Replay work from the keyboard, and reduced motion shows the last frame still.
 const mark = (p) => p.evaluate(() => document.querySelector('.bb-stage .ss-stage')?.getAttribute('data-mark') ?? '');

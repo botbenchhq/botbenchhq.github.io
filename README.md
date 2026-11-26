@@ -21,7 +21,7 @@ npx playwright install chromium
 node tools/check-browser.mjs
 ```
 
-It opens every page at 390, 768, 1280 and 1440 wide in both themes, saves screenshots to `shots/`, runs an accessibility scan (axe), and does a keyboard pass over the menu, the tabs, the filter and the copy buttons.
+It opens every page at 358, 390, 768, 1280 and 1440 wide in both themes, saves screenshots to `shots/`, runs an accessibility scan (axe), does a keyboard pass over the menu, the tabs, the filter and the copy buttons, checks the coordination scene's playback and reduced-motion frame, and checks the rules below that a browser can see: the closing band only on the overview, Workbench, Coordination and Evidence, no text set in capitals, one name for the Evidence page, and Claude Code never offered as an alternative to Codex.
 
 `BOTBENCH_DIR=../botbench node tools/check-links.mjs --online` also checks that every repository path the site links to exists in a checkout, and asks each outside address.
 
@@ -68,4 +68,6 @@ npm run check:cards -- --frames=shots/cards                             # also t
 - Each capability is Available, Early or Planned, and Planned means not built.
 - Real screens and recordings are the evidence, listed in `PROVENANCE.md` with the commit they came from. An authored illustration is allowed only for shipped behaviour, uses the product's own words, is labelled as an illustration where it is shown, and sits beside real media.
 - Wording follows `docs/product/voice.md` in the Botbench repository.
+- Claude Code is required (it plans every run); Codex is optional. Say so wherever the agents are named.
+- Each page has one purpose and one primary action, written in a comment above it in `tools/build.mjs`. No label in capitals above a heading, and a state tag only on what is Early or Planned.
 - No cookies and no tracking.
