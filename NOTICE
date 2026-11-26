@@ -5,8 +5,17 @@ From botbenchhq/botbench (Apache License 2.0): the media in assets/media/ and
 assets/favicon.svg, listed with their commit and checksums in PROVENANCE.md, and
 the mark drawn in the header and footer.
 
-From botbenchhq/design-system, themes/botbench.css: the colour values at the top
-of assets/site.css.
+From botbenchhq/design-system at bfe048f62fd0de97792826cd4d564d904ff2be0d
+(Apache License 2.0): the colour values at the top of assets/site.css, from
+themes/botbench.css (Graphite + Glacier), and the two font files in assets/fonts/,
+copied unchanged from its dist/fonts:
+
+- assets/fonts/inter-latin-wght-normal.woff2: Inter, Copyright 2016 The Inter
+  Project Authors, under the SIL Open Font License 1.1
+  (assets/fonts/OFL-Inter.txt).
+- assets/fonts/jetbrains-mono-latin-wght-normal.woff2: JetBrains Mono, Copyright
+  2020 The JetBrains Mono Project Authors, under the SIL Open Font License 1.1
+  (assets/fonts/OFL-JetBrains-Mono.txt).
 
 The first page layout came from a wireframe made for this site; its sitemap is
 kept. No file of the project that inspired it is copied here.

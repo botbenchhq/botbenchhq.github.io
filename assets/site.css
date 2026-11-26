@@ -1,39 +1,43 @@
-/* Botbench website. Colour values are the Botbench theme of the design system
-   (botbenchhq/design-system, themes/botbench.css); see NOTICE. */
+/* Botbench website. Colour values and fonts are the Botbench theme of the design
+   system (botbenchhq/design-system, themes/botbench.css at bfe048f, Graphite + Glacier);
+   the two font files are its dist/fonts, unchanged, under the SIL Open Font License
+   (assets/fonts/OFL-*.txt). See NOTICE. */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 100 800; font-display: swap; src: url("fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2"); }
 :root {
-  --surface: #F2F2F7; --raised: #FFFFFF; --sunken: #EDEDF1; --fill: #E9E9EE;
-  --text: #1C1C1E; --muted: #636366; --border: #E6E6EB; --border-strong: #86868B;
-  --accent: #086B83; --accent-hover: #07586C; --on-accent: #FFFFFF;
-  --focus: #0066CC;
-  --success: #037A54; --success-subtle: #DCF8E9;
-  --approval: #8F6202; --approval-subtle: #FEF3C7;
-  --peer: #03748F; --peer-subtle: #DCF5FE;
-  --radius: 14px; --radius-sm: 8px;
-  --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --surface: #F5F6F7; --pane: #FBFBFC; --raised: #FFFFFF; --sunken: #EEF0F2; --fill: #ECEEF1;
+  --text: #1A2028; --muted: #545E6B; --border: #DFE2E7; --border-strong: #76808E;
+  --accent: #215BB8; --accent-hover: #1B4C9C; --on-accent: #FFFFFF;
+  --focus: #215BB8;
+  --success: #146A4A; --success-subtle: #E1F3EA;
+  --approval: #97600E; --approval-subtle: #FBF0DC;
+  --peer: #0C7187; --peer-subtle: #E0F3F6;
+  --radius: 12px; --radius-sm: 8px;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --page: 1248px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --surface: #161618; --raised: #212124; --sunken: #0F0F10; --fill: #2C2C30;
-    --text: #F5F5F7; --muted: #A1A1A8; --border: #29292D; --border-strong: #75757C;
-    --accent: #72E1EB; --accent-hover: #A1ECF2; --on-accent: #102124;
-    --focus: #4C9DFF;
-    --success: #34D399; --success-subtle: #09291D;
-    --approval: #FBBF24; --approval-subtle: #2D2106;
-    --peer: #06B6D4; --peer-subtle: #002830;
+    --surface: #111316; --pane: #181B20; --raised: #20242B; --sunken: #0B0D10; --fill: #2C3139;
+    --text: #F2F3F5; --muted: #ADB4BE; --border: #2A2F37; --border-strong: #727D8B;
+    --accent: #7CB7FF; --accent-hover: #9AC8FF; --on-accent: #0B1522;
+    --focus: #7CB7FF;
+    --success: #6ED5A4; --success-subtle: #12281F;
+    --approval: #F2B95D; --approval-subtle: #2E2513;
+    --peer: #60D4D4; --peer-subtle: #10292B;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --surface: #161618; --raised: #212124; --sunken: #0F0F10; --fill: #2C2C30;
-  --text: #F5F5F7; --muted: #A1A1A8; --border: #29292D; --border-strong: #75757C;
-  --accent: #72E1EB; --accent-hover: #A1ECF2; --on-accent: #102124;
-  --focus: #4C9DFF;
-  --success: #34D399; --success-subtle: #09291D;
-  --approval: #FBBF24; --approval-subtle: #2D2106;
-  --peer: #06B6D4; --peer-subtle: #002830;
+  --surface: #111316; --pane: #181B20; --raised: #20242B; --sunken: #0B0D10; --fill: #2C3139;
+  --text: #F2F3F5; --muted: #ADB4BE; --border: #2A2F37; --border-strong: #727D8B;
+  --accent: #7CB7FF; --accent-hover: #9AC8FF; --on-accent: #0B1522;
+  --focus: #7CB7FF;
+  --success: #6ED5A4; --success-subtle: #12281F;
+  --approval: #F2B95D; --approval-subtle: #2E2513;
+  --peer: #60D4D4; --peer-subtle: #10292B;
   color-scheme: dark;
 }
 
