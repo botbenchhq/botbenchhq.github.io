@@ -2,16 +2,19 @@
 
 Every file in the first table is copied, unchanged, from [botbenchhq/botbench](https://github.com/botbenchhq/botbench) by `tools/copy-media.mjs`, which also writes the table. Botbench makes the product screens and recordings with `npm run media` (`e2e/media.shots.ts`): real screens and recordings of a Botbench installation named studio-mac, working on a small billing repository under `/private/tmp/studio`, and of a second one on the same Mac, office-mac, paired with it. No model runs while they are made: Claude Code's build and Codex's review are replayed from sessions recorded from the real tools, the repository's check really runs, and each owner's messages between the two workbenches are typed through the real screens. Sign-in happens before a recording starts. Each was looked at before it was copied: none shows a private path, user name, token or repository.
 
-`assets/media/social-preview.png` is marketing artwork exported from Botbench's versioned `docs/media/social-preview.svg`, which contains the canonical two-tone light lockup and the export command. The PNG is copied unchanged; its newer source commit is recorded in the table.
+`assets/media/social-preview.png` is marketing artwork exported from Botbench's versioned `docs/media/social-preview.svg`, which contains the canonical two-tone light lockup and the export command. The PNG is copied unchanged.
 
 <!-- media:start -->
-From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the social preview whose source commit is listed in its row:
+From botbench at commit `f1ab6448e13e3d03e610c4b00bd5e498a749f698`:
 
 | File | Source in botbench | SHA-256 |
 |---|---|---|
 | `assets/media/hero-workbench.png` | `docs/images/hero-workbench.png`, unchanged | `d2e9534dd807d4b09c2f46412a97b314bb424eeb452d6623d4189aaaa8343196` |
 | `assets/media/ready-for-review-proof.png` | `docs/images/ready-for-review-proof.png`, unchanged | `cb67af2f4adf1e65f614d8d816fa5b4437c70caee5a43a71db4ff0b57421a3a6` |
 | `assets/media/permissions-check.png` | `docs/images/permissions-check.png`, unchanged | `101aded237fbdf1d546e41bcd19f6a7bc3326104ece7c6e8f63c8fe8582a0b0b` |
+| `assets/media/ready-for-review-proof-light.png` | `docs/images/ready-for-review-proof-light.png`, unchanged | `4704d93e96c096d17bbb29d52e5544273631c9ae42bdfa77016952b11846b128` |
+| `assets/media/permissions-check-light.png` | `docs/images/permissions-check-light.png`, unchanged | `e350602356ab0ff00bec504edd6a61d3f48691b7828c1991496165a4a344a8aa` |
+| `assets/media/approval-card.png` | `docs/images/approval-card.png`, unchanged | `7f26a6dc40fd4345e861738afec2bb90be739cfa04f99c7aa589f1a34236c9d0` |
 | `assets/media/paired-question.png` | `docs/images/paired-question.png`, unchanged | `46d164a91c6f4cc88c661d97166ab042977bd122a11b640b711f43dda9200c05` |
 | `assets/media/botbench-demo.mp4` | `docs/media/botbench-demo.mp4`, unchanged | `f85d01b87da56578ce4519534425a1fd99fe2a7030382ab956db48153129a2bb` |
 | `assets/media/botbench-demo-thumbnail.png` | `docs/media/botbench-demo-thumbnail.png`, unchanged | `36c3421206b5a8e326d85dcf37e52f13ba765b3d077ef22335eedc15f6dcd0a7` |
@@ -19,7 +22,7 @@ From botbench at commit `ebc33d24e77a5c9c5a838ef8ba4b0ea087209d64`, except the s
 | `assets/media/first-task-phone-poster.jpg` | `docs/media/first-task-phone-poster.jpg`, unchanged | `c58b7d27c19b6d64b3c69f259ec4173a71ac146d01f87c981167f9bdb69c1fd6` |
 | `assets/media/paired-question.mp4` | `docs/media/paired-question.mp4`, unchanged | `93f3ced8ad217dac7ceebe7431be7e58fd9b8b7967acb76c8e940838e9dfd56c` |
 | `assets/media/paired-question-poster.jpg` | `docs/media/paired-question-poster.jpg`, unchanged | `4ca087b17012600575923a494223db916729089ab6840fa90880dc8b2b769c55` |
-| `assets/media/social-preview.png` | `docs/media/social-preview.png` at `15e08edace18af92102a33f4dd4182645e42349d`, unchanged | `d612024227ffe6db823875c83de2554e6a3bab187a0e96cf9ccd30bdcee0e939` |
+| `assets/media/social-preview.png` | `docs/media/social-preview.png`, unchanged | `d612024227ffe6db823875c83de2554e6a3bab187a0e96cf9ccd30bdcee0e939` |
 <!-- media:end -->
 
 ## From before the 0.3.0 redesign
@@ -42,22 +45,67 @@ The homepage hero shows two crops of `assets/media/hero-workbench.png`, each cut
 | `assets/media/hero-desktop-crop.png` | 2380 × 1500 at x 68, y 110: the desktop window (`ffmpeg -i hero-workbench.png -vf crop=2380:1500:68:110`) | `e1c424d0f277ad16b9bfde3e70846411069e9247ae04b2348d0c63daddf1e9db` |
 | `assets/media/hero-phone-crop.png` | 680 × 1452 at x 2448, y 134: the phone (`-vf crop=680:1452:2448:134`) | `05ad15bf158e616bba83eb80b87c11a69bbf624d344ded5fb394b4a12fcb4559` |
 
-## Crops of the task and Permissions screens
+## Real screens between two workbenches (not yet in Botbench's main branch)
 
-Two crops make the evidence legible where a whole screen would be shown at a few pixels per letter. Each is cut out of a picture above with no other change (no scaling, no edit of the pixels), and each links to the whole screen it came from where it is shown:
+The Coordination and home pages show three real screens of coordination between workbenches, made by Botbench's `npm run media` ("between workbenches", `e2e/media.shots.ts`) on the branch of [botbenchhq/botbench pull request #253](https://github.com/botbenchhq/botbench/pull/253), at commit `14dcb4ec8b65ed4437153c415c87e6dbd08ac7b0`, which is not merged yet. No model runs while they are made. The other workbench, dev1, and its open pull requests are the real `gh` output captured once (`test/recordings/gh-peers-open.json`) and replayed; dev1's branch and claim are really pushed to a test remote; the task's check and the check together really run. The repository, names and pull request numbers are that example data. Copied unchanged with `cp docs/images/peers/<file> assets/media/peers/`:
 
-| File | Cut from | SHA-256 |
+| File | Source in botbench at `14dcb4e` | SHA-256 |
 |---|---|---|
-| `assets/media/review-evidence-crop.png` | `assets/media/ready-for-review-proof.png`, 1552 × 700 at x 588, y 640: the check and Codex's review (`ffmpeg -i ready-for-review-proof.png -vf crop=1552:700:588:640`) | `ff9c34f2eb699ef38e4a15517409546fda8af0e549315c15e82829d10139f4cc` |
-| `assets/media/check-a-command-crop.png` | `assets/media/permissions-check.png`, 1584 × 1096 at x 634, y 100: Check a command and its answer in each mode (`-vf crop=1584:1096:634:100`) | `3dd13501627f57125b6faed29c5a1e6f2d641675e29936ced3fc756773d8a633` |
+| `assets/media/peers/peers-overlap-desktop.png` | `docs/images/peers/peers-overlap-desktop.png`, unchanged | `5cd7edf4031722c5e7bce9ac443da0d971432fd48bb0abb62e75792fdd57ce8b` |
+| `assets/media/peers/peers-overlap-phone.png` | `docs/images/peers/peers-overlap-phone.png`, unchanged | `0afebb7d154dffeb547a6cb2fb91b5eda3207e7895164b34efb89eaa16a82078` |
+| `assets/media/peers/peers-passed-together-desktop.png` | `docs/images/peers/peers-passed-together-desktop.png`, unchanged | `9f0bda61243e70a515df8d9bb60a68f5cb71a9df436c3a8e56ece0222920368a` |
+| `assets/media/peers/peers-passed-together-phone.png` | `docs/images/peers/peers-passed-together-phone.png`, unchanged | `2f51d48475030a4570c9607206f6ea526bcd241cf651c91975af99c12bf1bc72` |
+| `assets/media/peers/peers-claim-warning-desktop.png` | `docs/images/peers/peers-claim-warning-desktop.png`, unchanged | `828637ae5c448cf600923f4218a27c15e59e05a2b1aa1f3d02adfcb9f995f3fb` |
+| `assets/media/peers/peers-claim-warning-phone.png` | `docs/images/peers/peers-claim-warning-phone.png`, unchanged | `678e614188ee5ef625fc523627e87f41a1137d1e5a015d064fc7c181d265dfbf` |
 
-The Evidence page also shows `assets/media/scene-coordination-final.png`, the coordination scene's last frame (below), labelled there as an illustration, not a screen.
+When pull request #253 is merged, these move into the first table through `tools/copy-media.mjs`.
+
+## The pictures the pages show
+
+A page shows a smaller or cut-out WebP of a real screen, so the words can be read at the size it is shown and the page stays light. Each is cut out of and/or scaled down from a file above with `cwebp`, with no other change to the pixels, by `tools/media-variants.mjs`, which also writes this table. Each links to the whole, unchanged screen it came from. Where the product has a light and a dark picture of a screen, the page shows the one that matches its theme.
+
+<!-- variants:start -->
+| File | Made from | SHA-256 |
+|---|---|---|
+| `assets/media/v/check-a-command-800.webp` | `assets/media/permissions-check.png`, cut 1584 × 1096 at x 634, y 100, scaled to 800 wide (`cwebp -quiet -q 86 -m 6 -crop 634 100 1584 1096 -resize 800 0`) | `4c5b840a119796e59f71e26aadd4d7bdc7715fe1d09875a8e330e33f87e8f737` |
+| `assets/media/v/check-a-command-1584.webp` | `assets/media/permissions-check.png`, cut 1584 × 1096 at x 634, y 100 (`cwebp -quiet -q 86 -m 6 -crop 634 100 1584 1096`) | `7c23dbb595d55f63ab20f988c0bf9b9b4f2c93257aa0fa998cdaf6e38408bfc5` |
+| `assets/media/v/check-a-command-light-800.webp` | `assets/media/permissions-check-light.png`, cut 1584 × 1096 at x 634, y 100, scaled to 800 wide (`cwebp -quiet -q 86 -m 6 -crop 634 100 1584 1096 -resize 800 0`) | `8401889f7df49fd98572c0e1b3d1e49e7c6a1d209b4fbf22fcba21770f5ee785` |
+| `assets/media/v/check-a-command-light-1584.webp` | `assets/media/permissions-check-light.png`, cut 1584 × 1096 at x 634, y 100 (`cwebp -quiet -q 86 -m 6 -crop 634 100 1584 1096`) | `87146e992c9f8852d48297849f87c772c457161159757caddca29170c03b2fe7` |
+| `assets/media/v/check-a-command-modes-900.webp` | `assets/media/permissions-check.png`, cut 900 × 345 at x 690, y 690 (`cwebp -quiet -q 86 -m 6 -crop 690 690 900 345`) | `1e6486bfb74e23f0dd9b7451f85d0da6ebc83385106e2d695414166b06dc6a93` |
+| `assets/media/v/check-a-command-modes-light-900.webp` | `assets/media/permissions-check-light.png`, cut 900 × 345 at x 690, y 690 (`cwebp -quiet -q 86 -m 6 -crop 690 690 900 345`) | `567e4d68c861b347f8a73acfd791ab51d3e856d2f673ae82bb5c350cfec1f537` |
+| `assets/media/v/review-evidence-800.webp` | `assets/media/ready-for-review-proof.png`, cut 1552 × 700 at x 588, y 640, scaled to 800 wide (`cwebp -quiet -q 86 -m 6 -crop 588 640 1552 700 -resize 800 0`) | `3f972d106d93d82147199e45d633d31856a570d3edd7f14ef2032a4777b01df6` |
+| `assets/media/v/review-evidence-1552.webp` | `assets/media/ready-for-review-proof.png`, cut 1552 × 700 at x 588, y 640 (`cwebp -quiet -q 86 -m 6 -crop 588 640 1552 700`) | `6a8d3947600cb625f05f26b8c98a8ae474654a71880a7ddd40f1321b68d34f0d` |
+| `assets/media/v/review-evidence-light-800.webp` | `assets/media/ready-for-review-proof-light.png`, cut 1552 × 700 at x 588, y 640, scaled to 800 wide (`cwebp -quiet -q 86 -m 6 -crop 588 640 1552 700 -resize 800 0`) | `abd86b7ad00b02d5d4dfd993817b02ed270c6118b55d196f030c73895495e6f7` |
+| `assets/media/v/review-evidence-light-1552.webp` | `assets/media/ready-for-review-proof-light.png`, cut 1552 × 700 at x 588, y 640 (`cwebp -quiet -q 86 -m 6 -crop 588 640 1552 700`) | `86772f2f7bd761a846b8bb5d92a8c6ce67c007f0137bf66b9bb841ca28c81cd1` |
+| `assets/media/v/your-decision-600.webp` | `assets/media/ready-for-review-proof.png`, cut 600 × 1060 at x 2242, y 40 (`cwebp -quiet -q 86 -m 6 -crop 2242 40 600 1060`) | `c31a230995327a4bb4cfb2370a4ca4954993fc2f1148b3f32a247d975902ad49` |
+| `assets/media/v/your-decision-light-600.webp` | `assets/media/ready-for-review-proof-light.png`, cut 600 × 1060 at x 2242, y 40 (`cwebp -quiet -q 86 -m 6 -crop 2242 40 600 1060`) | `e5a97e02c0ea8dc8ac713c24a02bd08e4a6562c347bfdc871b33723e29a4b16e` |
+| `assets/media/v/ready-for-review-1200.webp` | `assets/media/ready-for-review-proof.png`, scaled to 1200 wide (`cwebp -quiet -q 86 -m 6 -resize 1200 0`) | `369e00ed7765022fbb0a95ea22f534471dc5bd1cb8b47c1a7130ae53c7e5653e` |
+| `assets/media/v/ready-for-review-2000.webp` | `assets/media/ready-for-review-proof.png`, scaled to 2000 wide (`cwebp -quiet -q 86 -m 6 -resize 2000 0`) | `b2ce15ab6369a6c063344b80ba13ac031bcf4b8d4e4961e8db8fbbaeb3cdd492` |
+| `assets/media/v/ready-for-review-light-1200.webp` | `assets/media/ready-for-review-proof-light.png`, scaled to 1200 wide (`cwebp -quiet -q 86 -m 6 -resize 1200 0`) | `7dcaf7dfbdd2e617b9a4a93fa1a23d781c30a9c1edcd58b8b4cd020871fd992a` |
+| `assets/media/v/ready-for-review-light-2000.webp` | `assets/media/ready-for-review-proof-light.png`, scaled to 2000 wide (`cwebp -quiet -q 86 -m 6 -resize 2000 0`) | `5c5cf7bb53434475f8da9b559a37ea71e7856c5c638016f7999594f3cdebcf1a` |
+| `assets/media/v/approval-card-600.webp` | `assets/media/approval-card.png`, scaled to 600 wide (`cwebp -quiet -q 86 -m 6 -resize 600 0`) | `8e04a53ed8dfc482525ee61c2da1d13a4bf5533bbd0b3f544e867feb517512cd` |
+| `assets/media/v/approval-card-900.webp` | `assets/media/approval-card.png`, scaled to 900 wide (`cwebp -quiet -q 86 -m 6 -resize 900 0`) | `3788c74c3cc52c7568353372b25a92232ec51d3977b768460f136a8d235af0f5` |
+| `assets/media/v/peers-overlap-600.webp` | `assets/media/peers/peers-overlap-phone.png`, scaled to 600 wide (`cwebp -quiet -q 86 -m 6 -resize 600 0`) | `383433a9f7c82bc3bd1a403af9a40b81175bbaddf3516ec11d053beace03fa7b` |
+| `assets/media/v/peers-overlap-900.webp` | `assets/media/peers/peers-overlap-phone.png`, scaled to 900 wide (`cwebp -quiet -q 86 -m 6 -resize 900 0`) | `44f2a5798122045e0182ee3d7b199590d9a5f1a6a762bd20e6f8c823a262225c` |
+| `assets/media/v/peers-passed-together-600.webp` | `assets/media/peers/peers-passed-together-phone.png`, scaled to 600 wide (`cwebp -quiet -q 86 -m 6 -resize 600 0`) | `a730d2195c619b5ed7a4a595dbaeec78f696648f1dec4dda15f9d3a86c87bd93` |
+| `assets/media/v/peers-passed-together-900.webp` | `assets/media/peers/peers-passed-together-phone.png`, scaled to 900 wide (`cwebp -quiet -q 86 -m 6 -resize 900 0`) | `2c9c49b312b97989426300a475e51955acf92da2c50c367cec1cf7631b9b93f5` |
+| `assets/media/v/peers-claim-warning-600.webp` | `assets/media/peers/peers-claim-warning-phone.png`, scaled to 600 wide (`cwebp -quiet -q 86 -m 6 -resize 600 0`) | `295498036c8613489a34f8c5ea96cc634493881c1dee36d368d9c35e3df952e2` |
+| `assets/media/v/peers-claim-warning-900.webp` | `assets/media/peers/peers-claim-warning-phone.png`, scaled to 900 wide (`cwebp -quiet -q 86 -m 6 -resize 900 0`) | `87b085d10143c01340bf12deddd4ae664ae828eb4106df295e026d5ea6ec5995` |
+| `assets/media/v/demo-poster-1440.webp` | `assets/media/botbench-demo-thumbnail.png`, scaled to 1440 wide (`cwebp -quiet -q 86 -m 6 -resize 1440 0`) | `d60484c515b95692b2c3334d88afb4295a9616ab673e4c863eb8dd8312ce03e9` |
+| `assets/media/v/hero-desktop-1200.webp` | `assets/media/hero-desktop-crop.png`, scaled to 1200 wide (`cwebp -quiet -q 86 -m 6 -resize 1200 0`) | `8694b30a6a9a6df0174676e369ded1e78e3dbb24fdcd2bfdba0e33b23f6ef96f` |
+| `assets/media/v/hero-desktop-2380.webp` | `assets/media/hero-desktop-crop.png`, same size (`cwebp -quiet -q 86 -m 6`) | `8cfed40aca10d4e0066010b78adc45ffe49ca594958cb9e0e53ef363d38ca459` |
+| `assets/media/v/hero-phone-680.webp` | `assets/media/hero-phone-crop.png`, same size (`cwebp -quiet -q 86 -m 6`) | `6e23474e3fe5e331138a08f08c362811246ffce628978e3b774727264f36886a` |
+<!-- variants:end -->
 
 ## The coordination scene (an illustration, not a screen)
 
 "Before the second pull request" on the home and Coordination pages is drawn, not recorded, and is labelled as an illustration where it is shown. It is built with the Stageshow kit (`third_party/stageshow/`, MIT, revision `299140fafd08df55a9c234e610c3f64af3f45531`). The words inside its windows are Botbench's own, copied from botbenchhq/botbench at commit `f1ab6448e13e3d03e610c4b00bd5e498a749f698`: the claim and its withdrawal from `src/engine/claims.ts` (`holderWords` and the withdrawn detail, times in the format of `claimTimeWords` in `src/engine/claim-branch.ts`), the run's status line from `e2e/northstar.e2e.ts`, the overlap line from `web/src/app/peers.ts` (`overlapLines`), Check together from `web/src/app/check-together.ts` and `web/src/components/check-together.tsx`, and the decision line from `web/src/screens2/review/decision-panel.tsx`. The names studio-mac and office-mac, the repository billing-api, and the issue and task titles are the example of the real screenshots. The colours are the Botbench theme of botbenchhq/design-system (`themes/botbench.css`, Graphite + Glacier, at `9457a46630f10c55a33682d80ee872e001a9a2a8`). Each step is shipped behaviour listed in the README's "What works today"; the acceptance test (`e2e/northstar.e2e.ts`) covers the claim and the withdrawal.
 
-`assets/media/scene-coordination-final.png` is the scene's last frame, rendered from the scene itself (Playwright, Chromium, 1280 wide, device scale 2, reduced motion), shown only when JavaScript is off. SHA-256 `d81a1933705eb40dd94ab1b0f62199681892d6860d35f32270aea2129a5c29bb`.
+The scene's last frame is rendered from the scene itself by `tools/render-scene-stills.mjs` (Playwright, Chromium, device scale 2, reduced motion, dark), and saved as WebP:
+
+- `assets/media/scene-coordination-final.webp`: the whole stage at 1280 wide, shown when JavaScript is off.
+- `assets/media/scene-coordination-final-compact.webp`: the phone design at 390 wide, shown in its place on a narrow screen.
+- `assets/media/scene-coordination-pane.webp`: office-mac's window only, shown on the Evidence page, labelled there as an illustration, not a screen.
 
 ## README product card (an illustration, not a recording)
 

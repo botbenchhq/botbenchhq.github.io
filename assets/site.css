@@ -400,3 +400,37 @@ h2.group { font-size: 1.1875rem; letter-spacing: -0.01em; padding-top: 16px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 .prose > h3 { margin-top: 40px; }
+
+/* Real screens at phone size and cut-out panels */
+.frame picture { display: block; }
+.frame picture img { display: block; height: auto; }
+.frame-phone img { border-radius: 22px; }
+.frame-panel img { border-radius: 12px; }
+.workflow-media .frame-panel { max-width: 300px; }
+
+/* Coordination: the scene, then the same moments on real screens */
+.real-pair { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); align-items: start; margin-top: clamp(8px, 2vw, 24px); }
+.real-pair h3 { font-size: 1.25rem; line-height: 1.3; letter-spacing: -0.01em; }
+.real-pair-copy p { margin-top: 12px; color: var(--muted); }
+.real-pair .frame-phone { max-width: 340px; }
+@media (max-width: 899px) {
+  .real-pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .real-pair-copy { grid-column: 1 / -1; }
+}
+.caveat { margin-top: 16px; padding-left: 12px; border-left: 2px solid var(--border-strong); color: var(--text); font-size: 0.9375rem; max-width: 34em; }
+
+/* Workbench: the five steps under their heading, in two columns, so no column stands empty */
+.steps-head { max-width: 40em; }
+@media (min-width: 900px) {
+  .steps-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(32px, 5vw, 72px); }
+  .steps-grid > li:nth-last-child(2):nth-child(even) { border-bottom: 1px solid var(--border); }
+}
+
+/* Home: the demo as a full-width band, its heading over it, for a change of rhythm */
+.demo-section { background: var(--screen); color: #F2F3F5; }
+.demo-section .section-title-row { grid-template-columns: minmax(0, 1fr); max-width: 44em; gap: 16px; }
+.demo-section .section-title-row > p { color: #ADB4BE; }
+.demo-section .frame figcaption { color: #ADB4BE; }
+.demo-section .frame video { border-color: #2A2F37; }
+.demo-section h2 { color: #F2F3F5; }
+.demo-section a { color: #F2F3F5; }

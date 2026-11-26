@@ -23,6 +23,13 @@ for (const page of pages) {
     if (!existsSync(join(ROOT, target))) { failures.push(`${page}: ${ref} is not in the site`); continue; }
     if (hash && target.endsWith('.html') && !ids[target].has(hash)) failures.push(`${page}: ${ref} names an anchor that is not on ${target}`);
   }
+  // Every picture a srcset offers, and every asset the scene loads when it comes into view
+  for (const [, list] of html.matchAll(/\ssrcset="([^"]+)"/g)) {
+    for (const ref of list.split(',').map((c) => c.trim().split(/\s+/)[0])) if (!existsSync(join(ROOT, ref))) failures.push(`${page}: ${ref} (srcset) is not in the site`);
+  }
+  for (const [, list] of html.matchAll(/\sdata-scene-assets="([^"]+)"/g)) {
+    for (const ref of list.split(' ')) if (!existsSync(join(ROOT, ref))) failures.push(`${page}: ${ref} (scene asset) is not in the site`);
+  }
 }
 
 if (checkout) {

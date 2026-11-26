@@ -23,10 +23,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
-<link rel="stylesheet" href="assets/kit/stageshow.css">
-<link rel="stylesheet" href="assets/scene-coordination.css">
-<script defer src="assets/scene-coordination.js"></script>
-<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn,.filterbar,[data-cap-count]{display:none!important}.nav{flex-wrap:wrap}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap;flex-direction:row!important}@media (max-width:1000px){.site-header{position:static}.nav-links{order:4;flex-basis:100%;padding:0 0 8px!important;margin:0 -12px!important;border:0!important;background:none!important}.nav-links a{min-height:44px!important;font-size:.9375rem!important}.nav-links a[aria-current="page"]{box-shadow:none!important}}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
@@ -45,19 +42,25 @@
 <section class="scene-section" aria-labelledby="scene-title"><div class="wrap">
 <div class="section-head"><h2 id="scene-title">What each workbench sees.</h2><p>Two developers reach for the same issue, and then the same file. Botbench’s lines are its own; the names are examples.</p></div>
 <figure class="scene" id="before-the-second-pull-request">
-<div class="scene-mount" data-scene-mount="coordination">
-<img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its pull request #12. office-mac’s task for issue #43 is accepted, after checking it together with pull request #12: Passed together." loading="lazy" decoding="async">
-<p class="scene-fallback-caption">You found out before either was merged. Both branches are still there to decide on.</p>
+<div class="scene-mount" data-scene-mount="coordination" data-scene-assets="assets/kit/stageshow.css assets/scene-coordination.css assets/scene-coordination.js">
+<picture><source media="(max-width: 959px)" srcset="assets/media/scene-coordination-final-compact.webp" width="716" height="1090"><img class="scene-fallback" src="assets/media/scene-coordination-final.webp" width="2400" height="1312" alt="Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its open pull request #12. office-mac’s task for issue #43 is accepted after checking it together with pull request #12, Passed together: Botbench kept the branch botbench/office-mac/run-5/task-9." loading="lazy" decoding="async"></picture>
+<p class="scene-fallback-caption">You found out before either was merged. office-mac’s branch is kept, and studio-mac’s pull request #12 is still open.</p>
 </div>
 <figcaption class="scene-label">Illustration. Botbench’s lines are in its own words; the repository, issue titles and the remote’s panel are examples. Each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="https://github.com/botbenchhq/botbench#what-works-today">What works today</a></figcaption>
 </figure>
+<div class="real-pair">
+<div class="real-pair-copy"><h3>The same moments, on real screens.</h3><p>A task on a workbench named studio-mac, while another workbench, dev1, has pull request #128 open on the same repository. The overlap line sits under the changed files; Check together gives its result in the same place. Real screens from a test run of Botbench, with example repository data: dev1’s open pull requests are real <code>gh</code> output, replayed, and the checks really ran.</p></div>
+<figure class="frame frame-phone"><a class="zoom" href="assets/media/peers/peers-overlap-desktop.png" aria-label="Open the whole screen: A task’s Review tab at phone size"><picture><img src="assets/media/v/peers-overlap-600.webp" srcset="assets/media/v/peers-overlap-600.webp 600w, assets/media/v/peers-overlap-900.webp 900w" sizes="340px" width="1170" height="2532" alt="A task’s Review tab at phone size: 2 files changed, then dev1’s open pull request #128 also changes src/engine/peers.ts and test/peers.test.ts, so the two may conflict when both are merged; then Check together" loading="lazy" decoding="async"></picture></a><figcaption>The overlap line, under the changed files.</figcaption></figure>
+<figure class="frame frame-phone"><a class="zoom" href="assets/media/peers/peers-passed-together-desktop.png" aria-label="Open the whole screen: Check together with dev1’s pull request #128 at phone size"><picture><img src="assets/media/v/peers-passed-together-600.webp" srcset="assets/media/v/peers-passed-together-600.webp 600w, assets/media/v/peers-passed-together-900.webp 900w" sizes="340px" width="1170" height="2532" alt="Check together with dev1’s pull request #128 at phone size: Another workbench’s code. Includes another workbench’s code: dev1’s pull request #128, which nobody here reviewed. Passed together: Merged cleanly, and every check passed on the merge. 1 of 1 command passed" loading="lazy" decoding="async"></picture></a><figcaption>Passed together, marked as including another workbench’s code.</figcaption></figure>
+</div>
 </div></section>
 
 <section aria-labelledby="today-title"><div class="wrap split">
-<div><div class="section-head"><h2 id="today-title">Available today</h2><p>Three warnings, in Botbench’s own words, with example names. Each needs both workbenches to push their branches or open pull requests on the same remote, with <code>gh</code> signed in on each Mac.</p></div></div>
+<div><div class="section-head"><h2 id="today-title">Available today</h2><p>Three things it tells you, in Botbench’s own words, with example names. Each needs both workbenches to push their branches or open pull requests on the same remote, with <code>gh</code> signed in on each Mac.</p></div>
+<p class="caveat">Coordination between workbenches is early: it has been tested with two installations on one Mac, not yet across two Macs.</p></div>
 <div>
 <dl class="moments">
-<div><dt>The same files</dt><dd><p>When another workbench’s open pull request changes the same files as your task, the task’s Review tab says so under the changed files:</p><blockquote><code>office-mac’s open pull request #12 also changes calc.py, so the two may conflict when both are merged.</code></blockquote></dd></div>
+<div><dt>The same files</dt><dd><p>When another workbench’s open pull request changes the same files as your task, the task’s Review tab says so under the changed files:</p><blockquote><code>studio-mac’s open pull request #12 also changes calc.py, so the two may conflict when both are merged.</code></blockquote></dd></div>
 <div><dt>The same issue</dt><dd><p>Turn on issue claims for a repository (<code>"claimIssues": true</code>, off by default). A run from an issue that opens pull requests claims it as it starts; the remote takes only the first claim, and the later run stops:</p><blockquote><code>studio-mac started on issue #42 at 14:14:07 UTC on 2026-11-25, before this workbench did (14:15:02 UTC on 2026-11-25), so this run stopped: when two workbenches start on one issue, the earliest claim goes ahead.</code></blockquote><p>Before you start, Botbench also warns when another workbench already has a pull request open for the issue you attached.</p></dd></div>
 <div><dt>Changes that must fit</dt><dd><p>On a task that is ready for review, choose Check together with a teammate’s open pull request. Botbench merges the two in a temporary copy, runs the repository’s own checks on the merge, pushes nothing, and shows the result as including another workbench’s code:</p><blockquote><code>Passed together: Merged cleanly, and every check passed on the merge.</code></blockquote><p>A pass proves only what your checks cover, and counts only while both branches stay at the commits it ran on.</p></dd></div>
 </dl>

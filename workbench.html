@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
-<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn,.filterbar,[data-cap-count]{display:none!important}.nav{flex-wrap:wrap}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap;flex-direction:row!important}@media (max-width:1000px){.site-header{position:static}.nav-links{order:4;flex-basis:100%;padding:0 0 8px!important;margin:0 -12px!important;border:0!important;background:none!important}.nav-links a{min-height:44px!important;font-size:.9375rem!important}.nav-links a[aria-current="page"]{box-shadow:none!important}}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
@@ -39,10 +39,10 @@
 <main id="main">
 <section class="hero page-hero"><div class="wrap"><h1>Walk away. Come back to the branch.</h1><p class="lead">One coding agent in one terminal is easy to follow. Several are not. Botbench gives each task its own copy and branch, asks you only about what reaches outside it, and keeps a record of everything that ran.</p></div></section>
 
-<section id="how-it-goes" aria-labelledby="how-title"><div class="wrap split">
-<div><div class="section-head"><h2 id="how-title">Five steps, ending in a decision.</h2><p>What you come back to is the last step: a branch, its checks and a review, waiting for Accept or Reject.</p></div>
+<section id="how-it-goes" aria-labelledby="how-title"><div class="wrap">
+<div class="steps-head"><div class="section-head"><h2 id="how-title">Five steps, ending in a decision.</h2><p>What you come back to is the last step: a branch, its checks and a review, waiting for Accept or Reject.</p></div>
 </div>
-<ol class="steps">
+<ol class="steps steps-grid">
 <li><div><h3>You start a task or a run</h3><p>A task is a prompt and a repository. A run is a prompt or a spec file, which Claude Code turns into a plan of tasks. In a manual run, and in any run from a GitHub issue, nothing is built before you approve the plan.</p></div></li>
 <li><div><h3>Each task gets a separate copy</h3><p>It is built in its own copy of your repository (a git worktree), on its own branch, such as <code>botbench/your-mac/run-1/task-1</code>.</p></div></li>
 <li><div><h3>The agent works, and asks only when it matters</h3><p>Reading, searching and editing inside the copy never ask, in any mode. An action that reaches outside the copy waits for your answer: a push, sudo, a file outside the copy. A fully autonomous run refuses these instead of asking.</p></div></li>
@@ -50,7 +50,7 @@
 <li><div><h3>You accept or reject</h3><p>You read the diff, the checks and the transcript. Accept keeps the branch, and opens a pull request if the run says so. Botbench never merges one.</p></div></li>
 </ol>
 </div>
-<div class="wrap result-shot"><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the whole screen: A task ready for review"><img src="assets/media/ready-for-review-proof.png" width="2880" height="1800" alt="A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept" loading="lazy" decoding="async"></a><figcaption>What you come back to: the task, its check, Codex’s review and Your decision. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure></div>
+<div class="wrap result-shot"><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the whole screen: A task ready for review"><picture><source data-scheme="light" media="(prefers-color-scheme: light)" srcset="assets/media/v/ready-for-review-light-1200.webp 1200w, assets/media/v/ready-for-review-light-2000.webp 2000w" sizes="(max-width: 1279px) calc(100vw - 32px), 1200px" width="2880" height="1800"><img src="assets/media/v/ready-for-review-1200.webp" srcset="assets/media/v/ready-for-review-1200.webp 1200w, assets/media/v/ready-for-review-2000.webp 2000w" sizes="(max-width: 1279px) calc(100vw - 32px), 1200px" width="2880" height="1800" alt="A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept" loading="lazy" decoding="async"></picture></a><figcaption>What you come back to: the task, its check, Codex’s review and Your decision. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure></div>
 </section>
 
 <section aria-labelledby="modes-title"><div class="wrap">
@@ -66,7 +66,7 @@
 </div></section>
 
 <section id="control" aria-labelledby="control-title"><div class="wrap split media-first">
-<figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the whole screen: Check a command in Botbench’s settings"><img src="assets/media/check-a-command-crop.png" width="1584" height="1096" alt="Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push" loading="lazy" decoding="async"></a><figcaption>Here a push asks you, or is refused in a fully autonomous run. Open it for the whole Permissions screen, with Activity.</figcaption></figure>
+<figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the whole screen: Check a command in Botbench’s settings"><picture><source data-scheme="light" data-base="(max-width: 600px)" media="(max-width: 600px) and (prefers-color-scheme: light)" srcset="assets/media/v/check-a-command-modes-light-900.webp 900w" sizes="calc(100vw - 32px)" width="900" height="345"><source media="(max-width: 600px)" srcset="assets/media/v/check-a-command-modes-900.webp 900w" sizes="calc(100vw - 32px)" width="900" height="345"><source data-scheme="light" media="(prefers-color-scheme: light)" srcset="assets/media/v/check-a-command-light-800.webp 800w, assets/media/v/check-a-command-light-1584.webp 1584w" sizes="(max-width: 899px) calc(100vw - 32px), 680px" width="1584" height="1096"><img src="assets/media/v/check-a-command-800.webp" srcset="assets/media/v/check-a-command-800.webp 800w, assets/media/v/check-a-command-1584.webp 1584w" sizes="(max-width: 899px) calc(100vw - 32px), 680px" width="1584" height="1096" alt="Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push" loading="lazy" decoding="async"></picture></a><figcaption>Here a push asks you, or is refused in a fully autonomous run. Open it for the whole Permissions screen, with Activity.</figcaption></figure>
 <div class="prose">
 <h2 id="control-title">Know the answer before the agent asks.</h2>
 <p>Check a command shows what any command would get in each mode, before an agent runs it. Permissions also lists what you chose to always allow, and every action that ran, newest first. The record is kept on your Mac and is only ever added to.</p>

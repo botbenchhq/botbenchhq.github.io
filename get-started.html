@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="assets/site.css">
 <script>try{var t=localStorage.getItem('botbench-site-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="assets/site.js"></script>
-<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn{display:none!important}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap}</style></noscript>
+<noscript><style>.tabpanel[hidden]{display:grid!important;margin-top:16px}.tablist,.menu-btn,.theme-btn,.filterbar,[data-cap-count]{display:none!important}.nav{flex-wrap:wrap}.nav-links{display:flex!important;position:static!important;flex-wrap:wrap;flex-direction:row!important}@media (max-width:1000px){.site-header{position:static}.nav-links{order:4;flex-basis:100%;padding:0 0 8px!important;margin:0 -12px!important;border:0!important;background:none!important}.nav-links a{min-height:44px!important;font-size:.9375rem!important}.nav-links a[aria-current="page"]{box-shadow:none!important}}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the page</a>
@@ -42,7 +42,7 @@
 <section class="tight-top" aria-labelledby="before-title"><div class="wrap split even">
 <div>
 <h2 id="before-title" class="small-head">You need</h2>
-<dl class="facts "><div><dt>macOS</dt><dd>Agents are started only on macOS, because the confinement relies on its sandbox.</dd></div><div><dt>Node and git</dt><dd>Node 24 or later, and git set up so you can commit.</dd></div><div><dt>Claude Code</dt><dd>Required: 2.1.322 or later, installed and signed in. It plans every run. Check with <code>claude --version</code> and <code>claude auth status</code>.</dd></div><div><dt>Codex</dt><dd>Optional: 0.171.0 or later, only if you want it to review or build.</dd></div></dl>
+<dl class="facts "><div><dt>macOS</dt><dd>Agents are started only on macOS, because the confinement relies on its sandbox.</dd></div><div><dt>Node and git</dt><dd>Node 24 or later (<a href="https://nodejs.org/">nodejs.org</a>), and git set up so you can commit.</dd></div><div><dt>Claude Code</dt><dd>Required: 2.1.322 or later, installed and signed in (<a href="https://www.anthropic.com/claude-code">anthropic.com/claude-code</a>). It plans every run. Check with <code>claude --version</code> and <code>claude auth status</code>.</dd></div><div><dt>Codex</dt><dd>Optional: 0.171.0 or later, only if you want it to review or build.</dd></div></dl>
 </div>
 <div>
 <h2 class="small-head">Do not use it if</h2>
@@ -77,14 +77,15 @@ git add README.md &amp;&amp; git commit -m "Start"
 pwd</pre></div></div></li>
 <li><div><h3>Start a task</h3><p>Open Chat, press Add context under the message box, choose Repository, then Another folder…, and paste the path. When it reads “Usable git repository.”, close the sheet. Write the task and choose Send:</p>
 <div class="code"><div class="code-head"><span>Message</span><button class="copy" type="button" data-copy="cmd-task">Copy</button></div><pre tabindex="0" aria-label="Message text to copy" id="cmd-task" class="wrap-lines">Add a file hello.txt that says hello, then run ls to show that it is there.</pre></div></div></li>
-<li><div><h3>Review and accept</h3><p>Within a minute the transcript shows Claude Code writing the file and running <code>ls</code>. The task then reads Ready for review, with <code>hello.txt</code> under “1 file changed” and its branch, such as <code>botbench/your-mac/run-1/task-1</code>. This repository has no checks, so the button reads Accept without verification; choose it. Botbench keeps the branch and removes the task’s copy.</p></div></li>
-<li><div><h3>See the branch</h3><p>In the practice repository, with the name <code>git branch</code> lists:</p>
+<li><div><h3>Watch it work</h3><p>Within a minute the transcript shows Claude Code writing the file and running <code>ls</code>. Neither asks you: both stay inside the task’s copy. A card appears only for an action that reaches outside the copy; if you see one, read it and choose Allow or Decline.</p></div></li>
+<li><div><h3>Review and accept</h3><p>The task reads Ready for review, with <code>hello.txt</code> under “1 file changed” and its branch, such as <code>botbench/your-mac/run-1/task-1</code>. The middle part is your workbench’s name, made from the Mac’s name at first start; Settings → Workbench identity shows it. This repository has no checks, so the button reads Accept without verification; choose it. Botbench keeps the branch and removes the task’s copy.</p></div></li>
+<li><div><h3>See the branch</h3><p>In the practice repository, with the name <code>git branch</code> lists. Put your workbench’s name where this says <code>your-mac</code>:</p>
 <div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-branch">Copy</button></div><pre tabindex="0" aria-label="Terminal text to copy" id="cmd-branch">git branch
 git log --stat -1 botbench/your-mac/run-1/task-1</pre></div>
 <p class="done">The branch holds one commit by Botbench that adds <code>hello.txt</code>. Your own branch is unchanged, and <code>git status</code> shows nothing to commit. That is your first branch.</p>
 <p>To clean up: Ctrl+C in the first terminal, then <code>rm -rf ~/botbench-try</code>. Botbench keeps its database and login token in <code>~/.botbench</code>; delete that folder only to start again from nothing.</p></div></li>
 </ol>
-<p class="source-note">These steps follow the README’s quickstart, which is the authority and has every detail, including how to use Botbench from your phone over a private network.</p>
+<p class="source-note"><strong>If something fails,</strong> look for it in <a href="https://github.com/botbenchhq/botbench/issues">the issues</a>, or open one with what you did, what you expected and what Botbench printed. These steps follow the README’s quickstart, which is the authority and has every detail, including how to use Botbench from your phone over a private network.</p>
 <div class="btn-row next-steps"><a class="btn btn-primary" href="https://github.com/botbenchhq/botbench#configure-a-repository">Set up checks for a real repository <svg class="out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9"/></svg></a><a class="btn btn-quiet" href="https://github.com/botbenchhq/botbench#quickstart">The full quickstart <svg class="out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.5 3.5 7 9"/></svg></a></div>
 </div>
 </div></section>
