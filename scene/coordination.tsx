@@ -12,6 +12,9 @@
 //     web/src/components/check-together.tsx
 //   - "Accept keeps the branch. Nothing is pushed or merged.":
 //     web/src/screens2/review/decision-panel.tsx
+//   - once accepted: the Accepted badge and "Branch <name>" of the decision
+//     result (web/src/screens2/review/decision-panel.tsx), and the task's
+//     status line (web/src/components/task-status.ts, case "accepted")
 // The captions under the stage are the site's, not the product's.
 //
 // Beats (wide): 1 office-mac's owner starts a run from issue #42 set to open a
@@ -28,7 +31,6 @@ import { Window, Bar } from '../third_party/stageshow/kit/window'
 import { Badge } from '../third_party/stageshow/kit/controls/Badge'
 import { Button } from '../third_party/stageshow/kit/controls/Button'
 import { States } from '../third_party/stageshow/kit/motion/States'
-import { Connector } from '../third_party/stageshow/kit/motion/Connector'
 import { Spinner } from '../third_party/stageshow/kit/parts/Spinner'
 import { Check } from '../third_party/stageshow/kit/parts/Check'
 import { useReducedMotion } from '../third_party/stageshow/kit/reduced-motion'
@@ -56,6 +58,8 @@ const PASSED_WORD = 'Passed together:'
 const PASSED_LINE = 'Merged cleanly, and every check passed on the merge.'
 const OTHERS_CODE = `Includes another workbench's code: studio-mac's pull request #${PR}, which nobody here reviewed. It ran in the same sandbox as this task's checks.`
 const ACCEPT_LINE = 'Accept keeps the branch. Nothing is pushed or merged.'
+// task-status.ts, "accepted", checks ran, decided by the owner, no pull request
+const ACCEPTED_LINE = "Accepted. Botbench kept the branch and removed the task's copy of the project."
 const STUDIO_TASK_BRANCH = 'botbench/studio-mac/run-3/task-5'
 const OFFICE_TASK_BRANCH = 'botbench/office-mac/run-5/task-9'
 
@@ -67,10 +71,10 @@ export const CAPTIONS = [
   'studio-mac claimed issue #42 first, so office-mac’s run stops before it builds anything.',
   'office-mac takes issue #43 instead. Its task is ready for review, and it changes a file that studio-mac’s open pull request #12 changes too.',
   'Check together: Botbench merges both in a temporary copy and runs the repository’s own check on the merge.',
-  'You found out before either was merged. Both branches are still there to decide on.',
+  'You found out before either was merged. office-mac’s branch is kept, and studio-mac’s pull request #12 is still open.',
 ]
 export const SUMMARY =
-  'Illustration of two Botbench workbenches on one GitHub repository. office-mac starts a run from issue #42; studio-mac had claimed it first, so office-mac’s run stops. office-mac takes issue #43; its task is ready for review and Botbench notes that studio-mac’s open pull request #12 also changes calc.py. The owner checks the two together: they pass together. The owner accepts, and both branches stay.'
+  'Illustration of two Botbench workbenches on one GitHub repository. office-mac starts a run from issue #42; studio-mac had claimed it first, so office-mac’s run stops. office-mac takes issue #43; its task is ready for review and Botbench notes that studio-mac’s open pull request #12 also changes calc.py. The owner checks the two together: they pass together. The owner accepts: office-mac keeps its branch, and studio-mac’s pull request #12 stays open.'
 
 /* ---------- Scene state ---------- */
 
@@ -102,6 +106,24 @@ type Gate = { closed: () => boolean; onBeat: (n: number) => void; onDone: () => 
 
 const SLICE = 50
 
+// The kit's move eases in and out; a story beat here eases out only
+// (cubic-bezier(0.2, 0, 0, 1), BRIEF.md). The kit hands a path its eased
+// progress, so undo its curve and apply ours.
+const unInOut = (e: number) => (e < 0.5 ? Math.cbrt(e / 4) : 1 - Math.cbrt(2 * (1 - e)) / 2)
+function easeOut(x1: number, y1: number, x2: number, y2: number) {
+  const at = (a: number, b: number, t: number) => 3 * a * (1 - t) * (1 - t) * t + 3 * b * (1 - t) * t * t + t * t * t
+  return (x: number) => {
+    let lo = 0, hi = 1
+    for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (at(x1, x2, mid) < x) lo = mid; else hi = mid }
+    return at(y1, y2, (lo + hi) / 2)
+  }
+}
+const OUT = easeOut(0.2, 0, 0, 1)
+const outPath = (e: number, from: { x: number; y: number }, end: { x: number; y: number }) => {
+  const k = OUT(unInOut(e))
+  return { x: from.x + (end.x - from.x) * k, y: from.y + (end.y - from.y) * k }
+}
+
 function makeScript(gate: Gate) {
   return async function script(a: Act<S>) {
     const compact = a.layout === 'compact'
@@ -131,13 +153,13 @@ function makeScript(gate: Gate) {
       a.put({ focus: 'office' })
       await hold(500)
     }
-    await a.move({ at: 'send', x: 0.86, y: 0.7 }, { duration: 450 })
+    await a.move({ at: 'send', x: 0.86, y: 0.7 }, { duration: 450, path: outPath })
     await hold(150)
     await a.click()
     a.put({ sending: true })
     await hold(350)
     a.put({ screen: 'run', sending: false })
-    await a.move({ at: 'rest-end', x: 0.5, y: 0.5 }, { duration: 450 })
+    await a.move({ at: 'rest-end', x: 0.5, y: 0.5 }, { duration: 450, path: outPath })
     await hold(500)
 
     // 2. Its claim meets studio-mac's on the remote, and the run stops
@@ -150,10 +172,20 @@ function makeScript(gate: Gate) {
     // 3. studio-mac's task is accepted and pull request #12 opens; office-mac's
     // owner takes issue #43, whose task reaches Ready for review
     beat(3)
-    a.put({ claimTry: false, ties: 0, studioDone: true })
-    await hold(600)
-    a.put({ screen: 'task' })
-    await hold(500)
+    if (compact) {
+      // studio-mac's window comes back for the pull request it opened
+      a.put({ claimTry: false, ties: 0, focus: 'studio' })
+      await hold(500)
+      a.put({ studioDone: true })
+      await hold(1800)
+      a.put({ focus: 'office', screen: 'task' })
+      await hold(700)
+    } else {
+      a.put({ claimTry: false, ties: 0, studioDone: true })
+      await hold(600)
+      a.put({ screen: 'task' })
+      await hold(500)
+    }
     a.put({ overlap: true })
     await hold(450)
     a.put({ ties: 2 })
@@ -161,7 +193,7 @@ function makeScript(gate: Gate) {
 
     // 4. Check together with pull request #12
     beat(4)
-    await a.move({ at: 'check-together', x: 0.86, y: 0.6 }, { duration: 450 })
+    await a.move({ at: 'check-together', x: 0.86, y: 0.6 }, { duration: 450, path: outPath })
     await hold(150)
     await a.click()
     a.put({ check: 'running', ties: 0 })
@@ -170,12 +202,12 @@ function makeScript(gate: Gate) {
     await hold(1800)
 
     // 5. Accept
-    await a.move({ at: 'accept', x: 0.72, y: 0.62 }, { duration: 450 })
+    await a.move({ at: 'accept', x: 0.72, y: 0.62 }, { duration: 450, path: outPath })
     await hold(150)
     await a.click()
     a.put({ accepted: true })
     beat(5)
-    await a.move({ at: 'rest-end', x: 0.5, y: 0.5 }, { duration: 450 })
+    await a.move({ at: 'rest-end', x: 0.5, y: 0.5 }, { duration: 450, path: outPath })
     await hold(900)
     gate.onDone()
   }
@@ -390,11 +422,17 @@ function TaskScreen({ s, on, layout }: { s: S; on: boolean; layout: Layout }) {
           </div>
         </div>
       </div>
-      <div className="bb-foot">
-        <span className="bb-foot-line">{ACCEPT_LINE}</span>
-        <div className="bb-foot-actions">
-          <Button>Reject</Button>
-          <Button variant="primary" data-target="accept">Accept</Button>
+      <div className="bb-foot" data-decided={s.accepted || undefined}>
+        <div className="bb-foot-open" data-on={!s.accepted || undefined}>
+          <span className="bb-foot-line">{ACCEPT_LINE}</span>
+          <div className="bb-foot-actions">
+            <Button>Reject</Button>
+            <Button variant="primary" data-target="accept">Accept</Button>
+          </div>
+        </div>
+        <div className="bb-foot-done" data-on={s.accepted || undefined}>
+          <span className="bb-foot-line">{ACCEPTED_LINE}</span>
+          <span className="bb-foot-branch">Branch <Mono>{branch(OFFICE_TASK_BRANCH)}</Mono></span>
         </div>
       </div>
     </div>
@@ -408,6 +446,20 @@ function OfficeMac({ s, layout }: { s: S; layout: Layout }) {
       <RunScreen s={s} on={s.screen === 'run'} layout={layout} />
       <TaskScreen s={s} on={s.screen === 'task'} layout={layout} />
     </div>
+  )
+}
+
+// A tie from a workbench to the remote. It fades in and out; it is never drawn on.
+type Pt = { x: number; y: number }
+function Tie({ show, from, to, className }: { show: boolean; from: Pt; to: Pt; className: string }) {
+  const k = Math.abs(from.x - to.x) * 0.5
+  const d = `M ${from.x} ${from.y} C ${from.x - k} ${from.y}, ${to.x + k} ${to.y}, ${to.x} ${to.y}`
+  return (
+    <svg className={`bb-tie ${className}`} data-show={show || undefined} aria-hidden="true">
+      <path className="bb-tie-line" d={d} />
+      <circle className="bb-tie-dot" cx={from.x} cy={from.y} r={3.5} />
+      <circle className="bb-tie-dot" cx={to.x} cy={to.y} r={3.5} />
+    </svg>
   )
 }
 
@@ -445,17 +497,15 @@ function Scene({ s, rect, layout }: { s: S; rect: (name: string) => Rect; layout
           <Window title="office-mac" className="bb-win bb-win-office">
             <OfficeMac s={s} layout={layout} />
           </Window>
-          <Connector
-            className="bb-tie bb-tie-claim"
+          <Tie
+            className="bb-tie-claim"
             show={s.ties === 1}
-            route="curve"
             from={{ x: claim.x, y: claim.y + claim.height / 2 }}
             to={{ x: claimRef.x + claimRef.width, y: claimRef.y + claimRef.height / 2 }}
           />
-          <Connector
-            className="bb-tie bb-tie-overlap"
+          <Tie
+            className="bb-tie-overlap"
             show={s.ties === 2}
-            route="curve"
             from={{ x: overlap.x, y: overlap.y + 10 }}
             to={{ x: prRef.x + prRef.width, y: prRef.y + prRef.height / 2 }}
           />
@@ -526,7 +576,6 @@ function CoordinationScene() {
     setPaused((p) => !p)
   }, [done, replay])
 
-  const caption = reduced ? CAPTIONS[5] : CAPTIONS[beat]
   const playing = !paused && !done
 
   return (
@@ -536,23 +585,28 @@ function CoordinationScene() {
           key={take}
           width={1040}
           height={568}
-          compact={{ below: 960, width: 358, height: 482 }}
+          compact={{ below: 960, width: 358, height: 544 }}
           initial={initial}
           poster={poster}
           script={script}
           play="once"
           fill
           theme="dark"
-          cursor={{ at: { wide: { x: 780, y: 470 }, compact: { x: 340, y: 210 } }, style: 'real', idle: 2500 }}
+          cursor={{ at: { wide: { x: 780, y: 470 }, compact: { x: 300, y: 210 } }, style: 'real', idle: 2500 }}
           className="bb-stage"
         >
           {(s, rect, layout) => <Scene s={s} rect={rect} layout={layout} />}
         </Stage>
       </div>
       <div className="bb-bar">
+        {/* Every caption sits in one grid cell, so the bar is as tall as the longest and never moves */}
         <p className="bb-caption" data-beat={reduced ? 5 : beat}>
-          {!reduced && <span className="bb-step">{`${Math.max(beat, 1)} of 5`}</span>}
-          {caption}
+          {(reduced ? [5] : CAPTIONS.map((_, i) => i)).map((i) => (
+            <span key={i} className="bb-caption-text" data-on={(reduced || i === beat) || undefined} aria-hidden={reduced || i === beat ? undefined : true}>
+              {!reduced && <span className="bb-step">{`${Math.max(i, 1)} of 5`}</span>}
+              {CAPTIONS[i]}
+            </span>
+          ))}
         </p>
         {reduced ? (
           <p className="bb-reduced-note">Showing the last step without motion, as your system asks.</p>

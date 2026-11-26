@@ -12,7 +12,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'shots');
 mkdirSync(OUT, { recursive: true });
 const axe = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
-const TYPES = { html: 'text/html', css: 'text/css', js: 'text/javascript', svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg', mp4: 'video/mp4' };
+const TYPES = { html: 'text/html', css: 'text/css', js: 'text/javascript', svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp', mp4: 'video/mp4' };
 const server = createServer((req, res) => {
   const path = decodeURIComponent(new URL(req.url, 'http://x').pathname).replace(/\/$/, '/index.html');
   try {
@@ -99,6 +99,30 @@ const expect = (ok, what) => { if (!ok) problems.push(`keyboard: ${what}`); };
   await ctx.close();
 }
 
+// What each page says and how: the closing band only where it is the page's next step,
+// one name for the Evidence page, no capitals set by CSS, and the get-started steps
+// ending at the branch.
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const p = await ctx.newPage();
+  for (const file of [...pages, '404.html']) {
+    await p.goto(base + file);
+    const closing = await p.locator('.closing').count();
+    const wants = ['index.html', 'workbench.html', 'coordination.html', 'proof.html'].includes(file);
+    expect(closing === (wants ? 1 : 0), `${file}: the closing band is ${wants ? 'there' : 'not there'}`);
+    const caps = await p.evaluate(() => [...document.querySelectorAll('body *')].filter((el) => getComputedStyle(el).textTransform === 'uppercase' && el.textContent.trim() && !el.closest('.bb-stage')).map((el) => el.textContent.trim().slice(0, 30)));
+    expect(caps.length === 0, `${file}: no text is set in capitals by CSS (${caps.join(', ')})`);
+    expect(await p.locator('.eyebrow').count() === 0, `${file}: no eyebrow label above a heading`);
+    expect(!/Verification/.test(await p.evaluate(() => document.title + document.body.innerText)), `${file}: the Evidence page is never called Verification`);
+    expect(!/Claude Code or Codex/.test(await p.evaluate(() => document.body.innerText)), `${file}: Claude Code is never offered as an alternative to Codex`);
+  }
+  await p.goto(base + 'proof.html');
+  expect((await p.title()).startsWith('Evidence'), 'proof.html: its title is Evidence');
+  await p.goto(base + 'get-started.html');
+  expect((await p.locator('.steps > li h3').last().textContent()).trim() === 'See the branch', 'get-started.html: the last step is See the branch');
+  await ctx.close();
+}
+
 // The coordination scene: present where it is placed, starts only once in view,
 // Pause and Replay work from the keyboard, and reduced motion shows the last frame still.
 const mark = (p) => p.evaluate(() => document.querySelector('.bb-stage .ss-stage')?.getAttribute('data-mark') ?? '');
@@ -106,13 +130,14 @@ for (const file of ['index.html', 'coordination.html']) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const p = await ctx.newPage();
   await p.goto(base + file);
-  expect(await p.locator('[data-scene-mount="coordination"] .bb-stage .ss-stage').count() === 1, `${file}: the coordination scene is on the page`);
   expect(await p.locator('.scene-label a[href$="#what-works-today"]').count() === 1, `${file}: the scene carries its illustration label and link`);
   if (file === 'index.html') {
     await p.waitForTimeout(1500);
     expect(!/^beat-[1-5]$/.test(await mark(p)), `${file}: the scene waits until it is in view`);
   }
-  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.locator('figure.scene').scrollIntoViewIfNeeded();
+  await p.waitForSelector('.bb-scene .bb-stage .ss-stage', { timeout: 8000 });
+  expect(await p.locator('[data-scene-mount="coordination"] .bb-stage .ss-stage').count() === 1, `${file}: the coordination scene is on the page`);
   await p.waitForFunction(() => /^beat-[1-5]$/.test(document.querySelector('.bb-stage .ss-stage')?.getAttribute('data-mark') ?? ''), null, { timeout: 8000 }).catch(() => {});
   expect(/^beat-[1-5]$/.test(await mark(p)), `${file}: the scene plays once in view`);
   const toggle = p.locator('[data-scene-toggle]');
@@ -137,21 +162,90 @@ for (const file of ['index.html', 'coordination.html']) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' });
   const p = await ctx.newPage();
   await p.goto(base + 'coordination.html');
-  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.locator('figure.scene').scrollIntoViewIfNeeded();
+  await p.waitForSelector('.bb-scene .bb-stage .ss-stage', { timeout: 8000 });
   await p.waitForTimeout(1500);
   expect(await p.locator('.bb-scene[data-reduced] .bb-stage .ss-stage[data-still]').count() === 1, 'reduced motion: the scene shows its still frame');
-  expect(await p.locator('.bb-stage [data-target="accept"]').count() === 1 && (await p.textContent('.bb-caption')).includes('before either was merged'), 'reduced motion: the still is the last step, with its caption');
+  expect((await p.textContent('.bb-caption')).includes('before either was merged'), 'reduced motion: the still is the last step, with its caption');
+  expect(await p.locator('.bb-stage .bb-win-office .bb-foot-done[data-on]').count() === 1 && await p.locator('.bb-stage .bb-win-office .bb-foot-open[data-on]').count() === 0, 'reduced motion: the accepted task shows what Accept did, not Reject and Accept');
   expect(await p.locator('[data-scene-toggle]').count() === 0, 'reduced motion: no playback controls');
   const running = await p.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running' && a.effect?.target?.closest?.('.bb-stage')).length);
   expect(running === 0, `reduced motion: nothing in the scene animates (${running} running)`);
   expect(!/^beat-/.test(await mark(p)), 'reduced motion: the scene\'s script does not run');
   await ctx.close();
 }
+// The compact scene, played through at phone widths: the window in view fits the
+// stage with its border showing, the remote's panel has its own space, and the
+// caption bar keeps one height, so Pause and Replay never move.
+for (const width of [358, 390]) {
+  const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+  const p = await ctx.newPage();
+  await p.goto(base + 'coordination.html');
+  await p.locator('figure.scene').scrollIntoViewIfNeeded();
+  await p.waitForSelector('.bb-scene .bb-stage .ss-stage', { timeout: 8000 });
+  const misfits = new Set();
+  const heights = new Set();
+  const controls = new Set();
+  let samples = 0;
+  const until = Date.now() + 26000;
+  while (Date.now() < until) {
+    const r = await p.evaluate(() => {
+      const box = (el) => el && el.getBoundingClientRect();
+      const stage = box(document.querySelector('.bb-stage .ss-stage'));
+      const track = document.querySelector('.bb-track');
+      if (!stage || !track) return null;
+      const win = box(document.querySelector(track.dataset.focus === 'office' ? '.bb-win-office' : '.bb-win-studio'));
+      const remote = box(document.querySelector('.bb-remote'));
+      const moving = document.getAnimations().some((a) => a.playState === 'running' && a.effect?.target === track);
+      return {
+        moving, mark: document.querySelector('.bb-stage .ss-stage').getAttribute('data-mark'),
+        fits: win.left >= stage.left + 1 && win.right <= stage.right - 1 && win.top >= stage.top && win.bottom <= stage.bottom,
+        clear: remote.top >= win.bottom && remote.bottom <= stage.bottom,
+        caption: Math.round(box(document.querySelector('.bb-caption')).height),
+        controls: Math.round(box(document.querySelector('.bb-controls')).top - stage.top),
+        done: document.querySelector('[data-scene-toggle]')?.textContent.trim() === 'Play',
+      };
+    });
+    if (r) {
+      if (!r.moving && !r.fits) misfits.add(`${r.mark}: the window runs past the stage`);
+      if (!r.clear) misfits.add(`${r.mark}: the remote's panel overlaps the window`);
+      samples++;
+      heights.add(r.caption);
+      controls.add(r.controls);
+      if (r.done) break;
+    }
+    await p.waitForTimeout(400);
+  }
+  console.log(`The compact scene at ${width}: ${samples} samples, caption ${[...heights].join('/')}px tall.`);
+  expect(samples > 20, `coordination.html at ${width}: the scene was sampled through its run`);
+  expect(misfits.size === 0, `coordination.html at ${width}: the compact scene fits its stage (${[...misfits].join('; ')})`);
+  expect(heights.size === 1, `coordination.html at ${width}: the caption keeps one height through the scene (${[...heights].join(', ')})`);
+  expect(controls.size === 1, `coordination.html at ${width}: Pause and Replay stay in place through the scene (${[...controls].join(', ')})`);
+  const claim = await p.evaluate(() => parseFloat(getComputedStyle(document.querySelector('.bb-claim p')).fontSize) * (document.querySelector('.bb-stage .ss-stage').getBoundingClientRect().width / 358));
+  expect(claim >= 11, `coordination.html at ${width}: the claim's words are drawn at 11px or more (${claim.toFixed(1)})`);
+  expect(await p.locator('.bb-stage .bb-foot-open[data-on]').count() === 0, `coordination.html at ${width}: the last frame shows no Reject and Accept`);
+  await ctx.close();
+}
+
+// The scene's script loads only as the scene comes near the view.
+{
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const p = await ctx.newPage();
+  await p.goto(base + 'index.html');
+  await p.waitForTimeout(800);
+  expect(await p.locator('script[src$="scene-coordination.js"]').count() === 0, 'index.html: the scene\'s script waits until the scene is near the view');
+  await p.locator('.scene').scrollIntoViewIfNeeded();
+  await p.waitForSelector('script[src$="scene-coordination.js"]', { state: 'attached', timeout: 5000 }).catch(() => {});
+  expect(await p.locator('script[src$="scene-coordination.js"]').count() === 1, 'index.html: the scene\'s script loads once the scene is near');
+  await ctx.close();
+}
+
 for (const file of ['index.html', 'coordination.html']) {
   const ctx = await browser.newContext({ viewport: { width: 358, height: 800 } });
   const p = await ctx.newPage();
   await p.goto(base + file);
-  await p.locator('.bb-scene').scrollIntoViewIfNeeded();
+  await p.locator('figure.scene').scrollIntoViewIfNeeded();
+  await p.waitForSelector('.bb-scene .bb-stage .ss-stage', { timeout: 8000 });
   await p.waitForTimeout(800);
   expect(await p.locator('.bb-stage .ss-stage[data-layout="compact"]').count() === 1, `${file} at 358: the scene uses its compact design`);
   expect(await p.evaluate(() => document.documentElement.scrollWidth - innerWidth) <= 0, `${file} at 358: no sideways scroll with the scene`);
@@ -163,6 +257,20 @@ for (const file of ['index.html', 'coordination.html']) {
   const p = await ctx.newPage();
   await p.goto(base + 'coordination.html');
   expect(await p.locator('.scene-fallback').isVisible() && await p.locator('.scene-fallback-caption').isVisible(), 'without JavaScript: the scene\'s last frame and caption show');
+  await ctx.close();
+}
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 800 }, javaScriptEnabled: false });
+  const p = await ctx.newPage();
+  await p.goto(base + 'index.html');
+  const nav = await p.evaluate(() => {
+    const links = [...document.querySelectorAll('#site-nav a')].filter((a) => a.offsetParent).map((a) => a.getBoundingClientRect());
+    const brand = document.querySelector('.site-header .brand').getBoundingClientRect();
+    return { rows: new Set(links.map((r) => Math.round(r.top))).size, count: links.length, below: links.every((r) => r.top >= brand.bottom - 1) };
+  });
+  expect(nav.count > 0 && nav.below && nav.rows < nav.count, 'without JavaScript at 390: the menu is a wrapped row under the logo, not a column beside it');
+  await p.goto(base + 'explore.html');
+  expect(!(await p.locator('.filterbar').isVisible()), 'without JavaScript: Explore hides the filters and search, which need it');
   await ctx.close();
 }
 

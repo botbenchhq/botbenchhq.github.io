@@ -10,12 +10,39 @@
   const nameTheme = () => themeBtn?.setAttribute('aria-label', dark() ? 'Use the light theme' : 'Use the dark theme');
   nameTheme();
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', nameTheme);
+  // A screen the product has in light and dark shows the one that matches the
+  // page: the device's choice, or the visitor's once they choose (data-scheme sources).
+  const syncPictures = () => document.querySelectorAll('source[data-scheme]').forEach((source) => {
+    const chosen = root.dataset.theme;
+    const scheme = chosen ? (chosen === source.dataset.scheme ? '' : 'not all') : `(prefers-color-scheme: ${source.dataset.scheme})`;
+    source.media = scheme === 'not all' ? scheme : [source.dataset.base, scheme].filter(Boolean).join(' and ') || 'all';
+  });
+  syncPictures();
   themeBtn?.addEventListener('click', () => {
     const next = dark() ? 'light' : 'dark';
     root.dataset.theme = next;
     try { localStorage.setItem('botbench-site-theme', next); } catch {}
     nameTheme();
+    syncPictures();
   });
+
+  // The coordination scene: its styles and script load only when it comes near
+  // the view. Until then, and if they never load, its still frame shows.
+  const sceneMounts = [...document.querySelectorAll('[data-scene-assets]')];
+  if (sceneMounts.length && 'IntersectionObserver' in window) {
+    const load = () => {
+      io.disconnect();
+      const files = sceneMounts[0].dataset.sceneAssets.split(' ');
+      const styles = files.filter((f) => f.endsWith('.css')).map((href) => new Promise((done) => {
+        const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href });
+        link.onload = link.onerror = done;
+        document.head.append(link);
+      }));
+      Promise.all(styles).then(() => files.filter((f) => f.endsWith('.js')).forEach((src) => document.head.append(Object.assign(document.createElement('script'), { src }))));
+    };
+    const io = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) load(); }, { rootMargin: '800px 0px' });
+    sceneMounts.forEach((el) => io.observe(el));
+  }
 
   // Menu at phone width.
   const menuBtn = document.querySelector('[data-menu-toggle]');

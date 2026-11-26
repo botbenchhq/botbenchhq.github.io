@@ -208,16 +208,22 @@
   background: var(--bb-pane);
 }
 .bb-stage .bb-foot-line { flex: 1; font-size: 12px; color: var(--bb-muted); }
+/* Before the decision: the line and Reject / Accept. After it: what Accept did, in the product's words */
+.bb-stage .bb-foot { display: grid; }
+.bb-stage .bb-foot-open, .bb-stage .bb-foot-done { grid-area: 1 / 1; display: flex; align-items: center; gap: 12px; opacity: 0; transition: opacity 160ms var(--bb-ease); }
+.bb-stage .bb-foot-open[data-on], .bb-stage .bb-foot-done[data-on] { opacity: 1; transition: opacity 280ms var(--bb-ease) 120ms; }
+.bb-stage .bb-foot-done { flex-direction: column; align-items: flex-start; gap: 2px; }
+.bb-stage .bb-foot-done .bb-foot-line { color: var(--bb-text); }
+.bb-stage .bb-foot-branch { font-size: 12px; color: var(--bb-muted); }
+.bb-stage .bb-foot-branch .bb-mono { font-size: 11.5px; color: var(--bb-text); }
 .bb-stage .bb-foot-actions { display: flex; gap: 8px; }
 .bb-stage .bb-foot .ss-button { --ss-button-height: 32px; padding: 0 16px; }
 
-/* The ties between a workbench and the remote: they fade, they are not drawn on */
-.bb-stage .bb-tie .ss-connector__line { stroke: var(--bb-accent); stroke-width: 1.5; stroke-dasharray: none; stroke-dashoffset: 0; opacity: 0; transition: opacity 160ms var(--bb-ease); }
-.bb-stage .bb-tie[data-show] .ss-connector__line { opacity: 0.9; transition: opacity 360ms var(--bb-ease); }
-.bb-stage .bb-tie .ss-connector__reveal { stroke-dasharray: none; stroke-dashoffset: 0; transition: none; }
-.bb-stage .bb-tie .ss-connector__dot { fill: var(--bb-accent); stroke: var(--bb-sunken); transform: none; transition: opacity 360ms var(--bb-ease); }
-.bb-stage .bb-tie[data-show] .ss-connector__dot { opacity: 1; }
-.bb-stage .bb-tie:not([data-show]) .ss-connector__dot { opacity: 0; transition-duration: 160ms; }
+/* The ties between a workbench and the remote: they fade, they are not drawn on (opacity only) */
+.bb-stage .bb-tie { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 20; opacity: 0; transition: opacity 160ms var(--bb-ease); }
+.bb-stage .bb-tie[data-show] { opacity: 1; transition-duration: 360ms; }
+.bb-stage .bb-tie-line { fill: none; stroke: var(--bb-accent); stroke-width: 1.5; opacity: 0.9; }
+.bb-stage .bb-tie-dot { fill: var(--bb-accent); stroke: var(--bb-sunken); stroke-width: 2; }
 
 .bb-stage .bb-rest { position: absolute; left: 700px; top: 470px; width: 40px; height: 20px; }
 
@@ -308,27 +314,26 @@
 .bb-stage .ss-stage[data-layout="compact"] .bb-remote-prs { margin: 0 -14px; padding: 8px 14px 10px; }
 .bb-stage .ss-stage[data-layout="compact"] .bb-remote-prs > .bb-remote-kind { display: none; }
 
-/* Compact, final: the workbench window is the hero, a corner bleed off the right
-   (one 12px gutter above and to its left); the shared remote is a satellite
-   straddling its bottom edge. The two workbenches share one track: studio-mac
-   first, then the track carries office-mac in. */
+/* Compact: one workbench window at a time, the stage's full width less a 12px
+   gutter each side, so its border and radius show; the shared remote sits under
+   it in space of its own. The two windows share one track: studio-mac first, the
+   track carries office-mac in, and brings studio-mac back for its pull request. */
 .bb-stage .ss-stage[data-layout="compact"] .bb-switch { display: none; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-track { left: 12px; top: 12px; width: 800px; height: 420px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-track[data-focus="office"] { transform: translateX(-382px); }
-.bb-stage .ss-stage[data-layout="compact"] .bb-win { top: 0; width: 370px; height: 410px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-track { left: 12px; top: 12px; width: 680px; height: 372px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-track[data-focus="office"] { transform: translateX(-346px); }
+.bb-stage .ss-stage[data-layout="compact"] .bb-win { top: 0; width: 334px; height: 372px; }
 .bb-stage .ss-stage[data-layout="compact"] .bb-win-studio { left: 0; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-win-office { left: 382px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-win-office { left: 346px; }
 .bb-stage .ss-stage[data-layout="compact"] .bb-pane,
-.bb-stage .ss-stage[data-layout="compact"] .bb-screen { padding: 14px 50px 14px 14px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-screen { padding: 14px 14px; }
 .bb-stage .ss-stage[data-layout="compact"] .bb-office { padding: 0; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-foot { bottom: 50px; padding: 8px 50px 8px 14px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-remote { top: 380px; left: 12px; width: 334px; z-index: 3; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-rest { left: 330px; top: 200px; width: 20px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-foot { bottom: 0; padding: 10px 14px 12px; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-remote { top: 396px; left: 12px; width: 334px; z-index: 3; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-rest { left: 300px; top: 200px; width: 20px; }
 .bb-stage .bb-ref[data-target="claim-ref"]::before { box-shadow: none; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-win { height: 346px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-foot { bottom: 36px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-remote { top: 330px; }
-.bb-stage .ss-stage[data-layout="compact"] .bb-claim { font-size: 11px; line-height: 1.4; }
+/* At 358 the stage is drawn at about 0.91, so the claim's words are set at 12.5 to read at 11 or more */
+.bb-stage .ss-stage[data-layout="compact"] .bb-claim { font-size: 12.5px; line-height: 1.4; }
+.bb-stage .ss-stage[data-layout="compact"] .bb-overlap { font-size: 12.5px; }
 /* The window the track carries in fades in over the first half of its travel, the one it carries out fades as it goes */
 .bb-stage .ss-stage[data-layout="compact"] .bb-win { transition: opacity 220ms var(--bb-ease); }
 .bb-stage .ss-stage[data-layout="compact"] .bb-track[data-focus="studio"] .bb-win-office,
@@ -343,8 +348,10 @@
 .bb-stage .ss-stage[data-layout="compact"] .bb-issue-title { font-size: 14px; }
 .bb-stage .bb-studio-sub { display: grid; }
 .bb-stage .bb-studio-sub > * { grid-area: 1 / 1; }
-@media (max-width: 1007px) { .bb-scene .bb-caption { min-height: 4.5em; } }
-@media (min-width: 1008px) { .bb-scene .bb-caption { min-height: 3em; } }
+/* Every caption is in the one grid cell; only the current one shows, so the bar keeps the longest one's height */
+.bb-scene .bb-caption { display: grid; min-height: 0; }
+.bb-scene .bb-caption-text { grid-area: 1 / 1; visibility: hidden; }
+.bb-scene .bb-caption-text[data-on] { visibility: visible; }
 .bb-stage .ss-button[data-pressed] { transform: scale(0.96); }
 
 /* The delivery choice, as the composer's sheet shows it */
@@ -354,3 +361,7 @@
 .bb-stage .bb-option .bb-strong { font-size: 12.5px; }
 .bb-stage .bb-radio { flex: none; width: 14px; height: 14px; margin-top: 2px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--ss-ink-4); }
 .bb-stage .bb-option[data-picked] .bb-radio { box-shadow: inset 0 0 0 4px var(--bb-accent); }
+
+/* The kit's check draws its tick on with stroke-dashoffset; here it fades in, opacity only */
+.bb-stage .ss-check__tick { stroke-dasharray: none; stroke-dashoffset: 0; transition: opacity 160ms var(--bb-ease); }
+.bb-stage .ss-check[data-on] .ss-check__tick { stroke-dashoffset: 0; transition: opacity 240ms var(--bb-ease) 120ms; }
