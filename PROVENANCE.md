@@ -42,6 +42,17 @@ The homepage hero shows two crops of `assets/media/hero-workbench.png`, each cut
 | `assets/media/hero-desktop-crop.png` | 2380 × 1500 at x 68, y 110: the desktop window (`ffmpeg -i hero-workbench.png -vf crop=2380:1500:68:110`) | `e1c424d0f277ad16b9bfde3e70846411069e9247ae04b2348d0c63daddf1e9db` |
 | `assets/media/hero-phone-crop.png` | 680 × 1452 at x 2448, y 134: the phone (`-vf crop=680:1452:2448:134`) | `05ad15bf158e616bba83eb80b87c11a69bbf624d344ded5fb394b4a12fcb4559` |
 
+## Crops of the task and Permissions screens
+
+Two crops make the evidence legible where a whole screen would be shown at a few pixels per letter. Each is cut out of a picture above with no other change (no scaling, no edit of the pixels), and each links to the whole screen it came from where it is shown:
+
+| File | Cut from | SHA-256 |
+|---|---|---|
+| `assets/media/review-evidence-crop.png` | `assets/media/ready-for-review-proof.png`, 1552 × 700 at x 588, y 640: the check and Codex's review (`ffmpeg -i ready-for-review-proof.png -vf crop=1552:700:588:640`) | `ff9c34f2eb699ef38e4a15517409546fda8af0e549315c15e82829d10139f4cc` |
+| `assets/media/check-a-command-crop.png` | `assets/media/permissions-check.png`, 1584 × 1096 at x 634, y 100: Check a command and its answer in each mode (`-vf crop=1584:1096:634:100`) | `3dd13501627f57125b6faed29c5a1e6f2d641675e29936ced3fc756773d8a633` |
+
+The Evidence page also shows `assets/media/scene-coordination-final.png`, the coordination scene's last frame (below), labelled there as an illustration, not a screen.
+
 ## The coordination scene (an illustration, not a screen)
 
 "Before the second pull request" on the home and Coordination pages is drawn, not recorded, and is labelled as an illustration where it is shown. It is built with the Stageshow kit (`third_party/stageshow/`, MIT, revision `299140fafd08df55a9c234e610c3f64af3f45531`). The words inside its windows are Botbench's own, copied from botbenchhq/botbench at commit `f1ab6448e13e3d03e610c4b00bd5e498a749f698`: the claim and its withdrawal from `src/engine/claims.ts` (`holderWords` and the withdrawn detail, times in the format of `claimTimeWords` in `src/engine/claim-branch.ts`), the run's status line from `e2e/northstar.e2e.ts`, the overlap line from `web/src/app/peers.ts` (`overlapLines`), Check together from `web/src/app/check-together.ts` and `web/src/components/check-together.tsx`, and the decision line from `web/src/screens2/review/decision-panel.tsx`. The names studio-mac and office-mac, the repository billing-api, and the issue and task titles are the example of the real screenshots. The colours are the Botbench theme of botbenchhq/design-system (`themes/botbench.css`, Graphite + Glacier, at `9457a46630f10c55a33682d80ee872e001a9a2a8`). Each step is shipped behaviour listed in the README's "What works today"; the acceptance test (`e2e/northstar.e2e.ts`) covers the claim and the withdrawal.

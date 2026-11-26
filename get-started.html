@@ -60,8 +60,8 @@
 <figure class="frame frame-phone"><video controls playsinline preload="none" width="780" height="1688" poster="assets/media/first-task-phone-poster.jpg" aria-label="A 24-second recording of starting one task and accepting it, on a phone-size screen"><source src="assets/media/first-task-phone.mp4" type="video/mp4">Your browser cannot play this recording. The steps beside it say what it shows.</video><figcaption>One task from start to Accept, recorded at phone size from a real Botbench at its real speed. Claude Code’s reply is replayed from a recorded session, and the task is a bug fix, not the hello.txt of step 5. 24 seconds, no sound.</figcaption></figure></div>
 <div>
 <ol class="steps">
-<li><div><h3>Get it and build the screens</h3>
-<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-build">Copy</button></div><pre tabindex="0" aria-label="Terminal text to copy" id="cmd-build" class="wrap-lines">git clone https://github.com/botbenchhq/botbench.git
+<li><div><h3>Clone it and build its web interface</h3>
+<div class="code"><div class="code-head"><span>Terminal</span><button class="copy" type="button" data-copy="cmd-build">Copy</button></div><pre tabindex="0" aria-label="Terminal text to copy" id="cmd-build">git clone https://github.com/botbenchhq/botbench.git
 cd botbench
 npm ci
 npm ci --prefix web
@@ -93,7 +93,7 @@ git log --stat -1 botbench/your-mac/run-1/task-1</pre></div>
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early software for macOS.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><p class="footer-head">Product</p><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Evidence</a><a href="explore.html">What works today</a></div>
 <div><p class="footer-head">Use it</p><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>

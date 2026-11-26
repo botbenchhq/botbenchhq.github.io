@@ -32,8 +32,9 @@ const NAV = [
 const tag = (state) => `<span class="tag tag-${state}">${{ early: 'Early', planned: 'Planned' }[state]}</span>`;
 const btn = (label, href, kind = 'primary', ic = '') => `<a class="btn btn-${kind}" href="${href}">${label}${ic ? ` ${ic}` : ''}</a>`;
 const more = (label, href, ic = '') => `<a class="more" href="${href}">${label}${ic ? ` ${ic}` : ''}</a>`;
-const shot = (file, w, h, alt, caption, cls = '') =>
-  `<figure class="frame ${cls}"><a class="zoom" href="assets/media/${file}" aria-label="Open the full-size image: ${alt.split(':')[0]}"><img src="assets/media/${file}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"></a>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`;
+// A crop links to the whole screen it was cut from (PROVENANCE.md lists each crop).
+const shot = (file, w, h, alt, caption, cls = '', whole = file) =>
+  `<figure class="frame ${cls}"><a class="zoom" href="assets/media/${whole}" aria-label="Open the whole screen: ${alt.split(':')[0]}"><img src="assets/media/${file}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"></a>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`;
 const clip = (file, poster, w, h, label, caption, fallback, cls = '') =>
   `<figure class="frame ${cls}"><video controls playsinline preload="none" width="${w}" height="${h}" poster="assets/media/${poster}" aria-label="${label}"><source src="assets/media/${file}" type="video/mp4">${fallback}</video><figcaption>${caption}</figcaption></figure>`;
 const head = (title, text, id = '') => `<div class="section-head"${id ? ` id="${id}"` : ''}><h2>${title}</h2>${text ? `<p>${text}</p>` : ''}</div>`;
@@ -120,7 +121,7 @@ ${end ? closing : ''}
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home">${icon.mark}<span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early software for macOS.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><p class="footer-head">Product</p><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Evidence</a><a href="explore.html">What works today</a></div>
 <div><p class="footer-head">Use it</p><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="${REPO}">GitHub</a></div>
@@ -140,9 +141,9 @@ const stages = [
     title: 'A task. Its own branch.',
     text: 'Hand over a task, or let Claude Code plan a run of several. Each task works in its own copy of your repository, on a branch such as <code>botbench/your-mac/run-1/task-1</code>, under the mode you choose: manual, semi-autonomous or fully autonomous.',
     link: 'How a piece of work goes', href: 'workbench.html',
-    media: shot('permissions-check.png', 2880, 1800,
-      'Settings, Permissions and autonomy: Check a command shows that git push origin main asks you in Manual and Semi-autonomous and is refused in Fully autonomous, with Activity below',
-      'Check a command: what <code>git push origin main</code> would get in each mode, before any agent runs it.'),
+    media: shot('check-a-command-crop.png', 1584, 1096,
+      'Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push',
+      'Check a command: what <code>git push origin main</code> would get in each mode, before any agent runs it.', '', 'permissions-check.png'),
   },
   {
     // The panel ID is kept so saved links and keyboard navigation still reach the second stage.
@@ -160,9 +161,9 @@ const stages = [
     title: 'Come back to work you can inspect.',
     text: 'Read the branch, the diff and the output of your repository’s checks. Another vendor’s agent can review the change; Botbench shows its review as a model’s opinion, apart from the checks. Then accept or reject. Botbench never merges a pull request.',
     link: 'What a check can and cannot tell you', href: 'proof.html',
-    media: shot('ready-for-review-proof.png', 2880, 1800,
-      'A task ready for review: 1 of 1 check passed, then Codex’s review and the things it says it checked, the changed line, and Reject and Accept',
-      'A task ready for review: the check that ran, then Codex’s review, labelled as an opinion.'),
+    media: shot('review-evidence-crop.png', 1552, 700,
+      'A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed on commit e119be7; then Codex’s review, a model’s opinion, not a check, with the two things it says it checked',
+      'The check that ran, then Codex’s review, labelled as an opinion.', '', 'ready-for-review-proof.png'),
   },
 ];
 
@@ -174,10 +175,11 @@ page({
   end: true,
   body: `<section class="hero home-hero"><div class="wrap">
 <div class="hero-heading">
-<h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
-<div class="hero-intro"><p class="hero-positioning">One workbench for your agents. One coordination layer for your team.</p>
+<div><h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
+<p class="hero-positioning">One workbench for your agents. One coordination layer for your team.</p></div>
+<div class="hero-intro">
 <p class="lead">For developers on a Mac who use Claude Code. Hand it a task, walk away, and come back to a branch with its checks and a second agent’s review.</p>
-<p class="lead lead-team">When a teammate’s agents work the same GitHub repository and you both push there, Botbench can tell you before your work collides, not when the second pull request opens.</p>
+<p class="lead lead-team">Share a GitHub repository with a teammate who uses their own agents? When you both push there, Botbench can tell you before your work collides, not when the second pull request opens.</p>
 <div class="btn-row">${btn('Build from source', 'get-started.html')}${btn('Watch the 25-second demo', '#demo', 'quiet')}</div>
 <p class="cta-note">About ten minutes to your first branch, in a practice repository. Early, macOS only, open source.</p></div>
 </div>
@@ -186,7 +188,7 @@ page({
 <picture class="hero-desktop"><source media="(max-width: 1023px)" srcset="assets/media/hero-phone-crop.png" width="680" height="1452"><img src="assets/media/hero-desktop-crop.png" width="2380" height="1500" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></picture>
 <img class="hero-phone" src="assets/media/hero-phone-crop.png" width="680" height="1452" alt="" loading="eager" decoding="async">
 </a>
-<figcaption><span>Home on studio-mac: what needs you, oldest wait first. On the phone, a task ready for review.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens, unedited. Where they came from</a></figcaption>
+<figcaption><span>Home on studio-mac: what needs you, oldest wait first. On the phone, a task ready for review.</span></figcaption>
 </figure>
 <div class="agent-rail" aria-label="The agents Botbench drives">
 <div><strong>Claude Code</strong><span>Plans and builds. Required.</span></div>
@@ -208,19 +210,11 @@ ${stages.map((stage, i) => `<div class="tabpanel workflow-panel" role="tabpanel"
 </div></section>
 
 <section class="team-section" aria-labelledby="team-title"><div class="wrap">
-<div class="team-intro"><h2 id="team-title">Your agents. Their agents.<br>One coordinated workflow.</h2>
-<div><p class="lead">Two developers, each with their own agents, usually find out they took the same issue when the second pull request opens. With Botbench on both Macs, each workbench reads the other’s work from the repository you both push to, and tells you first.</p>
-<p class="early-note">${tag('early')} The coordination layer is new. Each part below says whether it is available.</p></div></div>
+<div class="team-intro"><h2 id="team-title">Find out before the second pull request.</h2>
+<div><p class="lead">Two developers, each with their own agents, usually learn they took the same issue, or changed the same file, when the second pull request opens. With Botbench on both Macs, each workbench reads the other’s work from the repository you both push to, and tells you first.</p></div></div>
 ${scene('before-the-second-pull-request')}
-<h3 class="list-title">Available today</h3>
-${facts([
-  ['The same files', 'On your task’s Review tab, a line names the teammate’s open pull request that also changes your files.'],
-  ['The same issue', 'Turn on issue claims for a repository, and only one workbench starts an issue. The later run stops and says who started first.'],
-  ['Changes that must fit', 'Check your ready task together with a teammate’s open pull request: both merged in a temporary copy, your checks run on the merge.'],
-  ['Their work in progress', 'See your teammates’ open pull requests and pushed branches, read with your own <code>gh</code>.'],
-])}
-<p class="team-boundary">${tag('early')} Paired questions and answers, each one approved by its owner. Tested with two installations on one Mac, not yet across two Macs.</p>
-${more('How coordination works today', 'coordination.html')}
+<div class="team-foot"><p><strong>Available today:</strong> the overlap warning, issue claims, and checking two changes together. ${tag('early')} Paired questions and answers, tested with two installations on one Mac, not yet across two.</p>
+${more('How coordination works today', 'coordination.html')}</div>
 </div></section>
 
 <section id="demo" class="demo-section" aria-labelledby="demo-title"><div class="wrap">
@@ -242,9 +236,7 @@ page({
 
 <section id="how-it-goes" aria-labelledby="how-title"><div class="wrap split">
 <div>${head('Five steps, ending in a decision.', 'What you come back to is the last step: a branch, its checks and a review, waiting for Accept or Reject.').replace('<h2>', '<h2 id="how-title">')}
-${shot('ready-for-review-proof.png', 2880, 1800,
-  'A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept',
-  `What you come back to. ${SHOTS_NOTE}`)}</div>
+</div>
 <ol class="steps">
 <li><div><h3>You start a task or a run</h3><p>A task is a prompt and a repository. A run is a prompt or a spec file, which Claude Code turns into a plan of tasks. In a manual run, and in any run from a GitHub issue, nothing is built before you approve the plan.</p></div></li>
 <li><div><h3>Each task gets a separate copy</h3><p>It is built in its own copy of your repository (a git worktree), on its own branch, such as <code>botbench/your-mac/run-1/task-1</code>.</p></div></li>
@@ -252,7 +244,11 @@ ${shot('ready-for-review-proof.png', 2880, 1800,
 <li><div><h3>Botbench commits and checks</h3><p>It runs the checks you set for the repository. If you chose a reviewer, it reads the change; with concerns, the builder makes a round of fixes and the checks and the review run again.</p></div></li>
 <li><div><h3>You accept or reject</h3><p>You read the diff, the checks and the transcript. Accept keeps the branch, and opens a pull request if the run says so. Botbench never merges one.</p></div></li>
 </ol>
-</div></section>
+</div>
+<div class="wrap result-shot">${shot('ready-for-review-proof.png', 2880, 1800,
+  'A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept',
+  `What you come back to: the task, its check, Codex’s review and Your decision. ${SHOTS_NOTE}`)}</div>
+</section>
 
 <section aria-labelledby="modes-title"><div class="wrap">
 ${head('Choose how much each run needs you.', 'A mode is about your decisions, not about which tools an agent has. The safety rules are the same in every mode.').replace('<h2>', '<h2 id="modes-title">')}
@@ -267,7 +263,7 @@ ${head('Choose how much each run needs you.', 'A mode is about your decisions, n
 </div></section>
 
 <section id="control" aria-labelledby="control-title"><div class="wrap split media-first">
-${shot('permissions-check.png', 2880, 1800, 'Settings, Permissions and autonomy, Check a command: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push; below, Activity', 'Here a push asks you, or is refused in a fully autonomous run.')}
+${shot('check-a-command-crop.png', 1584, 1096, 'Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push', 'Here a push asks you, or is refused in a fully autonomous run. Open it for the whole Permissions screen, with Activity.', '', 'permissions-check.png')}
 <div class="prose">
 <h2 id="control-title">Know the answer before the agent asks.</h2>
 <p>Check a command shows what any command would get in each mode, before an agent runs it. Permissions also lists what you chose to always allow, and every action that ran, newest first. The record is kept on your Mac and is only ever added to.</p>
@@ -317,7 +313,7 @@ page({
   `<p class="hero-meta">Each of you runs your own Botbench on your own Mac. There are no accounts and no shared server: the workbenches meet in the GitHub repository you both push to, read with your own <code>gh</code> and <code>git</code>.</p>`)}
 
 <section class="scene-section" aria-labelledby="scene-title"><div class="wrap">
-${head('Before the second pull request.', 'What each workbench sees when two developers reach for the same issue, and then the same file.').replace('<h2>', '<h2 id="scene-title">')}
+${head('What each workbench sees.', 'Two developers reach for the same issue, and then the same file. Botbench’s lines are its own; the names are examples.').replace('<h2>', '<h2 id="scene-title">')}
 ${scene('before-the-second-pull-request')}
 </div></section>
 
@@ -370,7 +366,7 @@ page({
   body: `${pageHero('Proof, not promises.', 'Every task ends in things you can inspect: a branch, its diff, the output of your own checks, and the transcript of what the agent did and what you answered. This page says what each of them can tell you, and what has not been tested.')}
 
 <section aria-labelledby="kinds-title"><div class="wrap split media-first">
-${shot('ready-for-review-proof.png', 2880, 1800, 'A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed; Codex’s review, a model’s opinion, not a check: Codex found nothing to fix, and the two things it says it checked', `A task ready for review, from the demo’s run. ${SHOTS_NOTE}`)}
+${shot('review-evidence-crop.png', 1552, 700, 'A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed on commit e119be7; then Codex’s review, a model’s opinion, not a check: Codex found nothing to fix, and the two things it says it checked', `Cut from a task ready for review; open it for the whole screen. ${SHOTS_NOTE}`, '', 'ready-for-review-proof.png')}
 <div class="prose">
 <h2 id="kinds-title">A check runs your commands. A review is a model’s opinion.</h2>
 <p><strong>Checks</strong> are your repository’s own commands, run on the agent’s work in a sandbox. Botbench keeps their output. A passing check proves only what the check covers, and the agent may have changed the code the checks run, so read the output, not only the result.</p>
@@ -415,7 +411,7 @@ ${more('Read the acceptance test', src('e2e/northstar.e2e.ts'), icon.out)}
 </div></section>
 
 <section aria-labelledby="untested-title"><div class="wrap split">
-<div>${head('Not tested yet.', 'Said as plainly as what was.').replace('<h2>', '<h2 id="untested-title">')}</div>
+<div>${head('Not tested yet.').replace('<h2>', '<h2 id="untested-title">')}</div>
 ${facts([
   ['Two Macs', 'Pairing and questions and answers were tested with two installations on one Mac, over the loopback address, not across two Macs.'],
   ['A real iPhone', 'Adding Botbench to the Home Screen and its notifications are in the code, not confirmed on a real iPhone.'],
@@ -523,12 +519,12 @@ ${facts([
 ${clip('first-task-phone.mp4', 'first-task-phone-poster.jpg', 780, 1688, 'A 24-second recording of starting one task and accepting it, on a phone-size screen', 'One task from start to Accept, recorded at phone size from a real Botbench at its real speed. Claude Code’s reply is replayed from a recorded session, and the task is a bug fix, not the hello.txt of step 5. 24 seconds, no sound.', 'Your browser cannot play this recording. The steps beside it say what it shows.', 'frame-phone')}</div>
 <div>
 <ol class="steps">
-<li><div><h3>Get it and build the screens</h3>
+<li><div><h3>Clone it and build its web interface</h3>
 ${code('cmd-build', 'Terminal', `git clone https://github.com/botbenchhq/botbench.git
 cd botbench
 npm ci
 npm ci --prefix web
-npm run build --prefix web`, true)}</div></li>
+npm run build --prefix web`)}</div></li>
 <li><div><h3>Start it</h3><p>Leave this terminal open; Ctrl+C stops Botbench. It prints its address, <code>http://127.0.0.1:4780</code>, and on the first start a login token.</p>
 ${code('cmd-start', 'Terminal', 'npm start')}</div></li>
 <li><div><h3>Sign in</h3><p>Open <code>http://127.0.0.1:4780</code> in a browser on the Mac, paste the token and choose Sign in. You arrive on Home. Later, read the token with <code>cat ~/.botbench/login-token</code>. If Chat says “Connect an agent in Settings → Agents.”, run <code>claude auth login</code> in a terminal.</p></div></li>
@@ -601,7 +597,7 @@ page({
   description: 'This page does not exist.',
   base: `<meta name="robots" content="noindex">\n`,
   rootLinks: true,
-  body: `<section class="hero page-hero not-found"><div class="wrap"><h1>This page does not exist.</h1><p class="lead">The address may have changed. Every page is in the menu above, and the overview links to each of them.</p><div class="btn-row">${btn('Go to the overview', 'index.html')}${btn('What works today', 'explore.html', 'quiet')}</div></div></section>`,
+  body: `<section class="hero page-hero not-found"><div class="wrap"><h1>This page does not exist.</h1><p class="lead">The address may have changed. Every page is in the menu above.</p><div class="btn-row">${btn('Go to the home page', 'index.html')}${btn('What works today', 'explore.html', 'quiet')}</div></div></section>`,
 });
 
 console.log('Wrote the pages.');

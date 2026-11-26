@@ -41,7 +41,7 @@
 
 <section id="how-it-goes" aria-labelledby="how-title"><div class="wrap split">
 <div><div class="section-head"><h2 id="how-title">Five steps, ending in a decision.</h2><p>What you come back to is the last step: a branch, its checks and a review, waiting for Accept or Reject.</p></div>
-<figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the full-size image: A task ready for review"><img src="assets/media/ready-for-review-proof.png" width="2880" height="1800" alt="A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept" loading="lazy" decoding="async"></a><figcaption>What you come back to. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure></div>
+</div>
 <ol class="steps">
 <li><div><h3>You start a task or a run</h3><p>A task is a prompt and a repository. A run is a prompt or a spec file, which Claude Code turns into a plan of tasks. In a manual run, and in any run from a GitHub issue, nothing is built before you approve the plan.</p></div></li>
 <li><div><h3>Each task gets a separate copy</h3><p>It is built in its own copy of your repository (a git worktree), on its own branch, such as <code>botbench/your-mac/run-1/task-1</code>.</p></div></li>
@@ -49,7 +49,9 @@
 <li><div><h3>Botbench commits and checks</h3><p>It runs the checks you set for the repository. If you chose a reviewer, it reads the change; with concerns, the builder makes a round of fixes and the checks and the review run again.</p></div></li>
 <li><div><h3>You accept or reject</h3><p>You read the diff, the checks and the transcript. Accept keeps the branch, and opens a pull request if the run says so. Botbench never merges one.</p></div></li>
 </ol>
-</div></section>
+</div>
+<div class="wrap result-shot"><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the whole screen: A task ready for review"><img src="assets/media/ready-for-review-proof.png" width="2880" height="1800" alt="A task ready for review: 1 of 1 check passed, Codex’s review, the changed line of calc.py, and Your decision with Reject and Accept" loading="lazy" decoding="async"></a><figcaption>What you come back to: the task, its check, Codex’s review and Your decision. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure></div>
+</section>
 
 <section aria-labelledby="modes-title"><div class="wrap">
 <div class="section-head"><h2 id="modes-title">Choose how much each run needs you.</h2><p>A mode is about your decisions, not about which tools an agent has. The safety rules are the same in every mode.</p></div>
@@ -64,7 +66,7 @@
 </div></section>
 
 <section id="control" aria-labelledby="control-title"><div class="wrap split media-first">
-<figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the full-size image: Settings, Permissions and autonomy, Check a command"><img src="assets/media/permissions-check.png" width="2880" height="1800" alt="Settings, Permissions and autonomy, Check a command: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push; below, Activity" loading="lazy" decoding="async"></a><figcaption>Here a push asks you, or is refused in a fully autonomous run.</figcaption></figure>
+<figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the whole screen: Check a command in Botbench’s settings"><img src="assets/media/check-a-command-crop.png" width="1584" height="1096" alt="Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push" loading="lazy" decoding="async"></a><figcaption>Here a push asks you, or is refused in a fully autonomous run. Open it for the whole Permissions screen, with Activity.</figcaption></figure>
 <div class="prose">
 <h2 id="control-title">Know the answer before the agent asks.</h2>
 <p>Check a command shows what any command would get in each mode, before an agent runs it. Permissions also lists what you chose to always allow, and every action that ran, newest first. The record is kept on your Mac and is only ever added to.</p>
@@ -111,7 +113,7 @@
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early software for macOS.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><p class="footer-head">Product</p><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Evidence</a><a href="explore.html">What works today</a></div>
 <div><p class="footer-head">Use it</p><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>

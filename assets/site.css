@@ -70,7 +70,7 @@ h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; overflow-wrap: bre
 h1 { font-size: clamp(2.4rem, 5.4vw, 4.25rem); letter-spacing: -0.026em; line-height: 1.04; }
 h2 { font-size: clamp(1.75rem, 3.3vw, 2.625rem); letter-spacing: -0.02em; line-height: 1.1; }
 h3 { font-size: 1.1875rem; letter-spacing: -0.01em; line-height: 1.3; }
-p { margin: 0; }
+p { margin: 0; text-wrap: pretty; }
 .wrap { max-width: var(--page); margin: 0 auto; padding: 0 24px; }
 @media (max-width: 480px) { .wrap { padding: 0 16px; } }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -152,7 +152,7 @@ section.tight-top { padding-top: clamp(16px, 3vw, 32px); }
 .section-head p { margin-top: 16px; font-size: 1.0625rem; }
 .split > div > .section-head { margin-bottom: 32px; }
 .small-head { font-size: 1.5rem; letter-spacing: -0.015em; margin-bottom: 16px; }
-.source-note { margin-top: 20px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 62em; }
+.source-note { margin-top: 20px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 72ch; }
 .source-note a { color: var(--text); }
 
 /* State tags: a word always, colour is extra; only Early and Planned are tagged */
@@ -163,7 +163,7 @@ section.tight-top { padding-top: clamp(16px, 3vw, 32px); }
 /* Real screens: in a dark product frame, unedited */
 .frame { margin: 0; }
 .frame img, .frame video { width: 100%; border-radius: 10px; border: 1px solid var(--border); background: var(--screen); }
-.frame figcaption { padding-top: 16px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 60em; }
+.frame figcaption { padding-top: 16px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 72ch; }
 .frame figcaption a { color: var(--text); }
 .frame-phone { max-width: 300px; }
 .frame-phone video { border-radius: 22px; }
@@ -241,7 +241,7 @@ td.yes { color: var(--text); }
 .cap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid var(--border); }
 .cap[hidden] { display: none; }
 .cap h2 { font-size: 1.0625rem; letter-spacing: -0.01em; line-height: 1.35; }
-.cap p { color: var(--muted); font-size: 0.9375rem; max-width: 48em; margin-top: 4px; }
+.cap p { color: var(--muted); font-size: 0.9375rem; max-width: 42em; margin-top: 4px; }
 .cap .meta { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; font-size: 0.875rem; color: var(--muted); }
 .state { font-weight: 600; }
 .state-available { color: var(--success); }
@@ -270,7 +270,7 @@ h2.group { font-size: 1.1875rem; letter-spacing: -0.01em; padding-top: 16px; }
 .hero-heading { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: end; }
 .home-hero h1 { font-size: clamp(2.75rem, 6.2vw, 5.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.02; max-width: 11em; }
 .home-hero h1 .peer { display: block; }
-.hero-positioning { font-size: 1.1875rem; line-height: 1.45; font-weight: 600; letter-spacing: -0.01em; }
+.hero-positioning { margin-top: 20px; font-size: 1.1875rem; line-height: 1.45; font-weight: 600; letter-spacing: -0.01em; }
 .hero-intro .lead { margin-top: 16px; font-size: 1.0625rem; line-height: 1.6; }
 .hero-intro .lead-team { margin-top: 12px; }
 .hero-intro .btn-row { margin-top: 28px; }
@@ -311,18 +311,15 @@ h2.group { font-size: 1.1875rem; letter-spacing: -0.01em; padding-top: 16px; }
 .workflow-copy > p { color: var(--muted); }
 .workflow-copy .more { margin-top: 16px; }
 .workflow-media { min-width: 0; }
-.workflow-media .frame:not(.frame-phone) img { aspect-ratio: 1440 / 900; object-fit: contain; }
 .workflow-media .frame-phone { margin: 0 auto; max-width: 280px; }
 
 /* Home: the team */
 .team-section { background: var(--sunken); }
 .team-intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px 56px; align-items: end; margin-bottom: 48px; }
-.early-note { margin-top: 16px; font-size: 0.9375rem; color: var(--muted); }
-.early-note .tag { margin-right: 8px; }
-.list-title { margin: 8px 0 16px; font-size: 1.1875rem; }
-.team-boundary { margin-top: 24px; font-size: 0.9375rem; color: var(--muted); max-width: 60em; }
-.team-boundary .tag { margin-right: 8px; }
-.team-section .more { margin-top: 12px; }
+.team-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; }
+.team-foot p { color: var(--muted); max-width: 48em; }
+.team-foot strong { color: var(--text); }
+.result-shot { margin-top: clamp(40px, 5vw, 64px); }
 
 /* Coordination: the three moments, in the product's words */
 .moments { margin: 0 0 40px; }
@@ -366,7 +363,7 @@ h2.group { font-size: 1.1875rem; letter-spacing: -0.01em; padding-top: 16px; }
 .scene-mount { min-height: 120px; }
 .scene-fallback { display: block; width: 100%; height: auto; border-radius: 12px; }
 .scene-fallback-caption { margin-top: 16px; font-size: 1rem; line-height: 1.5; }
-.scene-label { margin-top: 12px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 52em; }
+.scene-label { margin-top: 12px; font-size: 0.875rem; line-height: 1.6; color: var(--muted); max-width: 72ch; }
 .scene-label a { color: var(--text); }
 .scene-section { padding-top: 16px; }
 /* Below a 960px column the scene switches to its compact design (scene/coordination.tsx);

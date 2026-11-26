@@ -40,7 +40,7 @@
 <section class="hero page-hero"><div class="wrap"><h1>Proof, not promises.</h1><p class="lead">Every task ends in things you can inspect: a branch, its diff, the output of your own checks, and the transcript of what the agent did and what you answered. This page says what each of them can tell you, and what has not been tested.</p></div></section>
 
 <section aria-labelledby="kinds-title"><div class="wrap split media-first">
-<figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the full-size image: A task’s evidence"><img src="assets/media/ready-for-review-proof.png" width="2880" height="1800" alt="A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed; Codex’s review, a model’s opinion, not a check: Codex found nothing to fix, and the two things it says it checked" loading="lazy" decoding="async"></a><figcaption>A task ready for review, from the demo’s run. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure>
+<figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the whole screen: A task’s evidence"><img src="assets/media/review-evidence-crop.png" width="1552" height="700" alt="A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed on commit e119be7; then Codex’s review, a model’s opinion, not a check: Codex found nothing to fix, and the two things it says it checked" loading="lazy" decoding="async"></a><figcaption>Cut from a task ready for review; open it for the whole screen. Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></figcaption></figure>
 <div class="prose">
 <h2 id="kinds-title">A check runs your commands. A review is a model’s opinion.</h2>
 <p><strong>Checks</strong> are your repository’s own commands, run on the agent’s work in a sandbox. Botbench keeps their output. A passing check proves only what the check covers, and the agent may have changed the code the checks run, so read the output, not only the result.</p>
@@ -85,7 +85,7 @@
 </div></section>
 
 <section aria-labelledby="untested-title"><div class="wrap split">
-<div><div class="section-head"><h2 id="untested-title">Not tested yet.</h2><p>Said as plainly as what was.</p></div></div>
+<div><div class="section-head"><h2 id="untested-title">Not tested yet.</h2></div></div>
 <dl class="facts "><div><dt>Two Macs</dt><dd>Pairing and questions and answers were tested with two installations on one Mac, over the loopback address, not across two Macs.</dd></div><div><dt>A real iPhone</dt><dd>Adding Botbench to the Home Screen and its notifications are in the code, not confirmed on a real iPhone.</dd></div><div><dt>Your phone, remotely</dt><dd>Using Botbench from a phone over a private network was not part of the tested quickstart.</dd></div><div><dt>Two real installations</dt><dd>No recording yet shows the overlap warning or checking together between two real installations.</dd></div><div><dt>First-run time</dt><dd>About ten minutes is the author’s figure, not a measurement.</dd></div></dl>
 </div></section>
 <section class="closing" aria-labelledby="closing-title"><div class="wrap closing-grid">
@@ -98,7 +98,7 @@
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early software for macOS.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><p class="footer-head">Product</p><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Evidence</a><a href="explore.html">What works today</a></div>
 <div><p class="footer-head">Use it</p><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>

@@ -42,10 +42,11 @@
 <main id="main">
 <section class="hero home-hero"><div class="wrap">
 <div class="hero-heading">
-<h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
-<div class="hero-intro"><p class="hero-positioning">One workbench for your agents. One coordination layer for your team.</p>
+<div><h1>Put your coding agents to work. <span class="peer">Together.</span></h1>
+<p class="hero-positioning">One workbench for your agents. One coordination layer for your team.</p></div>
+<div class="hero-intro">
 <p class="lead">For developers on a Mac who use Claude Code. Hand it a task, walk away, and come back to a branch with its checks and a second agent’s review.</p>
-<p class="lead lead-team">When a teammate’s agents work the same GitHub repository and you both push there, Botbench can tell you before your work collides, not when the second pull request opens.</p>
+<p class="lead lead-team">Share a GitHub repository with a teammate who uses their own agents? When you both push there, Botbench can tell you before your work collides, not when the second pull request opens.</p>
 <div class="btn-row"><a class="btn btn-primary" href="get-started.html">Build from source</a><a class="btn btn-quiet" href="#demo">Watch the 25-second demo</a></div>
 <p class="cta-note">About ten minutes to your first branch, in a practice repository. Early, macOS only, open source.</p></div>
 </div>
@@ -54,7 +55,7 @@
 <picture class="hero-desktop"><source media="(max-width: 1023px)" srcset="assets/media/hero-phone-crop.png" width="680" height="1452"><img src="assets/media/hero-desktop-crop.png" width="2380" height="1500" alt="Real Botbench screens: on the Mac, Home with three things that need you; on the phone, a task ready for review." loading="eager" fetchpriority="high" decoding="async"></picture>
 <img class="hero-phone" src="assets/media/hero-phone-crop.png" width="680" height="1452" alt="" loading="eager" decoding="async">
 </a>
-<figcaption><span>Home on studio-mac: what needs you, oldest wait first. On the phone, a task ready for review.</span><a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Real screens, unedited. Where they came from</a></figcaption>
+<figcaption><span>Home on studio-mac: what needs you, oldest wait first. On the phone, a task ready for review.</span></figcaption>
 </figure>
 <div class="agent-rail" aria-label="The agents Botbench drives">
 <div><strong>Claude Code</strong><span>Plans and builds. Required.</span></div>
@@ -72,17 +73,16 @@
 <button class="tab workflow-tab" type="button" role="tab" id="tab-hand-over" aria-controls="panel-hand-over" aria-selected="false" tabindex="-1"><span>Follow</span><small>Answer from anywhere</small></button>
 <button class="tab workflow-tab" type="button" role="tab" id="tab-verify" aria-controls="panel-verify" aria-selected="false" tabindex="-1"><span>Verify</span><small>Judge the result</small></button>
 </div>
-<div class="tabpanel workflow-panel" role="tabpanel" id="panel-delegate" aria-labelledby="tab-delegate" tabindex="0"><div class="workflow-copy"><h3>A task. Its own branch.</h3><p>Hand over a task, or let Claude Code plan a run of several. Each task works in its own copy of your repository, on a branch such as <code>botbench/your-mac/run-1/task-1</code>, under the mode you choose: manual, semi-autonomous or fully autonomous.</p><a class="more" href="workbench.html">How a piece of work goes</a></div><div class="workflow-media"><figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the full-size image: Settings, Permissions and autonomy"><img src="assets/media/permissions-check.png" width="2880" height="1800" alt="Settings, Permissions and autonomy: Check a command shows that git push origin main asks you in Manual and Semi-autonomous and is refused in Fully autonomous, with Activity below" loading="lazy" decoding="async"></a><figcaption>Check a command: what <code>git push origin main</code> would get in each mode, before any agent runs it.</figcaption></figure></div></div>
+<div class="tabpanel workflow-panel" role="tabpanel" id="panel-delegate" aria-labelledby="tab-delegate" tabindex="0"><div class="workflow-copy"><h3>A task. Its own branch.</h3><p>Hand over a task, or let Claude Code plan a run of several. Each task works in its own copy of your repository, on a branch such as <code>botbench/your-mac/run-1/task-1</code>, under the mode you choose: manual, semi-autonomous or fully autonomous.</p><a class="more" href="workbench.html">How a piece of work goes</a></div><div class="workflow-media"><figure class="frame "><a class="zoom" href="assets/media/permissions-check.png" aria-label="Open the whole screen: Check a command in Botbench’s settings"><img src="assets/media/check-a-command-crop.png" width="1584" height="1096" alt="Check a command in Botbench’s settings: git push origin main in billing-api asks you in Manual and Semi-autonomous, and is refused in Fully autonomous, each with its rule, git-push" loading="lazy" decoding="async"></a><figcaption>Check a command: what <code>git push origin main</code> would get in each mode, before any agent runs it.</figcaption></figure></div></div>
 <div class="tabpanel workflow-panel" role="tabpanel" id="panel-hand-over" aria-labelledby="tab-hand-over" tabindex="0" hidden><div class="workflow-copy"><h3>Answer only what reaches outside.</h3><p>Reading, editing and commands inside the task’s copy go on without you. A push, sudo or a file outside the copy waits as a card you answer on the Mac, or on your phone over a private network that gives the Mac an HTTPS name.</p><a class="more" href="workbench.html#how-it-goes">What asks, and what never does</a></div><div class="workflow-media"><figure class="frame frame-phone"><video controls playsinline preload="none" width="780" height="1688" poster="assets/media/first-task-phone-poster.jpg" aria-label="A 24-second recording at phone size: a task is started, reviewed and accepted"><source src="assets/media/first-task-phone.mp4" type="video/mp4">Your browser cannot play this recording. The text beside it says what it shows.</video><figcaption>Start a task, review it and accept it, at phone size, at real speed. Claude Code’s reply is replayed from a recorded session. 24 seconds, no sound.</figcaption></figure></div></div>
-<div class="tabpanel workflow-panel" role="tabpanel" id="panel-verify" aria-labelledby="tab-verify" tabindex="0" hidden><div class="workflow-copy"><h3>Come back to work you can inspect.</h3><p>Read the branch, the diff and the output of your repository’s checks. Another vendor’s agent can review the change; Botbench shows its review as a model’s opinion, apart from the checks. Then accept or reject. Botbench never merges a pull request.</p><a class="more" href="proof.html">What a check can and cannot tell you</a></div><div class="workflow-media"><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the full-size image: A task ready for review"><img src="assets/media/ready-for-review-proof.png" width="2880" height="1800" alt="A task ready for review: 1 of 1 check passed, then Codex’s review and the things it says it checked, the changed line, and Reject and Accept" loading="lazy" decoding="async"></a><figcaption>A task ready for review: the check that ran, then Codex’s review, labelled as an opinion.</figcaption></figure></div></div>
+<div class="tabpanel workflow-panel" role="tabpanel" id="panel-verify" aria-labelledby="tab-verify" tabindex="0" hidden><div class="workflow-copy"><h3>Come back to work you can inspect.</h3><p>Read the branch, the diff and the output of your repository’s checks. Another vendor’s agent can review the change; Botbench shows its review as a model’s opinion, apart from the checks. Then accept or reject. Botbench never merges a pull request.</p><a class="more" href="proof.html">What a check can and cannot tell you</a></div><div class="workflow-media"><figure class="frame "><a class="zoom" href="assets/media/ready-for-review-proof.png" aria-label="Open the whole screen: A task’s evidence"><img src="assets/media/review-evidence-crop.png" width="1552" height="700" alt="A task’s evidence: 1 of 1 check passed, python3 -B -m unittest -q Passed on commit e119be7; then Codex’s review, a model’s opinion, not a check, with the two things it says it checked" loading="lazy" decoding="async"></a><figcaption>The check that ran, then Codex’s review, labelled as an opinion.</figcaption></figure></div></div>
 </div>
 <p class="source-note">Real screens from a Botbench installation named studio-mac, working on a small billing repository. The agents’ work is replayed from recorded Claude Code and Codex sessions; the repository’s check really ran. Nothing on them was edited. <a href="https://github.com/botbenchhq/botbenchhq.github.io/blob/main/PROVENANCE.md">Where each one came from</a></p>
 </div></section>
 
 <section class="team-section" aria-labelledby="team-title"><div class="wrap">
-<div class="team-intro"><h2 id="team-title">Your agents. Their agents.<br>One coordinated workflow.</h2>
-<div><p class="lead">Two developers, each with their own agents, usually find out they took the same issue when the second pull request opens. With Botbench on both Macs, each workbench reads the other’s work from the repository you both push to, and tells you first.</p>
-<p class="early-note"><span class="tag tag-early">Early</span> The coordination layer is new. Each part below says whether it is available.</p></div></div>
+<div class="team-intro"><h2 id="team-title">Find out before the second pull request.</h2>
+<div><p class="lead">Two developers, each with their own agents, usually learn they took the same issue, or changed the same file, when the second pull request opens. With Botbench on both Macs, each workbench reads the other’s work from the repository you both push to, and tells you first.</p></div></div>
 <figure class="scene" id="before-the-second-pull-request">
 <div class="scene-mount" data-scene-mount="coordination">
 <img class="scene-fallback" src="assets/media/scene-coordination-final.png" width="2400" height="1312" alt="Illustration of two Botbench workbenches on one GitHub repository, at its last step. On the remote billing-api, studio-mac’s claim on issue #42 and its pull request #12. office-mac’s task for issue #43 is accepted, after checking it together with pull request #12: Passed together." loading="lazy" decoding="async">
@@ -90,10 +90,8 @@
 </div>
 <figcaption class="scene-label">Illustration. Botbench’s lines are in its own words; the repository, issue titles and the remote’s panel are examples. Each step is a shipped feature: issue claims, the overlap warning and checking two changes together. <a href="https://github.com/botbenchhq/botbench#what-works-today">What works today</a></figcaption>
 </figure>
-<h3 class="list-title">Available today</h3>
-<dl class="facts "><div><dt>The same files</dt><dd>On your task’s Review tab, a line names the teammate’s open pull request that also changes your files.</dd></div><div><dt>The same issue</dt><dd>Turn on issue claims for a repository, and only one workbench starts an issue. The later run stops and says who started first.</dd></div><div><dt>Changes that must fit</dt><dd>Check your ready task together with a teammate’s open pull request: both merged in a temporary copy, your checks run on the merge.</dd></div><div><dt>Their work in progress</dt><dd>See your teammates’ open pull requests and pushed branches, read with your own <code>gh</code>.</dd></div></dl>
-<p class="team-boundary"><span class="tag tag-early">Early</span> Paired questions and answers, each one approved by its owner. Tested with two installations on one Mac, not yet across two Macs.</p>
-<a class="more" href="coordination.html">How coordination works today</a>
+<div class="team-foot"><p><strong>Available today:</strong> the overlap warning, issue claims, and checking two changes together. <span class="tag tag-early">Early</span> Paired questions and answers, tested with two installations on one Mac, not yet across two.</p>
+<a class="more" href="coordination.html">How coordination works today</a></div>
 </div></section>
 
 <section id="demo" class="demo-section" aria-labelledby="demo-title"><div class="wrap">
@@ -110,7 +108,7 @@
 <footer class="footer"><div class="wrap footer-grid">
 <div><a class="brand" href="index.html" aria-label="Botbench, home"><svg viewBox="3 3 18 18" aria-hidden="true"><path class="mark-a" d="M13 4H6A2 2 0 0 0 4 6V17A2 2 0 0 0 6 19H8V9H13Z"/><path class="mark-b" d="M11 20H18A2 2 0 0 0 20 18V7A2 2 0 0 0 18 5H16V15H11Z"/></svg><span>Botbench</span></a>
 <p>One workbench for your agents. One coordination layer for your team.</p>
-<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early, and macOS only.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
+<p>Built by <a class="maker-link" href="https://github.com/jon-lange">Jon Lange</a>. Early software for macOS.<br>Apache License 2.0. No cookies or visit tracking.</p></div>
 <div class="footer-cols">
 <div><p class="footer-head">Product</p><a href="workbench.html">Workbench</a><a href="coordination.html">Coordination</a><a href="proof.html">Evidence</a><a href="explore.html">What works today</a></div>
 <div><p class="footer-head">Use it</p><a href="get-started.html">Build from source</a><a href="docs.html">Docs</a><a href="https://github.com/botbenchhq/botbench">GitHub</a></div>
